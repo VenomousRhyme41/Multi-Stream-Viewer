@@ -39,7 +39,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-bottom: 30px;
+            margin-bottom: 10px;
             position: relative;
         }
         h1 {
@@ -56,6 +56,7 @@
             right: 0;
             display: flex;
             gap: 10px;
+            align-items: center;
         }
         .global-btn {
             padding: 8px 15px;
@@ -71,15 +72,24 @@
         .global-btn:hover {
             background-color: rgba(0, 255, 157, 0.2);
         }
+        .separator {
+            color: var(--border-color);
+            font-weight: bold;
+            padding: 0 5px;
+        }
         .container {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            grid-template-rows: repeat(2, minmax(400px, 1fr));
-            gap: 20px;
+            grid-template-rows: repeat(2, minmax(300px, 1fr));
+            gap: 15px;
             max-width: 1800px;
             margin: 0 auto;
             width: 95%;
             flex-grow: 1;
+            margin-bottom: 10px;
+        }
+        .container.two-streams {
+            grid-template-rows: 1fr;
         }
         .stream-wrapper {
             position: relative;
@@ -94,6 +104,9 @@
         .stream-wrapper.active {
             border: 2px solid var(--active-color);
             box-shadow: 0 0 30px rgba(0, 255, 157, 0.3);
+        }
+        .stream-wrapper.hidden {
+            display: none;
         }
         .stream-input {
             position: absolute;
@@ -138,6 +151,13 @@
             border: none;
             flex-grow: 1;
             overflow: hidden;
+        }
+        .kick-iframe {
+            transform: scale(0.8);
+            transform-origin: top center;
+            width: 125%;
+            height: 125%;
+            margin-left: -12.5%;
         }
         .stream-controls {
             display: none;
@@ -199,12 +219,25 @@
             color: var(--active-color);
             transform: scale(1.1);
         }
+        .theater-mode-btn {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            z-index: 1000;
+            padding: 8px 15px;
+            background-color: var(--button-bg);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s;
+            font-size: 14px;
+        }
+        .theater-mode-btn:hover {
+            background-color: rgba(0, 255, 157, 0.2);
+        }
         @media (max-width: 1200px) {
-            .container {
-                grid-template-columns: 1fr;
-                grid-template-rows: repeat(4, 400px);
-                height: auto;
-            }
             .header {
                 flex-direction: column;
                 gap: 15px;
@@ -213,14 +246,47 @@
                 position: static;
             }
         }
+        body.theater-mode {
+            padding: 0;
+            overflow: hidden;
+            height: 100vh;
+        }
+        body.theater-mode .header,
+        body.theater-mode .github-link,
+        body.theater-mode .github-icon,
+        body.theater-mode .stream-input,
+        body.theater-mode .stream-controls {
+            display: none;
+        }
+        body.theater-mode .container {
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            height: 100vh;
+            width: 100%;
+            max-width: 100%;
+            margin: 0;
+            gap: 0;
+        }
+        body.theater-mode .stream-wrapper {
+            border-radius: 0;
+            height: 100%;
+        }
+        body.theater-mode.two-streams .container {
+            grid-template-rows: 1fr;
+        }
+        body.theater-mode .stream-iframe {
+            display: block !important;
+        }
     </style>
 </head>
 <body>
     <div class="header">
         <h1>Multi-Stream Viewer</h1>
         <div class="global-controls">
-            <button class="global-btn" onclick="muteAll()">Mute All</button>
-            <button class="global-btn" onclick="resetAll()">Reset All</button>
+            <button class="global-btn" id="streamLayoutBtn" onclick="toggleStreamLayout()">2 Streams</button>
+            <button class="global-btn" onclick="toggleTheaterMode()">Theater Mode</button>
+            <span class="separator">|</span>
+            <button class="global-btn" onclick="resetAll()">Reset All Streams</button>
         </div>
     </div>
     
@@ -235,6 +301,7 @@
                 <div class="stream-info"></div>
                 <div class="stream-buttons">
                     <button class="control-btn audio-btn" onclick="toggleAudio(this)">Audio ON</button>
+                    <button class="control-btn" onclick="resetStream(this)">Reset</button>
                 </div>
             </div>
         </div>
@@ -249,6 +316,7 @@
                 <div class="stream-info"></div>
                 <div class="stream-buttons">
                     <button class="control-btn audio-btn" onclick="toggleAudio(this)">Audio ON</button>
+                    <button class="control-btn" onclick="resetStream(this)">Reset</button>
                 </div>
             </div>
         </div>
@@ -263,6 +331,7 @@
                 <div class="stream-info"></div>
                 <div class="stream-buttons">
                     <button class="control-btn audio-btn" onclick="toggleAudio(this)">Audio ON</button>
+                    <button class="control-btn" onclick="resetStream(this)">Reset</button>
                 </div>
             </div>
         </div>
@@ -277,6 +346,7 @@
                 <div class="stream-info"></div>
                 <div class="stream-buttons">
                     <button class="control-btn audio-btn" onclick="toggleAudio(this)">Audio ON</button>
+                    <button class="control-btn" onclick="resetStream(this)">Reset</button>
                 </div>
             </div>
         </div>
@@ -287,12 +357,88 @@
         <i class="fab fa-github"></i>
     </a>
 
+    <button id="exitTheaterBtn" class="theater-mode-btn" style="display: none;" onclick="toggleTheaterMode()">Exit Theater</button>
+
     <script>
         const domain = window.location.hostname;
         let activeAudioWrapper = null;
-        const streamMetadata = {};
+        let isTheaterMode = false;
+        let showTwoStreams = false;
+        
+        function toggleTheaterMode() {
+            isTheaterMode = !isTheaterMode;
+            document.body.classList.toggle('theater-mode', isTheaterMode);
+            document.getElementById('exitTheaterBtn').style.display = isTheaterMode ? 'block' : 'none';
+            
+            updateStreamLayout();
+            
+            if (isTheaterMode) {
+                document.querySelectorAll('.stream-iframe').forEach(iframe => {
+                    if (iframe.src) {
+                        iframe.style.display = 'block';
+                    }
+                });
+            }
+        }
+        
+        function updateStreamLayout() {
+            const container = document.getElementById('streamContainer');
+            const streamWrappers = document.querySelectorAll('.stream-wrapper');
+            
+            if (showTwoStreams) {
+                container.classList.add('two-streams');
+                document.body.classList.toggle('two-streams', isTheaterMode && showTwoStreams);
+                
+                if (!isTheaterMode) {
+                    streamWrappers[2].classList.add('hidden');
+                    streamWrappers[3].classList.add('hidden');
+                }
+            } else {
+                container.classList.remove('two-streams');
+                document.body.classList.remove('two-streams');
+                
+                if (!isTheaterMode) {
+                    streamWrappers[2].classList.remove('hidden');
+                    streamWrappers[3].classList.remove('hidden');
+                }
+            }
+        }
+        
+        function toggleStreamLayout() {
+            showTwoStreams = !showTwoStreams;
+            updateStreamLayout();
+            
+            const btn = document.getElementById('streamLayoutBtn');
+            btn.textContent = showTwoStreams ? '4 Streams' : '2 Streams';
+        }
+        
+        function resetStream(button) {
+            const wrapper = button.closest('.stream-wrapper');
+            const inputContainer = wrapper.querySelector('.stream-input');
+            const iframe = wrapper.querySelector('.stream-iframe');
+            const controls = wrapper.querySelector('.stream-controls');
+            const info = wrapper.querySelector('.stream-info');
+            const audioBtn = wrapper.querySelector('.audio-btn');
+            
+            wrapper.classList.remove('active');
+            inputContainer.style.display = '';
+            iframe.style.display = 'none';
+            controls.style.display = 'none';
+            iframe.src = '';
+            info.textContent = '';
+            
+            wrapper.querySelector('.src-input').value = '';
+            audioBtn.textContent = 'Audio ON';
+            audioBtn.classList.remove('active');
+            iframe.classList.remove('kick-iframe');
+            
+            if (wrapper === activeAudioWrapper) {
+                activeAudioWrapper = null;
+            }
+        }
         
         function detectPlatform(url) {
+            if (!url) return null;
             if (url.includes('youtube.com') || url.includes('youtu.be')) return 'youtube';
             if (url.includes('twitch.tv')) return 'twitch';
             if (url.includes('kick.com')) return 'kick';
@@ -309,6 +455,8 @@
         }
         
         function getEmbedUrl(url) {
+            if (!url) return null;
+            
             if (url.includes('<iframe') && url.includes('src="')) {
                 return extractSrcFromIframe(url);
             }
@@ -339,6 +487,8 @@
         
         function extractStreamId(url, platform) {
             try {
+                if (!url || !platform) return null;
+                
                 const cleanUrl = url.toLowerCase()
                     .replace(/(https?:\/\/)?(www\.)?/, '')
                     .split('?')[0]
@@ -371,7 +521,7 @@
             }
         }
         
-        async function loadStream(button) {
+        function loadStream(button) {
             const wrapper = button.closest('.stream-wrapper');
             const input = wrapper.querySelector('.src-input');
             const iframe = wrapper.querySelector('.stream-iframe');
@@ -398,20 +548,23 @@
             controls.style.display = 'flex';
             
             if (embedUrl.includes('kick.com')) {
+                iframe.classList.add('kick-iframe');
                 info.textContent = 'Kick Stream';
-            } else if (embedUrl.includes('twitch.tv')) {
-                info.textContent = 'Twitch Stream';
-            } else if (embedUrl.includes('youtube.com')) {
+            } else {
+                iframe.classList.remove('kick-iframe');
+                info.textContent = embedUrl.includes('twitch.tv') ? 'Twitch Stream' : 'YouTube Stream';
+            }
+            
+            if (embedUrl.includes('youtube.com')) {
                 const videoId = extractStreamId(embedUrl, 'youtube');
-                info.textContent = 'YouTube Stream';
-                
                 if (videoId) {
-                    try {
-                        const title = await fetchYouTubeTitle(videoId);
-                        if (title) {
-                            info.textContent = title;
-                        }
-                    } catch {}
+                    fetchYouTubeTitle(videoId)
+                        .then(title => {
+                            if (title) {
+                                info.textContent = title;
+                            }
+                        })
+                        .catch(() => {});
                 }
             }
             
@@ -425,6 +578,7 @@
         async function fetchYouTubeTitle(videoId) {
             try {
                 const response = await fetch(`https://noembed.com/embed?url=https://www.youtube.com/watch?v=${videoId}`);
+                if (!response.ok) return null;
                 const data = await response.json();
                 return data.title || null;
             } catch {
@@ -473,7 +627,7 @@
         }
         
         function muteIframe(iframe) {
-            if (!iframe.contentWindow) return;
+            if (!iframe.contentWindow || !iframe.src) return;
             
             try {
                 if (iframe.src.includes('youtube.com')) {
@@ -492,7 +646,7 @@
         }
         
         function unmuteIframe(iframe) {
-            if (!iframe.contentWindow) return;
+            if (!iframe.contentWindow || !iframe.src) return;
             
             try {
                 if (iframe.src.includes('youtube.com')) {
@@ -528,6 +682,7 @@
                 wrapper.querySelector('.src-input').value = '';
                 audioBtn.textContent = 'Audio ON';
                 audioBtn.classList.remove('active');
+                iframe.classList.remove('kick-iframe');
             });
             
             activeAudioWrapper = null;
@@ -537,6 +692,8 @@
             document.querySelectorAll('.stream-controls').forEach(controls => {
                 controls.style.display = 'none';
             });
+            
+            updateStreamLayout();
         });
     </script>
 </body>
