@@ -296,7 +296,7 @@
                 <input type="text" placeholder="Paste stream URL or embed code" class="src-input">
                 <button onclick="loadStream(this)">Load Stream</button>
             </div>
-            <iframe class="stream-iframe" allowfullscreen></iframe>
+            <iframe class="stream-iframe" allowfullscreen sandbox="allow-same-origin allow-scripts allow-popups allow-forms"></iframe>
             <div class="stream-controls">
                 <div class="stream-info"></div>
                 <div class="stream-buttons">
@@ -311,7 +311,7 @@
                 <input type="text" placeholder="Paste stream URL or embed code" class="src-input">
                 <button onclick="loadStream(this)">Load Stream</button>
             </div>
-            <iframe class="stream-iframe" allowfullscreen></iframe>
+            <iframe class="stream-iframe" allowfullscreen sandbox="allow-same-origin allow-scripts allow-popups allow-forms"></iframe>
             <div class="stream-controls">
                 <div class="stream-info"></div>
                 <div class="stream-buttons">
@@ -326,7 +326,7 @@
                 <input type="text" placeholder="Paste stream URL or embed code" class="src-input">
                 <button onclick="loadStream(this)">Load Stream</button>
             </div>
-            <iframe class="stream-iframe" allowfullscreen></iframe>
+            <iframe class="stream-iframe" allowfullscreen sandbox="allow-same-origin allow-scripts allow-popups allow-forms"></iframe>
             <div class="stream-controls">
                 <div class="stream-info"></div>
                 <div class="stream-buttons">
@@ -341,7 +341,7 @@
                 <input type="text" placeholder="Paste stream URL or embed code" class="src-input">
                 <button onclick="loadStream(this)">Load Stream</button>
             </div>
-            <iframe class="stream-iframe" allowfullscreen></iframe>
+            <iframe class="stream-iframe" allowfullscreen sandbox="allow-same-origin allow-scripts allow-popups allow-forms"></iframe>
             <div class="stream-controls">
                 <div class="stream-info"></div>
                 <div class="stream-buttons">
@@ -351,14 +351,11 @@
             </div>
         </div>
     </div>
-
     <a href="https://github.com/VenomousRhyme41/Multi-Stream-Viewer" target="_blank" class="github-link">Star and fork the repository!</a>
     <a href="https://github.com/VenomousRhyme41/Multi-Stream-Viewer" target="_blank" class="github-icon">
         <i class="fab fa-github"></i>
     </a>
-
     <button id="exitTheaterBtn" class="theater-mode-btn" style="display: none;" onclick="toggleTheaterMode()">Exit Theater</button>
-
     <script>
         const domain = window.location.hostname;
         let activeAudioWrapper = null;
@@ -546,13 +543,12 @@
             iframe.style.display = 'block';
             inputContainer.style.display = 'none';
             controls.style.display = 'flex';
+            info.textContent = '';
             
             if (embedUrl.includes('kick.com')) {
                 iframe.classList.add('kick-iframe');
-                info.textContent = 'Kick Stream';
             } else {
                 iframe.classList.remove('kick-iframe');
-                info.textContent = embedUrl.includes('twitch.tv') ? 'Twitch Stream' : 'YouTube Stream';
             }
             
             if (embedUrl.includes('youtube.com')) {
@@ -569,8 +565,9 @@
             }
             
             setTimeout(() => {
-                if (wrapper !== activeAudioWrapper) {
-                    muteIframe(iframe);
+                muteIframe(iframe);
+                if (wrapper === activeAudioWrapper) {
+                    unmuteIframe(iframe);
                 }
             }, 3000);
         }
@@ -601,12 +598,13 @@
             
             muteAll();
             
-            wrapper.classList.add('active');
-            button.classList.add('active');
-            button.textContent = 'Audio ACTIVE';
-            activeAudioWrapper = wrapper;
-            
-            unmuteIframe(iframe);
+            setTimeout(() => {
+                wrapper.classList.add('active');
+                button.classList.add('active');
+                button.textContent = 'Audio ACTIVE';
+                activeAudioWrapper = wrapper;
+                unmuteIframe(iframe);
+            }, 100);
         }
         
         function muteAll() {
@@ -622,8 +620,6 @@
                     audioBtn.textContent = 'Audio ON';
                 }
             });
-            
-            activeAudioWrapper = null;
         }
         
         function muteIframe(iframe) {
@@ -654,6 +650,11 @@
                         event: 'command',
                         func: 'unMute',
                         args: []
+                    }), '*');
+                    iframe.contentWindow.postMessage(JSON.stringify({
+                        event: 'command',
+                        func: 'setVolume',
+                        args: [100]
                     }), '*');
                 } else if (iframe.src.includes('twitch.tv')) {
                     iframe.contentWindow.postMessage(JSON.stringify({
