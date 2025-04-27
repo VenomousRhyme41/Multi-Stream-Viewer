@@ -1,6 +1,6 @@
 # 📺 Multi-Stream Viewer  
 
-**Watch multiple streams simultaneously from Twitch, YouTube, and Kick**  
+**Watch multiple streams simultaneously from Twitch, YouTube, Kick, Rumble, Twitter/X, Instagram, TikTok, and Whatnot**  
 
 [![Live Demo](https://img.shields.io/badge/Live_Demo-Available-brightgreen)](https://venomousrhyme41.github.io/Multi-Stream-Viewer/)  
 ![License](https://img.shields.io/badge/License-MIT-blue)
@@ -9,27 +9,24 @@
 
 Watch up to 4 streams simultaneously with this sleek multi-platform viewer. Supports Twitch, YouTube, and Kick streams in one unified interface:  
 
-`Twitch | YouTube | Kick`  
+`Twitch | YouTube | Kick | Rumble | Twitter/X | Instagram | Tiktok | Whatnot`  
 
 ## ✨ Key Features  
 
-- **Multi-platform support** - Works with Twitch, YouTube, and Kick  
-
-- **Independent audio control** - Mute/unmute streams individually  
-
+- **Multi-platform support** - Works with Twitch, YouTube, Kick, Rumble, Twitter/X, Instagram, TikTok, and Whatnot
+- 
 - **Clean, dark theme** - Focuses attention on the content  
 
-- **Simple interface** - Just paste URLs and watch  
-
-- **Global controls** - Mute all or reset all streams instantly  
-
+- **Simple interface** - Just paste URLs and watch
+- 
 - **Responsive layout** - Works on desktop and mobile  
 
 - **Embed code support** - Works with standard embed codes too  
 
 ## 🖥️ Preview  
 
-![image](https://github.com/user-attachments/assets/877a8ef7-5103-455b-a99b-c0297c674c0c)
+![image](https://github.com/user-attachments/assets/dce9bf39-a64c-47e5-8844-01a2d011a250)
+
 *The minimalist interface puts focus on your streams*
 
 ## 🌐 Live Website  
@@ -41,16 +38,11 @@ Access the viewer at:
 ## 🛠️ How To Use  
 
 1. **Enter Stream URLs**  
-   - Paste Twitch, YouTube, or Kick URLs (or embed codes)  
+   - Paste Twitch, YouTube, Kick, Rumble, Twitter/X, Instagram, TikTok, or Whatnot URLs (or embed codes)  
    - Click "Load Stream"  
 
-2. **Control Audio**  
-   - Toggle "Audio ON/OFF" buttons below each stream  
-   - The active stream (green border) has unmuted audio  
-
-3. **Global Controls**  
-   - "Mute All" silences all streams  
-   - "Reset All" clears all streams  
+2. **Enter theator mode**  
+   - Enter theator mode for a more clean and slick look so you have no distractions from watching your favorite streams  
 
 ## 👨‍💻 Developer  
 
