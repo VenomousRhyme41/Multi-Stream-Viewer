@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Multi-Stream Viewer</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Roboto:wght@400;500&family=Oswald:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Roboto:wght@400;505&family=Oswald:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon" href="https://github.githubassets.com/images/icons/emoji/unicode/1f4fa.png" type="image/png">
     <style>
@@ -88,7 +88,7 @@
             flex-grow: 1;
             margin-bottom: 10px;
         }
-        .container.two-streams {
+        .container.tone-streams {
             grid-template-rows: 1fr;
         }
         .stream-wrapper {
@@ -296,7 +296,22 @@
                 <input type="text" placeholder="Paste stream URL or embed code" class="src-input">
                 <button onclick="loadStream(this)">Load Stream</button>
             </div>
-            <iframe class="stream-iframe" allowfullscreen sandbox="allow-same-origin allow-scripts allow-popups allow-forms"></iframe>
+            <iframe class="stream-iframe" allowfullscreen></iframe>
+            <div class="stream-controls">
+                <div class="stream-info"></div>
+                <div class="stream-buttons">
+            <button class="control-btn audio-btn" onclick="toggleAudio(this)">Audio ON</button>
+                    <button class="control-btn" onclick="resetStream(this)">Reset</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="stream-wrapper">
+            <div class="stream-input">
+                <input type="text" placeholder="Paste stream URL or embed code" class="src-input">
+                <button onclick="loadStream(this)">Load Stream</button>
+            </div>
+            <iframe class="stream-iframe" allowfullscreen></iframe>
             <div class="stream-controls">
                 <div class="stream-info"></div>
                 <div class="stream-buttons">
@@ -311,7 +326,7 @@
                 <input type="text" placeholder="Paste stream URL or embed code" class="src-input">
                 <button onclick="loadStream(this)">Load Stream</button>
             </div>
-            <iframe class="stream-iframe" allowfullscreen sandbox="allow-same-origin allow-scripts allow-popups allow-forms"></iframe>
+            <iframe class="stream-iframe" allowfullscreen></iframe>
             <div class="stream-controls">
                 <div class="stream-info"></div>
                 <div class="stream-buttons">
@@ -326,22 +341,7 @@
                 <input type="text" placeholder="Paste stream URL or embed code" class="src-input">
                 <button onclick="loadStream(this)">Load Stream</button>
             </div>
-            <iframe class="stream-iframe" allowfullscreen sandbox="allow-same-origin allow-scripts allow-popups allow-forms"></iframe>
-            <div class="stream-controls">
-                <div class="stream-info"></div>
-                <div class="stream-buttons">
-                    <button class="control-btn audio-btn" onclick="toggleAudio(this)">Audio ON</button>
-                    <button class="control-btn" onclick="resetStream(this)">Reset</button>
-                </div>
-            </div>
-        </div>
-        
-        <div class="stream-wrapper">
-            <div class="stream-input">
-                <input type="text" placeholder="Paste stream URL or embed code" class="src-input">
-                <button onclick="loadStream(this)">Load Stream</button>
-            </div>
-            <iframe class="stream-iframe" allowfullscreen sandbox="allow-same-origin allow-scripts allow-popups allow-forms"></iframe>
+            <iframe class="stream-iframe" allowfullscreen></iframe>
             <div class="stream-controls">
                 <div class="stream-info"></div>
                 <div class="stream-buttons">
@@ -395,7 +395,7 @@
                 document.body.classList.remove('two-streams');
                 
                 if (!isTheaterMode) {
-                    streamWrappers[2].classList.remove('hidden');
+                    streamWrappes[2].classList.remove('hidden');
                     streamWrappers[3].classList.remove('hidden');
                 }
             }
@@ -497,8 +497,8 @@
                             return url.split('youtu.be/')[1].split('?')[0].split('/')[0];
                         }
                         const youtubeId = new URL(url).searchParams.get('v') || 
-                                          url.split('embed/')[1]?.split('?')[0] || 
-                                          url.split('v=')[1]?.split('&')[0];
+                                      url.split('embed/')[1]?.split('?')[0] || 
+                                      url.split('v=')[1]?.split('&')[0];
                         return youtubeId;
                     case 'twitch':
                         if (url.includes('/videos/')) {
@@ -517,8 +517,8 @@
                 return null;
             }
         }
-        
-        function loadStream(button) {
+      
+      function loadStream(button) {
             const wrapper = button.closest('.stream-wrapper');
             const input = wrapper.querySelector('.src-input');
             const iframe = wrapper.querySelector('.stream-iframe');
