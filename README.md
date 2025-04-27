@@ -7,18 +7,18 @@
 
 ## 🎯 Overview  
 
-Watch up to 4 streams simultaneously with this sleek multi-platform viewer. Supports Twitch, YouTube, and Kick streams in one unified interface:  
+Watch up to 2-4 streams simultaneously with this sleek multi-platform viewer. Supports Twitch, YouTube, and Kick streams in one unified interface:  
 
 `Twitch | YouTube | Kick | Rumble | Twitter/X | Instagram | Tiktok | Whatnot`  
 
 ## ✨ Key Features  
 
 - **Multi-platform support** - Works with Twitch, YouTube, Kick, Rumble, Twitter/X, Instagram, TikTok, and Whatnot
-- 
+
 - **Clean, dark theme** - Focuses attention on the content  
 
 - **Simple interface** - Just paste URLs and watch
-- 
+
 - **Responsive layout** - Works on desktop and mobile  
 
 - **Embed code support** - Works with standard embed codes too  
