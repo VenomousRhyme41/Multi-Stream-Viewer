@@ -35,26 +35,21 @@
             flex-direction: column;
             overflow-x: hidden;
         }
-        .header-container {
-            width: 95%;
-            max-width: 1800px;
-            margin: 0 auto 20px;
-            position: relative;
-        }
         .header {
             display: flex;
             justify-content: center;
-            position: relative;
-            width: 100%;
             align-items: center;
+            margin-bottom: 10px;
+            position: relative;
         }
         h1 {
+            margin: 0;
             color: var(--active-color);
             font-weight: 600;
             font-size: 2.5rem;
             font-family: 'Montserrat', sans-serif;
+            text-align: center;
             letter-spacing: 1px;
-            margin: 0;
         }
         .github-btn {
             position: absolute;
@@ -80,10 +75,6 @@
             gap: 10px;
             align-items: center;
         }
-        .separator {
-            color: var(--text-color);
-            font-weight: bold;
-        }
         .global-btn {
             padding: 8px 15px;
             background-color: var(--button-bg);
@@ -98,18 +89,26 @@
         .global-btn:hover {
             background-color: rgba(0, 255, 157, 0.2);
         }
+        .separator {
+            color: var(--border-color);
+            font-weight: bold;
+            padding: 0 5px;
+        }
         .container {
             display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: auto;
             gap: 15px;
-            width: 95%;
             max-width: 1800px;
             margin: 0 auto;
+            width: 95%;
             flex-grow: 1;
+            margin-bottom: 10px;
         }
-        .container.ttwo-streams {
+        .container.two-streams {
             grid-template-columns: repeat(2, 1fr);
         }
-        .container.tthree-streams {
+        .container.three-streams {
             grid-template-columns: repeat(3, 1fr);
         }
         .container.four-streams {
@@ -120,7 +119,10 @@
             background-color: var(--card-color);
             border-radius: 12px;
             overflow: hidden;
+            transition: all 0.2s ease;
             box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
             min-height: 300px;
         }
         .stream-wrapper.loaded {
@@ -177,7 +179,8 @@
             height: 100%;
             display: none;
             border: none;
-            min-height: 400px;
+            flex-grow: 1;
+            overflow: hidden;
         }
         .kick-iframe {
             transform: scale(0.8);
@@ -192,9 +195,6 @@
             background-color: rgba(0,0,0,0.5);
             align-items: center;
             justify-content: space-between;
-            position: absolute;
-            bottom: 0;
-            width: 100%;
         }
         .stream-info {
             font-size: 14px;
@@ -224,6 +224,11 @@
         .control-btn:hover {
             background-color: rgba(0, 255, 157, 0.2);
         }
+        .control-btn.active {
+            background-color: var(--active-color);
+            color: #111;
+            border-color: transparent;
+        }
         .theater-mode-btn {
             position: fixed;
             top: 10px;
@@ -238,16 +243,40 @@
             font-weight: 500;
             transition: all 0.2s;
             font-size: 14px;
-            display: none;
         }
         .theater-mode-btn:hover {
             background-color: rgba(0, 255, 157, 0.2);
         }
+        .exit-theater-btn {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            z-index: 1000;
+            padding: 8px 15px;
+            background-color: var(--button-bg);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s;
+            font-size: 14px;
+        }
+        .exit-theater-btn:hover {
+            background-color: rgba(0, 255, 157, 0.2);
+        }
         @media (max-width: 1200px) {
-            .container.tthree-streams {
+            .header {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .global-controls {
+                position: static;
+            }
+            .container.three-streams {
                 grid-template-columns: repeat(2, 1fr);
             }
-            .container.tthree-streams .stream-wrapper:nth-child(3) {
+            .container.three-streams .stream-wrapper:nth-child(3) {
                 grid-column: 1 / -1;
             }
         }
@@ -256,26 +285,9 @@
                 grid-template-columns: 1fr;
             }
             .container.two-streams,
-            .container.tthree-streams,
+            .container.three-streams,
             .container.four-streams {
                 grid-template-columns: 1fr;
-            }
-            .header {
-                flex-direction: column;
-                gap: 15px;
-            }
-            .github-btn, .global-controls {
-                position: relative;
-                left: auto;
-                right: auto;
-                justify-content: center;
-            }
-            h1 {
-                text-align: center;
-                width: 100%;
-            }
-            .separator {
-                display: none;
             }
         }
         body.theater-mode {
@@ -283,9 +295,9 @@
             overflow: hidden;
             height: 100vh;
         }
-        body.theater-mode .header-container,
-        body.theater-mode .stream-controls,
-        body.theater-mode .stream-input {
+        body.theater-mode .header,
+        body.theater-mode .stream-input,
+        body.theater-mode .stream-controls {
             display: none;
         }
         body.theater-mode .container {
@@ -297,8 +309,8 @@
             padding: 0;
         }
         body.theater-mode .stream-wrapper {
-            height: 100%;
             border-radius: 0;
+            height: 100%;
         }
         body.theater-mode .stream-iframe {
             display: block !important;
@@ -306,13 +318,10 @@
         body.theater-mode .stream-wrapper:not(.loaded) {
             display: none;
         }
-        body.theater-mode .theater-mode-btn {
-            display: block;
-        }
-        body.theater-mode.ttwo-streams .container {
+        body.theater-mode.two-streams .container {
             grid-template-columns: repeat(2, 1fr);
         }
-        body.theater-mode.tthree-streams .container {
+        body.theater-mode.three-streams .container {
             grid-template-columns: repeat(3, 1fr);
         }
         body.theater-mode.four-streams .container {
@@ -324,28 +333,32 @@
                 grid-template-rows: 1fr;
             }
             body.theater-mode .stream-wrapper {
+                height: 100vh;
+            }
+            body.theater-mode.two-streams .stream-wrapper:nth-child(1) {
+                height: 50vh;
+            }
+            body.theater-mode.two-streams .stream-wrapper:nth-child(2) {
                 height: 50vh;
             }
         }
     </style>
 </head>
 <body>
-    <div class="header-container">
-        <div class="header">
-            <a href="https://github.com/VenomousRhyme41/Multi-Stream-Viewer" class="github-btn" target="_blank">
-                <i class="fab fa-github"></i> GitHub
-            </a>
-            <h1>Multi-Stream Viewer</h1>
-            <div class="global-controls">
-                <button class="global-btn" id="streamLayoutBtn">4 Streams</button>
-                <button class="global-btn" id="theaterModeBtn">Theater Mode</button>
-                <span class="separator">|</span>
-                <button class="global-btn" id="resetAllBtn">Reset All</button>
-            </div>
+    <div class="header">
+        <a href="https://github.com/yourusername/yourrepo" class="github-btn" target="_blank">
+            <i class="fab fa-github"></i> GitHub
+        </a>
+        <h1>Multi-Stream Viewer</h1>
+        <div class="global-controls">
+            <button class="global-btn" id="streamLayoutBtn">4 Streams</button>
+            <button class="global-btn" id="theaterModeBtn">Theater Mode</button>
+            <span class="separator">|</span>
+            <button class="global-btn" id="resetAllBtn">Reset All Streams</button>
         </div>
     </div>
-
-    <div class="container four-streams" id="streamContainer">
+    
+    <div class="container" id="streamContainer">
         <div class="stream-wrapper">
             <div class="stream-input">
                 <input type="text" placeholder="Paste stream URL or embed code" class="src-input">
@@ -406,45 +419,47 @@
             </div>
         </div>
     </div>
-
-    <button id="exitTheaterBtn" class="theater-mode-btn">Exit Theater Mode</button>
+    <button id="exitTheaterBtn" class="exit-theater-btn" style="display: none;">Exit Theater</button>
 
     <script>
+        const domain = window.location.hostname;
+        let activeAudioWrapper = null;
         let isTheaterMode = false;
         let streamLayout = 4;
-        let activeAudioWrapper = null;
-        const domain = window.location.hostname;
+
+        // DOM Elements
         const streamLayoutBtn = document.getElementById('streamLayoutBtn');
         const theaterModeBtn = document.getElementById('theaterModeBtn');
-        const exitTheaterBtn = document.getElementById('exitTheaterBtn');
         const resetAllBtn = document.getElementById('resetAllBtn');
+        const exitTheaterBtn = document.getElementById('exitTheaterBtn');
         const loadStreamBtns = document.querySelectorAll('.load-stream-btn');
         const audioBtns = document.querySelectorAll('.audio-btn');
         const resetBtns = document.querySelectorAll('.reset-btn');
-        
+
+        // Event Listeners
         streamLayoutBtn.addEventListener('click', toggleStreamLayout);
         theaterModeBtn.addEventListener('click', toggleTheaterMode);
         exitTheaterBtn.addEventListener('click', toggleTheaterMode);
         resetAllBtn.addEventListener('click', resetAll);
-        
+
         loadStreamBtns.forEach(btn => {
             btn.addEventListener('click', function() {
                 loadStream(this);
             });
         });
-        
+
         audioBtns.forEach(btn => {
             btn.addEventListener('click', function() {
                 toggleAudio(this);
             });
         });
-        
+
         resetBtns.forEach(btn => {
             btn.addEventListener('click', function() {
                 resetStream(this);
             });
         });
-        
+
         document.addEventListener('DOMContentLoaded', function() {
             document.querySelectorAll('.stream-controls').forEach(controls => {
                 controls.style.display = 'none';
@@ -452,7 +467,7 @@
             exitTheaterBtn.style.display = 'none';
             updateStreamLayout();
         });
-        
+
         function toggleTheaterMode() {
             isTheaterMode = !isTheaterMode;
             document.body.classList.toggle('theater-mode', isTheaterMode);
@@ -470,21 +485,21 @@
                 });
                 
                 const loadedCount = document.querySelectorAll('.stream-wrapper.loaded').length;
-                document.body.classList.remove('ttwo-streams', 'tthree-streams', 'four-streams');
+                document.body.classList.remove('two-streams', 'three-streams', 'four-streams');
                 
                 if (loadedCount <= 2) {
-                    document.body.classList.add('ttwo-streams');
+                    document.body.classList.add('two-streams');
                 } else if (loadedCount === 3) {
-                    document.body.classList.add('tthree-streams');
+                    document.body.classList.add('three-streams');
                 } else {
                     document.body.classList.add('four-streams');
                 }
             } else {
                 updateStreamLayout();
-                document.body.classList.remove('ttwo-streams', 'tthree-streams', 'four-streams');
+                document.body.classList.remove('two-streams', 'three-streams', 'four-streams');
             }
         }
-        
+
         function toggleStreamLayout() {
             streamLayout = streamLayout === 4 ? 2 : (streamLayout === 2 ? 3 : 4);
             updateStreamLayout();
@@ -495,26 +510,25 @@
             const container = document.getElementById('streamContainer');
             const streamWrappers = document.querySelectorAll('.stream-wrapper');
             
-            container.classList.remove('ttwo-streams', 'tthree-streams', 'four-streams');
+            container.classList.remove('two-streams', 'three-streams', 'four-streams');
             
             if (streamLayout === 2) {
-                container.classList.add('ttwo-streams');
+                container.classList.add('two-streams');
                 streamWrappers.forEach((wrapper, index) => {
                     wrapper.classList.toggle('hidden', index >= 2);
                 });
             } else if (streamLayout === 3) {
-                container.classList.add('tthree-streams');
+                container.classList.add('three-streams');
                 streamWrappers.forEach((wrapper, index) => {
                     wrapper.classList.toggle('hidden', index >= 3);
                 });
             } else {
-                container.classList.add('four-streams');
                 streamWrappers.forEach(wrapper => {
                     wrapper.classList.remove('hidden');
                 });
             }
         }
-        
+
         function resetStream(button) {
             const wrapper = button.closest('.stream-wrapper');
             const inputContainer = wrapper.querySelector('.stream-input');
@@ -770,17 +784,17 @@
                 } else if (iframe.src.includes('twitch.tv')) {
                     iframe.contentWindow.postMessage(JSON.stringify({
                         method: 'setVolume',
-        value: 0
-      }), '*');
-    } else if (iframe.src.includes('rumble.com')) {
-      iframe.contentWindow.postMessage(
-        JSON.stringify({ method: "setVolume", value: 0 }),
-        "*"
-      );
-    }
-  } catch {}
-}
-
+                        value: 0
+                    }), '*');
+                } else if (iframe.src.includes('rumble.com')) {
+                    iframe.contentWindow.postMessage(
+                        JSON.stringify({ method: "setVolume", value: 0 }),
+                        "*"
+                    );
+                }
+            } catch {}
+        }
+        
         function unmuteIframe(iframe) {
             if (!iframe.contentWindow || !iframe.src) return;
             
