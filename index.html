@@ -51,6 +51,23 @@
             text-align: center;
             letter-spacing: 1px;
         }
+        .github-btn {
+            position: absolute;
+            left: 0;
+            background-color: var(--button-bg);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 6px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .github-btn:hover {
+            background-color: #555;
+        }
         .global-controls {
             position: absolute;
             right: 0;
@@ -153,6 +170,9 @@
             transition: all 0.2s;
             font-size: 15px;
             width: 100%;
+        }
+        .stream-input button:hover {
+            opacity: 0.9;
         }
         .stream-iframe {
             width: 100%;
@@ -326,12 +346,15 @@
 </head>
 <body>
     <div class="header">
+        <a href="https://github.com/yourusername/yourrepo" class="github-btn" target="_blank">
+            <i class="fab fa-github"></i> GitHub
+        </a>
         <h1>Multi-Stream Viewer</h1>
         <div class="global-controls">
-            <button class="global-btn" id="streamLayoutBtn" onclick="toggleStreamLayout()">4 Streams</button>
-            <button class="global-btn" onclick="toggleTheaterMode()">Theater Mode</button>
+            <button class="global-btn" id="streamLayoutBtn">4 Streams</button>
+            <button class="global-btn" id="theaterModeBtn">Theater Mode</button>
             <span class="separator">|</span>
-            <button class="global-btn" onclick="resetAll()">Reset All Streams</button>
+            <button class="global-btn" id="resetAllBtn">Reset All Streams</button>
         </div>
     </div>
     
@@ -339,14 +362,14 @@
         <div class="stream-wrapper">
             <div class="stream-input">
                 <input type="text" placeholder="Paste stream URL or embed code" class="src-input">
-                <button onclick="loadStream(this)">Load Stream</button>
+                <button class="load-stream-btn">Load Stream</button>
             </div>
             <iframe class="stream-iframe" allowfullscreen></iframe>
             <div class="stream-controls">
                 <div class="stream-info"></div>
                 <div class="stream-buttons">
-                    <button class="control-btn audio-btn" onclick="toggleAudio(this)">Audio ON</button>
-                    <button class="control-btn" onclick="resetStream(this)">Reset</button>
+                    <button class="control-btn audio-btn">Audio ON</button>
+                    <button class="control-btn reset-btn">Reset</button>
                 </div>
             </div>
         </div>
@@ -354,14 +377,14 @@
         <div class="stream-wrapper">
             <div class="stream-input">
                 <input type="text" placeholder="Paste stream URL or embed code" class="src-input">
-                <button onclick="loadStream(this)">Load Stream</button>
+                <button class="load-stream-btn">Load Stream</button>
             </div>
             <iframe class="stream-iframe" allowfullscreen></iframe>
             <div class="stream-controls">
                 <div class="stream-info"></div>
                 <div class="stream-buttons">
-                    <button class="control-btn audio-btn" onclick="toggleAudio(this)">Audio ON</button>
-                    <button class="control-btn" onclick="resetStream(this)">Reset</button>
+                    <button class="control-btn audio-btn">Audio ON</button>
+                    <button class="control-btn reset-btn">Reset</button>
                 </div>
             </div>
         </div>
@@ -369,14 +392,14 @@
         <div class="stream-wrapper">
             <div class="stream-input">
                 <input type="text" placeholder="Paste stream URL or embed code" class="src-input">
-                <button onclick="loadStream(this)">Load Stream</button>
+                <button class="load-stream-btn">Load Stream</button>
             </div>
             <iframe class="stream-iframe" allowfullscreen></iframe>
             <div class="stream-controls">
                 <div class="stream-info"></div>
                 <div class="stream-buttons">
-                    <button class="control-btn audio-btn" onclick="toggleAudio(this)">Audio ON</button>
-                    <button class="control-btn" onclick="resetStream(this)">Reset</button>
+                    <button class="control-btn audio-btn">Audio ON</button>
+                    <button class="control-btn reset-btn">Reset</button>
                 </div>
             </div>
         </div>
@@ -384,20 +407,19 @@
         <div class="stream-wrapper">
             <div class="stream-input">
                 <input type="text" placeholder="Paste stream URL or embed code" class="src-input">
-                <button onclick="loadStream(this)">Load Stream</button>
+                <button class="load-stream-btn">Load Stream</button>
             </div>
             <iframe class="stream-iframe" allowfullscreen></iframe>
             <div class="stream-controls">
                 <div class="stream-info"></div>
                 <div class="stream-buttons">
-                    <button class="control-btn audio-btn" onclick="toggleAudio(this)">Audio ON</button>
-                    <button class="control-btn" onclick="resetStream(this)">Reset</button>
+                    <button class="control-btn audio-btn">Audio ON</button>
+                    <button class="control-btn reset-btn">Reset</button>
                 </div>
             </div>
         </div>
     </div>
-
-    <button id="exitTheaterBtn" class="exit-theater-btn" style="display: none;" onclick="toggleTheaterMode()">Exit Theater</button>
+    <button id="exitTheaterBtn" class="exit-theater-btn" style="display: none;">Exit Theater</button>
 
     <script>
         const domain = window.location.hostname;
@@ -405,11 +427,51 @@
         let isTheaterMode = false;
         let streamLayout = 4;
 
+        // DOM Elements
+        const streamLayoutBtn = document.getElementById('streamLayoutBtn');
+        const theaterModeBtn = document.getElementById('theaterModeBtn');
+        const resetAllBtn = document.getElementById('resetAllBtn');
+        const exitTheaterBtn = document.getElementById('exitTheaterBtn');
+        const loadStreamBtns = document.querySelectorAll('.load-stream-btn');
+        const audioBtns = document.querySelectorAll('.audio-btn');
+        const resetBtns = document.querySelectorAll('.reset-btn');
+
+        // Event Listeners
+        streamLayoutBtn.addEventListener('click', toggleStreamLayout);
+        theaterModeBtn.addEventListener('click', toggleTheaterMode);
+        exitTheaterBtn.addEventListener('click', toggleTheaterMode);
+        resetAllBtn.addEventListener('click', resetAll);
+
+        loadStreamBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                loadStream(this);
+            });
+        });
+
+        audioBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                toggleAudio(this);
+            });
+        });
+
+        resetBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                resetStream(this);
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.stream-controls').forEach(controls => {
+                controls.style.display = 'none';
+            });
+            exitTheaterBtn.style.display = 'none';
+            updateStreamLayout();
+        });
+
         function toggleTheaterMode() {
             isTheaterMode = !isTheaterMode;
             document.body.classList.toggle('theater-mode', isTheaterMode);
-            document.getElementById('exitTheaterBtn').style.display = isTheaterMode ? 'block' : 'none';
-            document.querySelector('.theater-mode-btn').style.display = isTheaterMode ? 'none' : 'block';
+            exitTheaterBtn.style.display = isTheaterMode ? 'block' : 'none';
             
             if (isTheaterMode) {
                 document.querySelectorAll('.stream-wrapper').forEach(wrapper => {
@@ -441,7 +503,7 @@
         function toggleStreamLayout() {
             streamLayout = streamLayout === 4 ? 2 : (streamLayout === 2 ? 3 : 4);
             updateStreamLayout();
-            document.getElementById('streamLayoutBtn').textContent = `${streamLayout} Streams`;
+            streamLayoutBtn.textContent = `${streamLayout} Streams`;
         }
         
         function updateStreamLayout() {
@@ -500,6 +562,9 @@
             if (url.includes('kick.com')) return 'kick';
             if (url.includes('rumble.com')) return 'rumble';
             if (url.includes('x.com') || url.includes('twitter.com')) return 'twitter';
+            if (url.includes('instagram.com')) return 'instagram';
+            if (url.includes('tiktok.com')) return 'tiktok';
+            if (url.includes('whatnot.com')) return 'whatnot';
             return null;
         }
         
@@ -533,7 +598,15 @@
                 case 'rumble':
                     return `https://rumble.com/embed/${streamId}/?pub=4`;
                 case 'twitter':
-                    return null;
+                    return `https://twitter.com/i/events/${streamId}`;
+                case 'instagram':
+                    return url.includes('/reel/') ? 
+                        `https://www.instagram.com/reel/${streamId}/embed` : 
+                        url;
+                case 'tiktok':
+                    return url;
+                case 'whatnot':
+                    return url;
                 default:
                     return null;
             }
@@ -571,7 +644,18 @@
                         if (url.includes('embed/')) {
                             return cleanUrl.split('rumble.com/embed/')[1].split('/')[0];
                         }
-                        return null;
+                        return cleanUrl.split('rumble.com/')[1].split('/')[0];
+                    case 'twitter':
+                        return cleanUrl.split('x.com/')[1]?.split('/')[2] || 
+                               cleanUrl.split('twitter.com/')[1]?.split('/')[2];
+                    case 'instagram':
+                        return url.includes('/reel/') ? 
+                            url.split('/reel/')[1].split('/')[0] : 
+                            url;
+                    case 'tiktok':
+                        return cleanUrl.split('tiktok.com/')[1].split('/')[1];
+                    case 'whatnot':
+                        return url;
                     default:
                         return null;
                 }
@@ -597,31 +681,26 @@
             const embedUrl = getEmbedUrl(inputValue);
             const platform = detectPlatform(inputValue);
             
-            if (!embedUrl && platform !== 'twitter') {
-                alert('Invalid stream format. Supported: YouTube, Twitch, Kick, Rumble URLs or embed codes');
+            if (!embedUrl && platform !== 'twitter' && platform !== 'instagram' && platform !== 'tiktok' && platform !== 'whatnot') {
+                alert('Invalid stream format. Supported: YouTube, Twitch, Kick, Rumble, Twitter/X, Instagram, TikTok, Whatnot');
                 return;
             }
             
-            if (platform === 'twitter') {
-                info.textContent = "Twitter/X streams can't be embedded directly";
-                return;
-            }
-            
-            iframe.src = embedUrl;
+            iframe.src = embedUrl || inputValue;
             iframe.style.display = 'block';
             inputContainer.style.display = 'none';
             controls.style.display = 'flex';
             info.textContent = '';
             wrapper.classList.add('loaded');
             
-            if (embedUrl.includes('kick.com')) {
+            if (iframe.src.includes('kick.com')) {
                 iframe.classList.add('kick-iframe');
             } else {
                 iframe.classList.remove('kick-iframe');
             }
             
-            if (embedUrl.includes('youtube.com')) {
-                const videoId = extractStreamId(embedUrl, 'youtube');
+            if (iframe.src.includes('youtube.com')) {
+                const videoId = extractStreamId(iframe.src, 'youtube');
                 if (videoId) {
                     fetchYouTubeTitle(videoId)
                         .then(title => {
@@ -630,16 +709,20 @@
                             }
                         });
                 }
-            } else if (embedUrl.includes('rumble.com')) {
+            } else if (iframe.src.includes('rumble.com')) {
                 info.textContent = 'Rumble Stream';
+            } else if (iframe.src.includes('whatnot.com')) {
+                info.textContent = 'Whatnot Stream';
             }
             
-            setTimeout(() => {
-                muteIframe(iframe);
-                if (wrapper === activeAudioWrapper) {
-                    unmuteIframe(iframe);
-                }
-            }, 3000);
+            if (platform && !['twitter', 'instagram', 'tiktok'].includes(platform)) {
+                setTimeout(() => {
+                    muteIframe(iframe);
+                    if (wrapper === activeAudioWrapper) {
+                        unmuteIframe(iframe);
+                    }
+                }, 3000);
+            }
         }
         
         async function fetchYouTubeTitle(videoId) {
@@ -764,14 +847,6 @@
             
             activeAudioWrapper = null;
         }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            document.querySelectorAll('.stream-controls').forEach(controls => {
-                controls.style.display = 'none';
-            });
-            document.getElementById('exitTheaterBtn').style.display = 'none';
-            updateStreamLayout();
-        });
     </script>
 </body>
 </html>
