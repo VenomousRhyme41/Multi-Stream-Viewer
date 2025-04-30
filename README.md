@@ -25,7 +25,8 @@ Watch up to 2-4 streams simultaneously with this sleek multi-platform viewer. Su
 
 ## 🖥️ Preview  
 
-![image](https://github.com/user-attachments/assets/dce9bf39-a64c-47e5-8844-01a2d011a250)
+![image](https://github.com/user-attachments/assets/4528423d-867c-4a29-a9ee-f93a5c84f31c)
+
 
 *The minimalist interface puts focus on your streams*
 
