@@ -1,19 +1,19 @@
 # 📺 Multi-Stream Viewer  
 
-**Watch multiple streams simultaneously from Twitch, YouTube, Kick, Rumble, Twitter/X, Instagram, TikTok, and Whatnot**  
+**Watch multiple streams simultaneously from Youtube, Twitch, Kick, and most embed links**  
 
 [![Live Demo](https://img.shields.io/badge/Live_Demo-Available-brightgreen)](https://venomousrhyme41.github.io/Multi-Stream-Viewer/)  
 ![License](https://img.shields.io/badge/License-MIT-blue)
 
 ## 🎯 Overview  
 
-Watch up to 2-4 streams simultaneously with this sleek multi-platform viewer. Supports Twitch, YouTube, and Kick streams in one unified interface:  
+Watch up to 2-4 streams simultaneously with this sleek multi-platform viewer. Supports Youtube, Twitch, Kick and embed links streams in one unified interface:  
 
-`Twitch | YouTube | Kick | Rumble | Twitter/X | Instagram | Tiktok | Whatnot`  
+`Youtube | Twitch | Kick | Embed links`  
 
 ## ✨ Key Features  
 
-- **Multi-platform support** - Works with Twitch, YouTube, Kick, Rumble, Twitter/X, Instagram, TikTok, and Whatnot
+- **Multi-platform support** - Works with Youtube, Twitch, Kick, and most embed links
 
 - **Clean, dark theme** - Focuses attention on the content  
 
@@ -39,7 +39,7 @@ Access the viewer at:
 ## 🛠️ How To Use  
 
 1. **Enter Stream URLs**  
-   - Paste Twitch, YouTube, Kick, Rumble, Twitter/X, Instagram, TikTok, or Whatnot URLs (or embed codes)  
+   - Paste Youtube, Twitch, Kick, or embed links
    - Click "Load Stream"  
 
 2. **Enter theator mode**  
