@@ -45,6 +45,13 @@ Access the viewer at:
 2. **Enter theator mode**  
    - Enter theator mode for a more clean and slick look so you have no distractions from watching your favorite streams  
 
+## 🆕 Updates that might come in the future!
+
+- **Refresh button**: A refresh button under the stream to just refresh the stream without removing it.
+- **Fixing the stream gaps**: Fixing the big blank spaces between the streams while in 4 stream view. 
+
+  *Note: Some of these features might not come. Who knows (6/13/25)*
+
 ## 👨‍💻 Developer  
 
 **Creator**: [VenomousRhyme41](https://github.com/VenomousRhyme41)  
