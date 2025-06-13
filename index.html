@@ -430,6 +430,7 @@ display: none !important;
 <div class="stream-controls">
 <div class="stream-info"></div>
 <div class="stream-buttons">
+<button class="control-btn refresh-btn">Refresh</button>
 <button class="control-btn reset-btn">Reset</button>
 </div>
 </div>
@@ -825,6 +826,19 @@ setTimeout(() => {
 errorDiv.remove();
 }, 3000);
 }
+document.querySelectorAll('.refresh-btn').forEach(btn => {
+    btn.addEventListener('click', function () {
+        const wrapper = btn.closest('.stream-wrapper');
+        const iframe = wrapper.querySelector('.stream-iframe');
+        if (iframe && iframe.src) {
+            const currentSrc = iframe.src;
+            iframe.src = ''; // Clear the source temporarily
+            setTimeout(() => {
+                iframe.src = currentSrc; // Reassign the source to refresh
+            }, 100);
+        }
+    });
+});
 </script>
 </body>
 </html>
