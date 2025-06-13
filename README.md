@@ -47,8 +47,8 @@ Access the viewer at:
 
 ## 🆕 Updates that might come in the future!
 
-- **Refresh button**: A refresh button under the stream to just refresh the stream without removing it.
 - **Fixing the stream gaps**: Fixing the big blank spaces between the streams while in 4 stream view. 
+- **Auto configure twitch links**: Add a feature to auto add the "&parent=venomousrhyme41.github.io" to the link when loading a stream.
 
   *Note: Some of these features might not come. Who knows (6/13/25)*
 
