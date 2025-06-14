@@ -269,9 +269,9 @@ top: 10px;
 right: 10px;
 z-index: 1000;
 padding: 8px 15px;
-background-color: var(--button-bg);
-color: var(--text-color);
-border: 1px solid var(--border-color);
+background-color: rgba(255, 255, 255, 0.015);
+color: rgba(255, 255, 255, 0.5);
+border: 1px solid rgba(255, 255, 255, 0.05);
 border-radius: 6px;
 cursor: pointer;
 font-weight: 500;
@@ -279,7 +279,7 @@ transition: all 0.2s;
 font-size: 14px;
 }
 .exit-theater-btn:hover {
-background-color: rgba(0, 255, 157, 0.2);
+background-color: rgba(0, 255, 157, 0.08);
 }
 @media (max-width: 1200px) {
 .header {
@@ -843,9 +843,9 @@ document.querySelectorAll('.refresh-btn').forEach(btn => {
         const iframe = wrapper.querySelector('.stream-iframe');
         if (iframe && iframe.src) {
             const currentSrc = iframe.src;
-            iframe.src = ''; // Clear the source temporarily
+            iframe.src = '';
             setTimeout(() => {
-                iframe.src = currentSrc; // Reassign the source to refresh
+                iframe.src = currentSrc;
             }, 100);
         }
     });
