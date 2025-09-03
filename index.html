@@ -341,23 +341,28 @@ grid-template-columns: repeat(2, 1fr);
 body.theater-mode.three-streams .container {
 grid-template-columns: repeat(3, 1fr);
 }
+
+/* CHANGED BLOCK START (lines ~343–360) */
 body.theater-mode.four-streams .container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    width: 100vw;
-    height: 100vh;
-    margin: 0;
-    padding: 0;
-    gap: 0;
-    background: black;
+display: grid;
+grid-template-columns: repeat(2, 1fr);
+grid-template-rows: repeat(2, 1fr);
+width: 100vw;
+height: 100vh;
+margin: 0;
+padding: 0;
+gap: 0;
+overflow: hidden;
 }
-body.theater-mode.four-streams .stream {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    background: black;
+body.theater-mode.four-streams .stream-wrapper { overflow: hidden; }
+body.theater-mode.four-streams .stream-iframe {
+width: calc(100% + 2px);
+height: calc(100% + 2px);
+transform: translate(-1px, -1px);
+display: block;
 }
+/* CHANGED BLOCK END */
+
 @media (max-width: 768px) {
 body.theater-mode .container {
 grid-template-columns: 1fr !important;
@@ -392,12 +397,10 @@ animation: fadeInOut 3s forwards;
 90% { opacity: 1; }
 100% { opacity: 0; display: none; }
 }
-
 body.theater-mode .stream-controls,
 body.theater-mode .stream-info {
 display: none !important;
 }
-
 </style>
 </head>
 <body>
