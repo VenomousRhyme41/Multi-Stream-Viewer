@@ -158,6 +158,29 @@ border-color: var(--active-color);
 .stream-selector select:hover {
 background-color: #333;
 }
+.twitch-selector {
+position: absolute;
+top: 50px;
+right: 10px;
+z-index: 20;
+}
+.twitch-selector select {
+padding: 6px 10px;
+background-color: var(--button-bg);
+color: var(--text-color);
+border: 1px solid var(--border-color);
+border-radius: 6px;
+font-size: 14px;
+cursor: pointer;
+transition: all 0.2s;
+}
+.twitch-selector select:focus {
+outline: none;
+border-color: var(--active-color);
+}
+.twitch-selector select:hover {
+background-color: #333;
+}
 .stream-input {
 position: absolute;
 top: 50%;
@@ -313,7 +336,8 @@ height: 100vh;
 }
 body.theater-mode .header,
 body.theater-mode .stream-input,
-body.theater-mode .stream-selector {
+body.theater-mode .stream-selector,
+body.theater-mode .twitch-selector {
 display: none;
 }
 body.theater-mode .container {
@@ -342,7 +366,6 @@ body.theater-mode.three-streams .container {
 grid-template-columns: repeat(3, 1fr);
 }
 
-/* CHANGED BLOCK START (lines ~343–360) */
 body.theater-mode.four-streams .container {
 display: grid;
 grid-template-columns: repeat(2, 1fr);
@@ -361,7 +384,6 @@ height: calc(100% + 2px);
 transform: translate(-1px, -1px);
 display: block;
 }
-/* CHANGED BLOCK END */
 
 @media (max-width: 768px) {
 body.theater-mode .container {
@@ -440,40 +462,13 @@ display: none !important;
 <option value="familyguy">Family Guy</option>
 </select>
 </div>
-<div class="stream-input">
-<input type="text" placeholder="Paste stream URL or embed code" class="src-input">
-<button class="load-stream-btn">Load Stream</button>
-</div>
-<iframe class="stream-iframe" allowfullscreen></iframe>
-<div class="stream-controls">
-<div class="stream-info"></div>
-<div class="stream-buttons">
-<button class="control-btn refresh-btn">Refresh</button>
-<button class="control-btn reset-btn">Reset</button>
-</div>
-</div>
-</div>
-<div class="stream-wrapper">
-<div class="stream-selector">
-<select class="stream-dropdown">
-<option value="" selected disabled>24/7 Channels</option>
-<option value="espn">ESPN</option>
-<option value="mlb-network">MLB Network</option>
-<option value="nfl-network">NFL Network</option>
-<option value="nba-tv">NBA TV</option>
-<option value="nhl-network">NHL Network</option>
-<option value="tennis-channel">Tennis Channel</option>
-<option value="sky-sports-golf">Golf Channel</option>
-<option value="sky-sports-darts">Darts Channel</option>
-<option value="fox-nrl-tv">Rugby Channel</option>
-<option value="ufc-events">UFC Events</option>
-<option value="dazn-f1">Formula 1 (DAZN)</option>
-<option value="sky-f1">F1 (Sky Sports)</option>
-<option value="motogp">MotoGP</option>
-<option value="poker">Poker</option>
-<option value="southpark">South Park</option>
-<option value="simpsons">The Simpsons</option>
-<option value="familyguy">Family Guy</option>
+<div class="twitch-selector">
+<select class="twitch-dropdown">
+<option value="" selected disabled>Twitch</option>
+<option value="jynxi">Jynxi</option>
+<option value="test1">Test 1</option>
+<option value="test2">Test 2</option>
+<option value="test3">Test 3</option>
 </select>
 </div>
 <div class="stream-input">
@@ -512,6 +507,15 @@ display: none !important;
 <option value="familyguy">Family Guy</option>
 </select>
 </div>
+<div class="twitch-selector">
+<select class="twitch-dropdown">
+<option value="" selected disabled>Twitch</option>
+<option value="jynxi">Jynxi</option>
+<option value="test1">Test 1</option>
+<option value="test2">Test 2</option>
+<option value="test3">Test 3</option>
+</select>
+</div>
 <div class="stream-input">
 <input type="text" placeholder="Paste stream URL or embed code" class="src-input">
 <button class="load-stream-btn">Load Stream</button>
@@ -546,6 +550,60 @@ display: none !important;
 <option value="southpark">South Park</option>
 <option value="simpsons">The Simpsons</option>
 <option value="familyguy">Family Guy</option>
+</select>
+</div>
+<div class="twitch-selector">
+<select class="twitch-dropdown">
+<option value="" selected disabled>Twitch</option>
+<option value="jynxi">Jynxi</option>
+<option value="test1">Test 1</option>
+<option value="test2">Test 2</option>
+<option value="test3">Test 3</option>
+</select>
+</div>
+<div class="stream-input">
+<input type="text" placeholder="Paste stream URL or embed code" class="src-input">
+<button class="load-stream-btn">Load Stream</button>
+</div>
+<iframe class="stream-iframe" allowfullscreen></iframe>
+<div class="stream-controls">
+<div class="stream-info"></div>
+<div class="stream-buttons">
+<button class="control-btn refresh-btn">Refresh</button>
+<button class="control-btn reset-btn">Reset</button>
+</div>
+</div>
+</div>
+<div class="stream-wrapper">
+<div class="stream-selector">
+<select class="stream-dropdown">
+<option value="" selected disabled>24/7 Channels</option>
+<option value="espn">ESPN</option>
+<option value="mlb-network">MLB Network</option>
+<option value="nfl-network">NFL Network</option>
+<option value="nba-tv">NBA TV</option>
+<option value="nhl-network">NHL Network</option>
+<option value="tennis-channel">Tennis Channel</option>
+<option value="sky-sports-golf">Golf Channel</option>
+<option value="sky-sports-darts">Darts Channel</option>
+<option value="fox-nrl-tv">Rugby Channel</option>
+<option value="ufc-events">UFC Events</option>
+<option value="dazn-f1">Formula 1 (DAZN)</option>
+<option value="sky-f1">F1 (Sky Sports)</option>
+<option value="motogp">MotoGP</option>
+<option value="poker">Poker</option>
+<option value="southpark">South Park</option>
+<option value="simpsons">The Simpsons</option>
+<option value="familyguy">Family Guy</option>
+</select>
+</div>
+<div class="twitch-selector">
+<select class="twitch-dropdown">
+<option value="" selected disabled>Twitch</option>
+<option value="jynxi">Jynxi</option>
+<option value="test1">Test 1</option>
+<option value="test2">Test 2</option>
+<option value="test3">Test 3</option>
 </select>
 </div>
 <div class="stream-input">
@@ -573,6 +631,7 @@ const resetAllBtn = document.getElementById('resetAllBtn');
 const exitTheaterBtn = document.getElementById('exitTheaterBtn');
 const resetBtns = document.querySelectorAll('.reset-btn');
 const streamDropdowns = document.querySelectorAll('.stream-dropdown');
+const twitchDropdowns = document.querySelectorAll('.twitch-dropdown');
 const channelMap = {
 'espn': {
 url: 'https://embedstreams.top/embed/alpha/espn/1',
@@ -641,6 +700,22 @@ name: 'The Simpsons'
 'familyguy': {
 url: 'https://vecloud.eu/stream/d2b4b104-853f-4e4e-9edd-425a1275e90a',
 name: 'Family Guy'
+},
+'jynxi': {
+url: '<iframe src="https://player.twitch.tv/?channel=jynxzi&parent=venomousrhyme41.github.io" frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="620"></iframe>',
+name: 'Jynxi'
+},
+'test1': {
+url: '<iframe src="https://player.twitch.tv/?channel=&parent=venomousrhyme41.github.io" frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="620"></iframe>',
+name: 'more'
+},
+'test2': {
+url: '<iframe src="https://player.twitch.tv/?channel=&parent=venomousrhyme41.github.io" frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="620"></iframe>',
+name: 'to come'
+},
+'test3': {
+url: '<iframe src="https://player.twitch.tv/?channel=&parent=venomousrhyme41.github.io" frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="620"></iframe>',
+name: 'soon!'
 }
 };
 streamLayoutBtn.addEventListener('click', toggleStreamLayout);
@@ -662,6 +737,11 @@ dropdown.addEventListener('change', function() {
 handleDropdownChange(this);
 });
 });
+twitchDropdowns.forEach(dropdown => {
+dropdown.addEventListener('change', function() {
+handleTwitchDropdownChange(this);
+});
+});
 document.addEventListener('DOMContentLoaded', function() {
 document.querySelectorAll('.stream-controls').forEach(controls => {
 controls.style.display = 'none';
@@ -677,6 +757,7 @@ const inputContainer = wrapper.querySelector('.stream-input');
 const controls = wrapper.querySelector('.stream-controls');
 const info = wrapper.querySelector('.stream-info');
 const selector = wrapper.querySelector('.stream-selector');
+const twitchSelector = wrapper.querySelector('.twitch-selector');
 let src = input.value.trim();
 let title = '';
 if (src.includes('<iframe')) {
@@ -727,6 +808,7 @@ inputContainer.style.display = 'none';
 controls.style.display = 'flex';
 wrapper.classList.add('loaded');
 selector.style.display = 'none';
+twitchSelector.style.display = 'none';
 if (title) {
 info.textContent = title;
 } else {
@@ -749,6 +831,23 @@ wrapper.querySelector('.stream-controls').style.display = 'flex';
 wrapper.classList.add('loaded');
 wrapper.querySelector('.stream-info').textContent = channel.name;
 wrapper.querySelector('.stream-selector').style.display = 'none';
+wrapper.querySelector('.twitch-selector').style.display = 'none';
+dropdown.selectedIndex = 0;
+}
+}
+function handleTwitchDropdownChange(dropdown) {
+const wrapper = dropdown.closest('.stream-wrapper');
+const channel = channelMap[dropdown.value];
+if (channel) {
+const iframe = wrapper.querySelector('.stream-iframe');
+iframe.src = channel.url;
+iframe.style.display = 'block';
+wrapper.querySelector('.stream-input').style.display = 'none';
+wrapper.querySelector('.stream-controls').style.display = 'flex';
+wrapper.classList.add('loaded');
+wrapper.querySelector('.stream-info').textContent = channel.name;
+wrapper.querySelector('.stream-selector').style.display = 'none';
+wrapper.querySelector('.twitch-selector').style.display = 'none';
 dropdown.selectedIndex = 0;
 }
 }
@@ -759,10 +858,16 @@ exitTheaterBtn.style.display = isTheaterMode ? 'block' : 'none';
 document.querySelectorAll('.stream-selector').forEach(selector => {
 selector.style.display = 'none';
 });
+document.querySelectorAll('.twitch-selector').forEach(selector => {
+selector.style.display = 'none';
+});
 if (isTheaterMode) {
 updateTheaterModeLayout();
 } else {
 document.querySelectorAll('.stream-wrapper:not(.loaded) .stream-selector').forEach(selector => {
+selector.style.display = 'block';
+});
+document.querySelectorAll('.stream-wrapper:not(.loaded) .twitch-selector').forEach(selector => {
 selector.style.display = 'block';
 });
 updateStreamLayout();
@@ -811,7 +916,9 @@ const iframe = wrapper.querySelector('.stream-iframe');
 const controls = wrapper.querySelector('.stream-controls');
 const info = wrapper.querySelector('.stream-info');
 const dropdown = wrapper.querySelector('.stream-dropdown');
+const twitchDropdown = wrapper.querySelector('.twitch-dropdown');
 const selector = wrapper.querySelector('.stream-selector');
+const twitchSelector = wrapper.querySelector('.twitch-selector');
 wrapper.classList.remove('loaded');
 inputContainer.style.display = '';
 iframe.style.display = 'none';
@@ -819,7 +926,9 @@ controls.style.display = 'none';
 iframe.src = '';
 info.textContent = '';
 dropdown.selectedIndex = 0;
+twitchDropdown.selectedIndex = 0;
 selector.style.display = 'block';
+twitchSelector.style.display = 'block';
 if (isTheaterMode) {
 updateTheaterModeLayout();
 }
@@ -831,7 +940,9 @@ const iframe = wrapper.querySelector('.stream-iframe');
 const controls = wrapper.querySelector('.stream-controls');
 const info = wrapper.querySelector('.stream-info');
 const dropdown = wrapper.querySelector('.stream-dropdown');
+const twitchDropdown = wrapper.querySelector('.twitch-dropdown');
 const selector = wrapper.querySelector('.stream-selector');
+const twitchSelector = wrapper.querySelector('.twitch-selector');
 wrapper.classList.remove('loaded');
 inputContainer.style.display = '';
 iframe.style.display = 'none';
@@ -839,7 +950,9 @@ controls.style.display = 'none';
 iframe.src = '';
 info.textContent = '';
 dropdown.selectedIndex = 0;
+twitchDropdown.selectedIndex = 0;
 selector.style.display = 'block';
+twitchSelector.style.display = 'block';
 });
 if (isTheaterMode) {
 updateTheaterModeLayout();
