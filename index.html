@@ -21,6 +21,10 @@ box-sizing: border-box;
 margin: 0;
 padding: 0;
 scrollbar-width: none;
+-webkit-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+user-select: none;
 }
 *::-webkit-scrollbar {
 display: none;
@@ -70,10 +74,14 @@ border-radius: 50%;
 }
 .header {
 display: flex;
-justify-content: center;
+justify-content: space-between;
 align-items: center;
 margin-bottom: 10px;
 position: relative;
+width: 95%;
+max-width: 1800px;
+margin-left: auto;
+margin-right: auto;
 }
 h1 {
 margin: 0;
@@ -83,10 +91,11 @@ font-size: 2.5rem;
 font-family: 'Montserrat', sans-serif;
 text-align: center;
 letter-spacing: 1px;
+position: absolute;
+left: 50%;
+transform: translateX(-50%);
 }
 .github-btn {
-position: absolute;
-left: 0;
 background-color: var(--button-bg);
 color: white;
 padding: 8px 15px;
@@ -102,11 +111,10 @@ transition: all 0.2s;
 background-color: #555;
 }
 .global-controls {
-position: absolute;
-right: 0;
 display: flex;
 gap: 10px;
 align-items: center;
+margin-left: auto;
 }
 .global-btn {
 padding: 8px 15px;
@@ -237,6 +245,10 @@ border: 1px solid var(--border-color);
 color: var(--text-color);
 border-radius: 8px;
 font-size: 15px;
+-webkit-user-select: text;
+-moz-user-select: text;
+-ms-user-select: text;
+user-select: text;
 }
 .stream-input button {
 padding: 12px 25px;
@@ -343,13 +355,11 @@ flex-direction: column;
 gap: 15px;
 }
 .global-controls {
+margin-left: 0;
+}
+h1 {
 position: static;
-}
-.container.three-streams {
-grid-template-columns: repeat(2, 1fr);
-}
-.container.three-streams .stream-wrapper:nth-child(3) {
-grid-column: 1 / -1;
+transform: none;
 }
 }
 @media (max-width: 768px) {
@@ -374,7 +384,8 @@ height: 100vh;
 body.theater-mode .header,
 body.theater-mode .stream-input,
 body.theater-mode .stream-selector,
-body.theater-mode .twitch-selector {
+body.theater-mode .twitch-selector,
+body.theater-mode .announcement-banner {
 display: none;
 }
 body.theater-mode .container {
@@ -414,12 +425,16 @@ padding: 0;
 gap: 0;
 overflow: hidden;
 }
-body.theater-mode.four-streams .stream-wrapper { overflow: hidden; }
+body.theater-mode.four-streams .stream-wrapper { 
+overflow: hidden;
+margin: 0;
+padding: 0;
+}
 body.theater-mode.four-streams .stream-iframe {
-width: calc(100% + 2px);
-height: calc(100% + 2px);
-transform: translate(-1px, -1px);
+width: 100%;
+height: 100%;
 display: block;
+transform: none;
 }
 
 @media (max-width: 768px) {
