@@ -35,6 +35,39 @@ display: flex;
 flex-direction: column;
 overflow-x: hidden;
 }
+.announcement-banner {
+position: fixed;
+top: 0;
+left: 0;
+right: 0;
+background-color: #ff4444;
+color: white;
+padding: 12px 50px 12px 20px;
+text-align: center;
+z-index: 10000;
+font-weight: 500;
+box-shadow: 0 2px 10px rgba(255, 68, 68, 0.3);
+}
+.close-announcement {
+position: absolute;
+right: 15px;
+top: 50%;
+transform: translateY(-50%);
+background: none;
+border: none;
+color: white;
+font-size: 18px;
+cursor: pointer;
+width: 24px;
+height: 24px;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+.close-announcement:hover {
+background-color: rgba(255, 255, 255, 0.2);
+border-radius: 50%;
+}
 .header {
 display: flex;
 justify-content: center;
@@ -328,6 +361,10 @@ grid-template-columns: 1fr;
 .container.four-streams {
 grid-template-columns: 1fr;
 }
+.announcement-banner {
+padding: 10px 40px 10px 15px;
+font-size: 14px;
+}
 }
 body.theater-mode {
 padding: 0;
@@ -426,6 +463,10 @@ display: none !important;
 </style>
 </head>
 <body>
+<div class="announcement-banner" id="announcementBanner" style="display: none;">
+<div id="announcementText"></div>
+<button class="close-announcement" id="closeAnnouncement">×</button>
+</div>
 <div class="header">
 <a href="https://github.com/VenomousRhyme41/Multi-Stream-Viewer" class="github-btn" target="_blank">
 <i class="fab fa-github"></i> GitHub
@@ -632,6 +673,9 @@ const exitTheaterBtn = document.getElementById('exitTheaterBtn');
 const resetBtns = document.querySelectorAll('.reset-btn');
 const streamDropdowns = document.querySelectorAll('.stream-dropdown');
 const twitchDropdowns = document.querySelectorAll('.twitch-dropdown');
+const announcementBanner = document.getElementById('announcementBanner');
+const closeAnnouncement = document.getElementById('closeAnnouncement');
+const announcementText = document.getElementById('announcementText');
 const channelMap = {
 'espn': {
 url: 'https://embedstreams.top/embed/alpha/espn/1',
@@ -707,17 +751,42 @@ name: 'Jynxi'
 },
 'test1': {
 url: 'https://player.twitch.tv/?channel=&parent=venomousrhyme41.github.io',
-name: 'Test 2'
+name: 'Test 1'
 },
 'test2': {
 url: 'https://player.twitch.tv/?channel=&parent=venomousrhyme41.github.io',
-name: 'Test 3'
+name: 'Test 2'
 },
 'test3': {
 url: 'https://player.twitch.tv/?channel=&parent=venomousrhyme41.github.io',
-name: 'Test4'
+name: 'Test 3'
 }
 };
+
+async function fetchAnnouncement() {
+try {
+const response = await fetch('https://raw.githubusercontent.com/VenomousRhyme41/multi-stream-announcement-text-/refs/heads/main/text.txt');
+if (response.ok) {
+const text = await response.text();
+const trimmedText = text.trim();
+if (trimmedText && trimmedText.length > 0) {
+announcementText.textContent = trimmedText;
+announcementBanner.style.display = 'block';
+} else {
+announcementBanner.style.display = 'none';
+}
+} else {
+announcementBanner.style.display = 'none';
+}
+} catch (error) {
+announcementBanner.style.display = 'none';
+}
+}
+
+closeAnnouncement.addEventListener('click', function() {
+announcementBanner.style.display = 'none';
+});
+
 streamLayoutBtn.addEventListener('click', toggleStreamLayout);
 theaterModeBtn.addEventListener('click', toggleTheaterMode);
 exitTheaterBtn.addEventListener('click', toggleTheaterMode);
@@ -748,6 +817,7 @@ controls.style.display = 'none';
 });
 exitTheaterBtn.style.display = 'none';
 updateStreamLayout();
+fetchAnnouncement();
 });
 function loadStream(button) {
 const wrapper = button.closest('.stream-wrapper');
