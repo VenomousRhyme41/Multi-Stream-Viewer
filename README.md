@@ -1,71 +1,60 @@
-# 📺 Multi-Stream Viewer  
+# 📺 Multi-Stream Viewer
 
-**Watch multiple streams simultaneously from Youtube, Twitch, Kick, and most embed links**  
+Watch up to 4 streams at once from YouTube, Twitch, Kick, and more.
 
-[![Live Demo](https://img.shields.io/badge/Live_Demo-Available-brightgreen)](https://venomousrhyme41.github.io/Multi-Stream-Viewer/)  
+[![Live Demo](https://img.shields.io/badge/Live_Demo-Available-brightgreen)](https://venomousrhyme41.github.io/Multi-Stream-Viewer/)
 ![License](https://img.shields.io/badge/License-MIT-blue)
 
-## 🎯 Overview  
+---
 
-Watch up to 2-4 streams simultaneously with this sleek multi-platform viewer. Supports Youtube, Twitch, Kick and embed links streams in one unified interface:  
+## 🌐 Try It Now
 
-`Youtube | Twitch | Kick | Embed links`  
+**[Launch Multi-Stream Viewer →](https://venomousrhyme41.github.io/Multi-Stream-Viewer/)**
 
-## ✨ Key Features  
+<img width="1918" height="866" alt="image" src="https://github.com/user-attachments/assets/2526a227-dfbb-443a-9317-e5ddf73fc825" />
 
-- **Multi-platform support** - Works with Youtube, Twitch, Kick, and most embed links
+---
 
-- **Clean, dark theme** - Focuses attention on the content  
+## What You Can Do
 
-- **Simple interface** - Just paste URLs and watch
+**Watch Multiple Streams**
+Keep up with all your favorite streamers at the same time. No more switching between tabs.
 
-- **Responsive layout** - Works on desktop and mobile  
+**Supports All Major Platforms**
+YouTube, Twitch, Kick, and most embed links work right out of the box.
 
-- **Embed code support** - Works with standard embed codes too  
+**Theater Mode**
+Hide everything except the streams for a distraction-free experience.
 
-## 🖥️ Preview  
+---
 
-![image](https://github.com/user-attachments/assets/4528423d-867c-4a29-a9ee-f93a5c84f31c)
+## Quick Start
 
+1. Go to the [live site](https://venomousrhyme41.github.io/Multi-Stream-Viewer/)
+2. Paste stream URLs into the input boxes
+3. Click "Load Stream" for each one
+4. Hit theater mode if you want a cleaner view
 
-*The minimalist interface puts focus on your streams*
+That's it. No setup, no downloads, no accounts needed.
 
-## 🌐 Live Website  
+---
 
-Access the viewer at:  
+## Coming Soon
 
-🔗 [https://venomousrhyme41.github.io/Multi-Stream-Viewer/](https://venomousrhyme41.github.io/Multi-Stream-Viewer/)  
+- Removing the blank spaces between streams in 4-stream mode
+- A clean twitch dropdown that shows the top 5 stream with the most view counts
 
-## 🛠️ How To Use  
+*These updates might happen eventually, no promises though*
 
-1. **Enter Stream URLs**  
-   - Paste Youtube, Twitch, Kick, or embed links
-   - Click "Load Stream"  
+---
 
-2. **Enter theator mode**  
-   - Enter theator mode for a more clean and slick look so you have no distractions from watching your favorite streams  
+## Support This Project
 
-## 🆕 Updates that might come in the future!
+If you find this useful:
+- ⭐ Star the [GitHub repo](https://github.com/VenomousRhyme41/Multi-Stream-Viewer)
+- 🐛 Report bugs in the issues tab
+- 💡 Suggest features in discussions
 
-- **Fixing the stream gaps**: Fixing the big blank spaces between the streams while in 4 stream view. 
-- **Auto configure twitch links**: Add a feature to auto add the "&parent=venomousrhyme41.github.io" to the link when loading a stream.
+---
 
-  *Note: Some of these features might not come. Who knows (6/13/25)*
-
-## 👨‍💻 Developer  
-
-**Creator**: [VenomousRhyme41](https://github.com/VenomousRhyme41)  
-
-## 📜 License  
-
-MIT License - See [LICENSE](LICENSE) for details.  
-
-## 🤝 Support  
-
-⭐ **Star the repo** if you find it useful!  
-
-🐛 **Report issues** on the GitHub page  
-
-💡 **Suggest features** via GitHub Discussions  
-
-[![GitHub Repo](https://img.shields.io/badge/GitHub-Repository-blue)](https://github.com/VenomousRhyme41/Multi-Stream-Viewer)
+**Made by [VenomousRhyme41](https://github.com/VenomousRhyme41)** | MIT License
