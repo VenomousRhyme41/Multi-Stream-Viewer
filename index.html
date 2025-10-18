@@ -33,7 +33,7 @@ body {
 background-color: var(--bg-color);
 color: var(--text-color);
 font-family: 'Roboto', sans-serif;
-padding: 20px;
+padding: 20px 20px;
 min-height: 100vh;
 display: flex;
 flex-direction: column;
@@ -176,14 +176,27 @@ box-shadow: 0 0 30px rgba(0, 255, 157, 0.3);
 .stream-wrapper.hidden {
 display: none;
 }
-.stream-selector {
+.left-selectors {
+position: absolute;
+top: 10px;
+left: 10px;
+z-index: 20;
+display: flex;
+flex-direction: column;
+gap: 5px;
+}
+.right-selectors {
 position: absolute;
 top: 10px;
 right: 10px;
 z-index: 20;
+display: flex;
+flex-direction: column;
+gap: 5px;
 }
-.stream-selector select {
-padding: 6px 10px;
+.left-selectors select,
+.right-selectors select {
+padding: 8px 12px;
 background-color: var(--button-bg);
 color: var(--text-color);
 border: 1px solid var(--border-color);
@@ -191,36 +204,37 @@ border-radius: 6px;
 font-size: 14px;
 cursor: pointer;
 transition: all 0.2s;
+width: auto;
 }
-.stream-selector select:focus {
+.left-selectors select:focus,
+.right-selectors select:focus {
 outline: none;
 border-color: var(--active-color);
 }
-.stream-selector select:hover {
+.left-selectors select:hover,
+.right-selectors select:hover {
 background-color: #333;
 }
-.twitch-selector {
-position: absolute;
-top: 50px;
-right: 10px;
-z-index: 20;
+.twitch-dropdown {
+width: 180px;
 }
-.twitch-selector select {
-padding: 6px 10px;
-background-color: var(--button-bg);
-color: var(--text-color);
-border: 1px solid var(--border-color);
-border-radius: 6px;
-font-size: 14px;
-cursor: pointer;
-transition: all 0.2s;
+.twitch-option {
+display: flex;
+justify-content: space-between;
+align-items: center;
+width: 100%;
+padding: 4px 0;
 }
-.twitch-selector select:focus {
-outline: none;
-border-color: var(--active-color);
+.viewer-count {
+display: flex;
+align-items: center;
+gap: 4px;
+font-size: 11px;
+color: #ff4444;
 }
-.twitch-selector select:hover {
-background-color: #333;
+.red-eye {
+color: #ff4444;
+font-size: 10px;
 }
 .stream-input {
 position: absolute;
@@ -293,6 +307,22 @@ letter-spacing: 0.5px;
 .stream-buttons {
 display: flex;
 gap: 8px;
+align-items: center;
+}
+.favorite-btn {
+background: none;
+border: none;
+color: var(--text-color);
+cursor: pointer;
+font-size: 16px;
+transition: all 0.2s;
+padding: 4px;
+}
+.favorite-btn:hover {
+color: #ff6b9d;
+}
+.favorite-btn.favorited {
+color: #ff6b9d;
 }
 .control-btn {
 padding: 6px 12px;
@@ -349,6 +379,74 @@ font-size: 14px;
 .exit-theater-btn:hover {
 background-color: rgba(0, 255, 157, 0.08);
 }
+.shortcuts-modal {
+display: none;
+position: fixed;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+background-color: var(--card-color);
+padding: 25px;
+border-radius: 12px;
+box-shadow: 0 10px 50px rgba(0,0,0,0.5);
+z-index: 10000;
+max-width: 400px;
+width: 90%;
+border: 2px solid var(--active-color);
+}
+.shortcuts-modal h2 {
+color: var(--active-color);
+margin-bottom: 15px;
+text-align: center;
+font-family: 'Montserrat', sans-serif;
+font-size: 1.5rem;
+}
+.shortcut-category {
+margin-bottom: 15px;
+}
+.shortcut-category h3 {
+color: var(--active-color);
+font-size: 14px;
+margin-bottom: 8px;
+font-family: 'Montserrat', sans-serif;
+border-bottom: 1px solid var(--border-color);
+padding-bottom: 5px;
+}
+.shortcut-item {
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 6px 0;
+font-size: 13px;
+}
+.shortcut-key {
+background-color: var(--button-bg);
+padding: 3px 6px;
+border-radius: 4px;
+font-family: monospace;
+font-size: 11px;
+border: 1px solid var(--border-color);
+}
+.close-shortcuts {
+position: absolute;
+top: 10px;
+right: 12px;
+background: none;
+border: none;
+color: var(--text-color);
+font-size: 18px;
+cursor: pointer;
+}
+.overlay {
+display: none;
+position: fixed;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background-color: rgba(0,0,0,0.7);
+z-index: 9999;
+}
 @media (max-width: 1200px) {
 .header {
 flex-direction: column;
@@ -375,6 +473,15 @@ grid-template-columns: 1fr;
 padding: 10px 40px 10px 15px;
 font-size: 14px;
 }
+.left-selectors,
+.right-selectors {
+flex-direction: row;
+flex-wrap: wrap;
+}
+.left-selectors select,
+.right-selectors select {
+min-width: 120px;
+}
 }
 body.theater-mode {
 padding: 0;
@@ -383,10 +490,12 @@ height: 100vh;
 }
 body.theater-mode .header,
 body.theater-mode .stream-input,
-body.theater-mode .stream-selector,
-body.theater-mode .twitch-selector,
-body.theater-mode .announcement-banner {
+body.theater-mode .left-selectors,
+body.theater-mode .right-selectors {
 display: none;
+}
+body.theater-mode .announcement-banner {
+display: none !important;
 }
 body.theater-mode .container {
 height: 100vh;
@@ -413,7 +522,6 @@ grid-template-columns: repeat(2, 1fr);
 body.theater-mode.three-streams .container {
 grid-template-columns: repeat(3, 1fr);
 }
-
 body.theater-mode.four-streams .container {
 display: grid;
 grid-template-columns: repeat(2, 1fr);
@@ -436,7 +544,6 @@ height: 100%;
 display: block;
 transform: none;
 }
-
 @media (max-width: 768px) {
 body.theater-mode .container {
 grid-template-columns: 1fr !important;
@@ -482,6 +589,58 @@ display: none !important;
 <div id="announcementText"></div>
 <button class="close-announcement" id="closeAnnouncement">×</button>
 </div>
+
+<div class="overlay" id="overlay"></div>
+<div class="shortcuts-modal" id="shortcutsModal">
+<button class="close-shortcuts" id="closeShortcuts">×</button>
+<h2>Keyboard Shortcuts</h2>
+<div class="shortcut-category">
+<h3>Layout & Display</h3>
+<div class="shortcut-item">
+<span>Toggle Theater Mode</span>
+<span class="shortcut-key">T</span>
+</div>
+<div class="shortcut-item">
+<span>Cycle Layout (2/3/4)</span>
+<span class="shortcut-key">L</span>
+</div>
+</div>
+<div class="shortcut-category">
+<h3>Stream Management</h3>
+<div class="shortcut-item">
+<span>Reset All Streams</span>
+<span class="shortcut-key">R</span>
+</div>
+<div class="shortcut-item">
+<span>Refresh All Streams</span>
+<span class="shortcut-key">F5</span>
+</div>
+<div class="shortcut-item">
+<span>Toggle Favorite</span>
+<span class="shortcut-key">F</span>
+</div>
+</div>
+<div class="shortcut-category">
+<h3>Interface</h3>
+<div class="shortcut-item">
+<span>Show/Hide Shortcuts</span>
+<span class="shortcut-key">Shift + ?</span>
+</div>
+<div class="shortcut-item">
+<span>Close Announcement</span>
+<span class="shortcut-key">X</span>
+</div>
+<div class="shortcut-item">
+<span>Reopen Announcement</span>
+<span class="shortcut-key">A</span>
+</div>
+<div class="shortcut-item">
+<span>Clear History</span>
+<span class="shortcut-key">H</span>
+</div>
+</div>
+</div>
+
 <div class="header">
 <a href="https://github.com/VenomousRhyme41/Multi-Stream-Viewer" class="github-btn" target="_blank">
 <i class="fab fa-github"></i> GitHub
@@ -496,7 +655,15 @@ display: none !important;
 </div>
 <div class="container" id="streamContainer">
 <div class="stream-wrapper">
-<div class="stream-selector">
+<div class="left-selectors">
+<select class="favorites-dropdown">
+<option value="" selected disabled>Favorites</option>
+</select>
+<select class="history-dropdown">
+<option value="" selected disabled>History</option>
+</select>
+</div>
+<div class="right-selectors">
 <select class="stream-dropdown">
 <option value="" selected disabled>24/7 Channels</option>
 <option value="espn">ESPN</option>
@@ -517,14 +684,62 @@ display: none !important;
 <option value="simpsons">The Simpsons</option>
 <option value="familyguy">Family Guy</option>
 </select>
-</div>
-<div class="twitch-selector">
 <select class="twitch-dropdown">
 <option value="" selected disabled>Twitch</option>
-<option value="jynxi">Jynxi</option>
-<option value="test1">Test 1</option>
-<option value="test2">Test 2</option>
-<option value="test3">Test 3</option>
+<option value="jynxi">
+<div class="twitch-option">
+<span>Jynxi</span>
+<span class="viewer-count">
+<i class="fas fa-eye red-eye"></i>
+000k
+</span>
+</div>
+</option>
+<option value="stream1">
+<div class="twitch-option">
+<span>Stream 1</span>
+<span class="viewer-count">
+<i class="fas fa-eye red-eye"></i>
+000k
+</span>
+</div>
+</option>
+<option value="stream2">
+<div class="twitch-option">
+<span>Stream 2</span>
+<span class="viewer-count">
+<i class="fas fa-eye red-eye"></i>
+000k
+</span>
+</div>
+</option>
+<option value="stream3">
+<div class="twitch-option">
+<span>Stream 3</span>
+<span class="viewer-count">
+<i class="fas fa-eye red-eye"></i>
+000k
+</span>
+</div>
+</option>
+<option value="stream4">
+<div class="twitch-option">
+<span>Stream 4</span>
+<span class="viewer-count">
+<i class="fas fa-eye red-eye"></i>
+000k
+</span>
+</div>
+</option>
+<option value="stream5">
+<div class="twitch-option">
+<span>Stream 5</span>
+<span class="viewer-count">
+<i class="fas fa-eye red-eye"></i>
+000k
+</span>
+</div>
+</option>
 </select>
 </div>
 <div class="stream-input">
@@ -535,13 +750,22 @@ display: none !important;
 <div class="stream-controls">
 <div class="stream-info"></div>
 <div class="stream-buttons">
+<button class="favorite-btn" title="Add to favorites">♡</button>
 <button class="control-btn refresh-btn">Refresh</button>
 <button class="control-btn reset-btn">Reset</button>
 </div>
 </div>
 </div>
 <div class="stream-wrapper">
-<div class="stream-selector">
+<div class="left-selectors">
+<select class="favorites-dropdown">
+<option value="" selected disabled>Favorites</option>
+</select>
+<select class="history-dropdown">
+<option value="" selected disabled>History</option>
+</select>
+</div>
+<div class="right-selectors">
 <select class="stream-dropdown">
 <option value="" selected disabled>24/7 Channels</option>
 <option value="espn">ESPN</option>
@@ -562,14 +786,62 @@ display: none !important;
 <option value="simpsons">The Simpsons</option>
 <option value="familyguy">Family Guy</option>
 </select>
-</div>
-<div class="twitch-selector">
 <select class="twitch-dropdown">
 <option value="" selected disabled>Twitch</option>
-<option value="jynxi">Jynxi</option>
-<option value="test1">Test 1</option>
-<option value="test2">Test 2</option>
-<option value="test3">Test 3</option>
+<option value="jynxi">
+<div class="twitch-option">
+<span>Jynxi</span>
+<span class="viewer-count">
+<i class="fas fa-eye red-eye"></i>
+000k
+</span>
+</div>
+</option>
+<option value="stream1">
+<div class="twitch-option">
+<span>Stream 1</span>
+<span class="viewer-count">
+<i class="fas fa-eye red-eye"></i>
+000k
+</span>
+</div>
+</option>
+<option value="stream2">
+<div class="twitch-option">
+<span>Stream 2</span>
+<span class="viewer-count">
+<i class="fas fa-eye red-eye"></i>
+000k
+</span>
+</div>
+</option>
+<option value="stream3">
+<div class="twitch-option">
+<span>Stream 3</span>
+<span class="viewer-count">
+<i class="fas fa-eye red-eye"></i>
+000k
+</span>
+</div>
+</option>
+<option value="stream4">
+<div class="twitch-option">
+<span>Stream 4</span>
+<span class="viewer-count">
+<i class="fas fa-eye red-eye"></i>
+000k
+</span>
+</div>
+</option>
+<option value="stream5">
+<div class="twitch-option">
+<span>Stream 5</span>
+<span class="viewer-count">
+<i class="fas fa-eye red-eye"></i>
+000k
+</span>
+</div>
+</option>
 </select>
 </div>
 <div class="stream-input">
@@ -580,13 +852,22 @@ display: none !important;
 <div class="stream-controls">
 <div class="stream-info"></div>
 <div class="stream-buttons">
+<button class="favorite-btn" title="Add to favorites">♡</button>
 <button class="control-btn refresh-btn">Refresh</button>
 <button class="control-btn reset-btn">Reset</button>
 </div>
 </div>
 </div>
 <div class="stream-wrapper">
-<div class="stream-selector">
+<div class="left-selectors">
+<select class="favorites-dropdown">
+<option value="" selected disabled>Favorites</option>
+</select>
+<select class="history-dropdown">
+<option value="" selected disabled>History</option>
+</select>
+</div>
+<div class="right-selectors">
 <select class="stream-dropdown">
 <option value="" selected disabled>24/7 Channels</option>
 <option value="espn">ESPN</option>
@@ -607,14 +888,62 @@ display: none !important;
 <option value="simpsons">The Simpsons</option>
 <option value="familyguy">Family Guy</option>
 </select>
-</div>
-<div class="twitch-selector">
 <select class="twitch-dropdown">
 <option value="" selected disabled>Twitch</option>
-<option value="jynxi">Jynxi</option>
-<option value="test1">Test 1</option>
-<option value="test2">Test 2</option>
-<option value="test3">Test 3</option>
+<option value="jynxi">
+<div class="twitch-option">
+<span>Jynxi</span>
+<span class="viewer-count">
+<i class="fas fa-eye red-eye"></i>
+000k
+</span>
+</div>
+</option>
+<option value="stream1">
+<div class="twitch-option">
+<span>Stream 1</span>
+<span class="viewer-count">
+<i class="fas fa-eye red-eye"></i>
+000k
+</span>
+</div>
+</option>
+<option value="stream2">
+<div class="twitch-option">
+<span>Stream 2</span>
+<span class="viewer-count">
+<i class="fas fa-eye red-eye"></i>
+000k
+</span>
+</div>
+</option>
+<option value="stream3">
+<div class="twitch-option">
+<span>Stream 3</span>
+<span class="viewer-count">
+<i class="fas fa-eye red-eye"></i>
+000k
+</span>
+</div>
+</option>
+<option value="stream4">
+<div class="twitch-option">
+<span>Stream 4</span>
+<span class="viewer-count">
+<i class="fas fa-eye red-eye"></i>
+000k
+</span>
+</div>
+</option>
+<option value="stream5">
+<div class="twitch-option">
+<span>Stream 5</span>
+<span class="viewer-count">
+<i class="fas fa-eye red-eye"></i>
+000k
+</span>
+</div>
+</option>
 </select>
 </div>
 <div class="stream-input">
@@ -625,13 +954,22 @@ display: none !important;
 <div class="stream-controls">
 <div class="stream-info"></div>
 <div class="stream-buttons">
+<button class="favorite-btn" title="Add to favorites">♡</button>
 <button class="control-btn refresh-btn">Refresh</button>
 <button class="control-btn reset-btn">Reset</button>
 </div>
 </div>
 </div>
 <div class="stream-wrapper">
-<div class="stream-selector">
+<div class="left-selectors">
+<select class="favorites-dropdown">
+<option value="" selected disabled>Favorites</option>
+</select>
+<select class="history-dropdown">
+<option value="" selected disabled>History</option>
+</select>
+</div>
+<div class="right-selectors">
 <select class="stream-dropdown">
 <option value="" selected disabled>24/7 Channels</option>
 <option value="espn">ESPN</option>
@@ -652,14 +990,62 @@ display: none !important;
 <option value="simpsons">The Simpsons</option>
 <option value="familyguy">Family Guy</option>
 </select>
-</div>
-<div class="twitch-selector">
 <select class="twitch-dropdown">
 <option value="" selected disabled>Twitch</option>
-<option value="jynxi">Jynxi</option>
-<option value="test1">Test 1</option>
-<option value="test2">Test 2</option>
-<option value="test3">Test 3</option>
+<option value="jynxi">
+<div class="twitch-option">
+<span>Jynxi</span>
+<span class="viewer-count">
+<i class="fas fa-eye red-eye"></i>
+000k
+</span>
+</div>
+</option>
+<option value="stream1">
+<div class="twitch-option">
+<span>Stream 1</span>
+<span class="viewer-count">
+<i class="fas fa-eye red-eye"></i>
+000k
+</span>
+</div>
+</option>
+<option value="stream2">
+<div class="twitch-option">
+<span>Stream 2</span>
+<span class="viewer-count">
+<i class="fas fa-eye red-eye"></i>
+000k
+</span>
+</div>
+</option>
+<option value="stream3">
+<div class="twitch-option">
+<span>Stream 3</span>
+<span class="viewer-count">
+<i class="fas fa-eye red-eye"></i>
+000k
+</span>
+</div>
+</option>
+<option value="stream4">
+<div class="twitch-option">
+<span>Stream 4</span>
+<span class="viewer-count">
+<i class="fas fa-eye red-eye"></i>
+000k
+</span>
+</div>
+</option>
+<option value="stream5">
+<div class="twitch-option">
+<span>Stream 5</span>
+<span class="viewer-count">
+<i class="fas fa-eye red-eye"></i>
+000k
+</span>
+</div>
+</option>
 </select>
 </div>
 <div class="stream-input">
@@ -670,6 +1056,7 @@ display: none !important;
 <div class="stream-controls">
 <div class="stream-info"></div>
 <div class="stream-buttons">
+<button class="favorite-btn" title="Add to favorites">♡</button>
 <button class="control-btn refresh-btn">Refresh</button>
 <button class="control-btn reset-btn">Reset</button>
 </div>
@@ -681,6 +1068,7 @@ display: none !important;
 const domain = window.location.hostname;
 let isTheaterMode = false;
 let streamLayout = 4;
+let announcementClosed = false;
 const streamLayoutBtn = document.getElementById('streamLayoutBtn');
 const theaterModeBtn = document.getElementById('theaterModeBtn');
 const resetAllBtn = document.getElementById('resetAllBtn');
@@ -688,9 +1076,16 @@ const exitTheaterBtn = document.getElementById('exitTheaterBtn');
 const resetBtns = document.querySelectorAll('.reset-btn');
 const streamDropdowns = document.querySelectorAll('.stream-dropdown');
 const twitchDropdowns = document.querySelectorAll('.twitch-dropdown');
+const favoritesDropdowns = document.querySelectorAll('.favorites-dropdown');
+const historyDropdowns = document.querySelectorAll('.history-dropdown');
+const favoriteBtns = document.querySelectorAll('.favorite-btn');
 const announcementBanner = document.getElementById('announcementBanner');
 const closeAnnouncement = document.getElementById('closeAnnouncement');
 const announcementText = document.getElementById('announcementText');
+const shortcutsModal = document.getElementById('shortcutsModal');
+const closeShortcuts = document.getElementById('closeShortcuts');
+const overlay = document.getElementById('overlay');
+
 const channelMap = {
 'espn': {
 url: 'https://embedstreams.top/embed/alpha/espn/1',
@@ -764,19 +1159,191 @@ name: 'Family Guy'
 url: 'https://player.twitch.tv/?channel=jynxzi&parent=venomousrhyme41.github.io',
 name: 'Jynxi'
 },
-'test1': {
+'stream1': {
 url: 'https://player.twitch.tv/?channel=&parent=venomousrhyme41.github.io',
-name: 'Test 1'
+name: 'Stream 1'
 },
-'test2': {
+'stream2': {
 url: 'https://player.twitch.tv/?channel=&parent=venomousrhyme41.github.io',
-name: 'Test 2'
+name: 'Stream 2'
 },
-'test3': {
+'stream3': {
 url: 'https://player.twitch.tv/?channel=&parent=venomousrhyme41.github.io',
-name: 'Test 3'
+name: 'Stream 3'
+},
+'stream4': {
+url: 'https://player.twitch.tv/?channel=&parent=venomousrhyme41.github.io',
+name: 'Stream 4'
+},
+'stream5': {
+url: 'https://player.twitch.tv/?channel=&parent=venomousrhyme41.github.io',
+name: 'Stream 5'
 }
 };
+
+function getFavorites() {
+return JSON.parse(localStorage.getItem('streamFavorites') || '[]');
+}
+
+function saveFavorites(favorites) {
+localStorage.setItem('streamFavorites', JSON.stringify(favorites));
+}
+
+function getHistory() {
+return JSON.parse(localStorage.getItem('streamHistory') || '[]');
+}
+
+function saveHistory(history) {
+localStorage.setItem('streamHistory', JSON.stringify(history.slice(0, 5)));
+}
+
+function clearHistory() {
+localStorage.setItem('streamHistory', '[]');
+updateHistoryDropdowns();
+}
+
+function addToHistory(src, title) {
+const history = getHistory();
+const existingIndex = history.findIndex(item => item.src === src);
+if (existingIndex > -1) {
+history.splice(existingIndex, 1);
+}
+history.unshift({ src, title, timestamp: Date.now() });
+saveHistory(history);
+updateHistoryDropdowns();
+}
+
+function toggleFavorite(src, title) {
+const favorites = getFavorites();
+const existingIndex = favorites.findIndex(item => item.src === src);
+if (existingIndex > -1) {
+favorites.splice(existingIndex, 1);
+} else {
+favorites.unshift({ src, title, timestamp: Date.now() });
+}
+saveFavorites(favorites);
+updateFavoritesDropdowns();
+updateFavoriteButtons();
+}
+
+function isFavorited(src) {
+const favorites = getFavorites();
+return favorites.some(item => item.src === src);
+}
+
+function updateFavoritesDropdowns() {
+const favorites = getFavorites();
+favoritesDropdowns.forEach(dropdown => {
+while (dropdown.children.length > 1) {
+dropdown.removeChild(dropdown.lastChild);
+}
+favorites.forEach(fav => {
+const option = document.createElement('option');
+option.value = fav.src;
+option.textContent = fav.title || fav.src;
+dropdown.appendChild(option);
+});
+});
+}
+
+function updateHistoryDropdowns() {
+const history = getHistory();
+historyDropdowns.forEach(dropdown => {
+while (dropdown.children.length > 1) {
+dropdown.removeChild(dropdown.lastChild);
+}
+history.forEach(item => {
+const option = document.createElement('option');
+option.value = item.src;
+option.textContent = item.title || item.src;
+dropdown.appendChild(option);
+});
+});
+}
+
+function updateFavoriteButtons() {
+document.querySelectorAll('.stream-wrapper.loaded').forEach(wrapper => {
+const iframe = wrapper.querySelector('.stream-iframe');
+const favoriteBtn = wrapper.querySelector('.favorite-btn');
+if (iframe.src && isFavorited(iframe.src)) {
+favoriteBtn.classList.add('favorited');
+favoriteBtn.innerHTML = '♥';
+} else {
+favoriteBtn.classList.remove('favorited');
+favoriteBtn.innerHTML = '♡';
+}
+});
+}
+
+function setupKeyboardShortcuts() {
+document.addEventListener('keydown', function(e) {
+if (e.target.tagName === 'INPUT') return;
+    
+if (e.shiftKey && e.key === '?') {
+if (shortcutsModal.style.display === 'block') {
+hideShortcuts();
+} else {
+showShortcuts();
+}
+return;
+}
+    
+switch(e.key.toLowerCase()) {
+case 't':
+toggleTheaterMode();
+break;
+case 'l':
+toggleStreamLayout();
+break;
+case 'r':
+resetAll();
+break;
+case '?':
+showShortcuts();
+break;
+case 'f':
+const activeWrapper = document.querySelector('.stream-wrapper.active, .stream-wrapper.loaded');
+if (activeWrapper) {
+const iframe = activeWrapper.querySelector('.stream-iframe');
+const info = activeWrapper.querySelector('.stream-info');
+if (iframe.src) {
+toggleFavorite(iframe.src, info.textContent);
+}
+}
+break;
+case 'x':
+if (announcementBanner.style.display !== 'none') {
+closeAnnouncement.click();
+}
+break;
+case 'a':
+if (announcementClosed) {
+announcementBanner.style.display = 'block';
+announcementClosed = false;
+}
+break;
+case 'h':
+clearHistory();
+showError("History cleared");
+break;
+case 'f5':
+if (e.ctrlKey || e.metaKey) return;
+e.preventDefault();
+document.querySelectorAll('.refresh-btn').forEach(btn => btn.click());
+break;
+}
+});
+}
+
+function showShortcuts() {
+shortcutsModal.style.display = 'block';
+overlay.style.display = 'block';
+}
+
+function hideShortcuts() {
+shortcutsModal.style.display = 'none';
+overlay.style.display = 'none';
+}
 
 async function fetchAnnouncement() {
 try {
@@ -786,7 +1353,9 @@ const text = await response.text();
 const trimmedText = text.trim();
 if (trimmedText && trimmedText.length > 0) {
 announcementText.textContent = trimmedText;
+if (!announcementClosed) {
 announcementBanner.style.display = 'block';
+}
 } else {
 announcementBanner.style.display = 'none';
 }
@@ -800,32 +1369,108 @@ announcementBanner.style.display = 'none';
 
 closeAnnouncement.addEventListener('click', function() {
 announcementBanner.style.display = 'none';
+announcementClosed = true;
 });
+
+closeShortcuts.addEventListener('click', hideShortcuts);
+overlay.addEventListener('click', hideShortcuts);
 
 streamLayoutBtn.addEventListener('click', toggleStreamLayout);
 theaterModeBtn.addEventListener('click', toggleTheaterMode);
 exitTheaterBtn.addEventListener('click', toggleTheaterMode);
 resetAllBtn.addEventListener('click', resetAll);
+
 document.querySelectorAll('.load-stream-btn').forEach(btn => {
 btn.addEventListener('click', function() {
 loadStream(this);
 });
 });
+
 resetBtns.forEach(btn => {
 btn.addEventListener('click', function() {
 resetStream(this);
 });
 });
+
 streamDropdowns.forEach(dropdown => {
 dropdown.addEventListener('change', function() {
 handleDropdownChange(this);
 });
 });
+
 twitchDropdowns.forEach(dropdown => {
 dropdown.addEventListener('change', function() {
 handleTwitchDropdownChange(this);
 });
 });
+
+favoritesDropdowns.forEach(dropdown => {
+dropdown.addEventListener('change', function() {
+handleFavoritesChange(this);
+});
+});
+
+historyDropdowns.forEach(dropdown => {
+dropdown.addEventListener('change', function() {
+handleHistoryChange(this);
+});
+});
+
+favoriteBtns.forEach(btn => {
+btn.addEventListener('click', function() {
+const wrapper = this.closest('.stream-wrapper');
+const iframe = wrapper.querySelector('.stream-iframe');
+const info = wrapper.querySelector('.stream-info');
+if (iframe.src) {
+toggleFavorite(iframe.src, info.textContent);
+}
+});
+});
+
+function handleFavoritesChange(dropdown) {
+const wrapper = dropdown.closest('.stream-wrapper');
+const src = dropdown.value;
+if (src) {
+const favorites = getFavorites();
+const favorite = favorites.find(fav => fav.src === src);
+if (favorite) {
+const iframe = wrapper.querySelector('.stream-iframe');
+iframe.src = favorite.src;
+iframe.style.display = 'block';
+wrapper.querySelector('.stream-input').style.display = 'none';
+wrapper.querySelector('.stream-controls').style.display = 'flex';
+wrapper.classList.add('loaded');
+wrapper.querySelector('.stream-info').textContent = favorite.title || favorite.src;
+wrapper.querySelector('.left-selectors').style.display = 'none';
+wrapper.querySelector('.right-selectors').style.display = 'none';
+dropdown.selectedIndex = 0;
+updateFavoriteButtons();
+}
+}
+}
+
+function handleHistoryChange(dropdown) {
+const wrapper = dropdown.closest('.stream-wrapper');
+const src = dropdown.value;
+if (src) {
+const history = getHistory();
+const historyItem = history.find(item => item.src === src);
+if (historyItem) {
+const iframe = wrapper.querySelector('.stream-iframe');
+iframe.src = historyItem.src;
+iframe.style.display = 'block';
+wrapper.querySelector('.stream-input').style.display = 'none';
+wrapper.querySelector('.stream-controls').style.display = 'flex';
+wrapper.classList.add('loaded');
+wrapper.querySelector('.stream-info').textContent = historyItem.title || historyItem.src;
+wrapper.querySelector('.left-selectors').style.display = 'none';
+wrapper.querySelector('.right-selectors').style.display = 'none';
+dropdown.selectedIndex = 0;
+updateFavoriteButtons();
+}
+}
+}
+
 document.addEventListener('DOMContentLoaded', function() {
 document.querySelectorAll('.stream-controls').forEach(controls => {
 controls.style.display = 'none';
@@ -833,7 +1478,11 @@ controls.style.display = 'none';
 exitTheaterBtn.style.display = 'none';
 updateStreamLayout();
 fetchAnnouncement();
+updateFavoritesDropdowns();
+updateHistoryDropdowns();
+setupKeyboardShortcuts();
 });
+
 function loadStream(button) {
 const wrapper = button.closest('.stream-wrapper');
 const input = wrapper.querySelector('.src-input');
@@ -841,10 +1490,11 @@ const iframe = wrapper.querySelector('.stream-iframe');
 const inputContainer = wrapper.querySelector('.stream-input');
 const controls = wrapper.querySelector('.stream-controls');
 const info = wrapper.querySelector('.stream-info');
-const selector = wrapper.querySelector('.stream-selector');
-const twitchSelector = wrapper.querySelector('.twitch-selector');
+const leftSelectors = wrapper.querySelector('.left-selectors');
+const rightSelectors = wrapper.querySelector('.right-selectors');
 let src = input.value.trim();
 let title = '';
+
 if (src.includes('<iframe')) {
 const parser = new DOMParser();
 const doc = parser.parseFromString(src, 'text/html');
@@ -854,10 +1504,12 @@ src = iframeElement.getAttribute('src');
 title = iframeElement.getAttribute('title') || '';
 }
 }
+
 if (!src) {
 showError("Please enter a valid URL or embed code");
 return;
 }
+
 if (src.includes('youtube.com')) {
 if (src.includes('watch?v=')) {
 const videoId = src.split('v=')[1].split('&')[0];
@@ -887,23 +1539,30 @@ title = data.title || 'YouTube Stream';
 showError("Invalid URL format");
 return;
 }
+
 iframe.src = src;
 iframe.style.display = 'block';
 inputContainer.style.display = 'none';
 controls.style.display = 'flex';
 wrapper.classList.add('loaded');
-selector.style.display = 'none';
-twitchSelector.style.display = 'none';
+leftSelectors.style.display = 'none';
+rightSelectors.style.display = 'none';
+
 if (title) {
 info.textContent = title;
 } else {
 info.textContent = src.replace(/https?:\/\/(www\.)?/, '').split('/')[0];
 }
+
 input.value = '';
+addToHistory(src, title);
+updateFavoriteButtons();
+
 if (isTheaterMode) {
 updateTheaterModeLayout();
 }
 }
+
 function handleDropdownChange(dropdown) {
 const wrapper = dropdown.closest('.stream-wrapper');
 const channel = channelMap[dropdown.value];
@@ -915,11 +1574,14 @@ wrapper.querySelector('.stream-input').style.display = 'none';
 wrapper.querySelector('.stream-controls').style.display = 'flex';
 wrapper.classList.add('loaded');
 wrapper.querySelector('.stream-info').textContent = channel.name;
-wrapper.querySelector('.stream-selector').style.display = 'none';
-wrapper.querySelector('.twitch-selector').style.display = 'none';
+wrapper.querySelector('.left-selectors').style.display = 'none';
+wrapper.querySelector('.right-selectors').style.display = 'none';
 dropdown.selectedIndex = 0;
+addToHistory(channel.url, channel.name);
+updateFavoriteButtons();
 }
 }
+
 function handleTwitchDropdownChange(dropdown) {
 const wrapper = dropdown.closest('.stream-wrapper');
 const channel = channelMap[dropdown.value];
@@ -931,33 +1593,38 @@ wrapper.querySelector('.stream-input').style.display = 'none';
 wrapper.querySelector('.stream-controls').style.display = 'flex';
 wrapper.classList.add('loaded');
 wrapper.querySelector('.stream-info').textContent = channel.name;
-wrapper.querySelector('.stream-selector').style.display = 'none';
-wrapper.querySelector('.twitch-selector').style.display = 'none';
+wrapper.querySelector('.left-selectors').style.display = 'none';
+wrapper.querySelector('.right-selectors').style.display = 'none';
 dropdown.selectedIndex = 0;
+addToHistory(channel.url, channel.name);
+updateFavoriteButtons();
 }
 }
+
 function toggleTheaterMode() {
 isTheaterMode = !isTheaterMode;
 document.body.classList.toggle('theater-mode', isTheaterMode);
 exitTheaterBtn.style.display = isTheaterMode ? 'block' : 'none';
-document.querySelectorAll('.stream-selector').forEach(selector => {
+document.querySelectorAll('.left-selectors').forEach(selector => {
 selector.style.display = 'none';
 });
-document.querySelectorAll('.twitch-selector').forEach(selector => {
+document.querySelectorAll('.right-selectors').forEach(selector => {
 selector.style.display = 'none';
 });
+
 if (isTheaterMode) {
 updateTheaterModeLayout();
 } else {
-document.querySelectorAll('.stream-wrapper:not(.loaded) .stream-selector').forEach(selector => {
-selector.style.display = 'block';
+document.querySelectorAll('.stream-wrapper:not(.loaded) .left-selectors').forEach(selector => {
+selector.style.display = 'flex';
 });
-document.querySelectorAll('.stream-wrapper:not(.loaded) .twitch-selector').forEach(selector => {
-selector.style.display = 'block';
+document.querySelectorAll('.stream-wrapper:not(.loaded) .right-selectors').forEach(selector => {
+selector.style.display = 'flex';
 });
 updateStreamLayout();
 }
 }
+
 function updateTheaterModeLayout() {
 const loadedCount = document.querySelectorAll('.stream-wrapper.loaded').length;
 document.body.classList.remove('two-streams', 'three-streams', 'four-streams');
@@ -969,11 +1636,13 @@ document.body.classList.add('three-streams');
 document.body.classList.add('four-streams');
 }
 }
+
 function toggleStreamLayout() {
 streamLayout = streamLayout === 4 ? 2 : (streamLayout === 2 ? 3 : 4);
 updateStreamLayout();
 streamLayoutBtn.textContent = `${streamLayout} Streams`;
 }
+
 function updateStreamLayout() {
 const container = document.getElementById('streamContainer');
 const streamWrappers = document.querySelectorAll('.stream-wrapper');
@@ -994,6 +1663,7 @@ wrapper.classList.remove('hidden');
 });
 }
 }
+
 function resetStream(button) {
 const wrapper = button.closest('.stream-wrapper');
 const inputContainer = wrapper.querySelector('.stream-input');
@@ -1002,8 +1672,10 @@ const controls = wrapper.querySelector('.stream-controls');
 const info = wrapper.querySelector('.stream-info');
 const dropdown = wrapper.querySelector('.stream-dropdown');
 const twitchDropdown = wrapper.querySelector('.twitch-dropdown');
-const selector = wrapper.querySelector('.stream-selector');
-const twitchSelector = wrapper.querySelector('.twitch-selector');
+const favoritesDropdown = wrapper.querySelector('.favorites-dropdown');
+const historyDropdown = wrapper.querySelector('.history-dropdown');
+const leftSelectors = wrapper.querySelector('.left-selectors');
+const rightSelectors = wrapper.querySelector('.right-selectors');
 wrapper.classList.remove('loaded');
 inputContainer.style.display = '';
 iframe.style.display = 'none';
@@ -1012,12 +1684,16 @@ iframe.src = '';
 info.textContent = '';
 dropdown.selectedIndex = 0;
 twitchDropdown.selectedIndex = 0;
-selector.style.display = 'block';
-twitchSelector.style.display = 'block';
+favoritesDropdown.selectedIndex = 0;
+historyDropdown.selectedIndex = 0;
+leftSelectors.style.display = 'flex';
+rightSelectors.style.display = 'flex';
+
 if (isTheaterMode) {
 updateTheaterModeLayout();
 }
 }
+
 function resetAll() {
 document.querySelectorAll('.stream-wrapper').forEach(wrapper => {
 const inputContainer = wrapper.querySelector('.stream-input');
@@ -1026,8 +1702,10 @@ const controls = wrapper.querySelector('.stream-controls');
 const info = wrapper.querySelector('.stream-info');
 const dropdown = wrapper.querySelector('.stream-dropdown');
 const twitchDropdown = wrapper.querySelector('.twitch-dropdown');
-const selector = wrapper.querySelector('.stream-selector');
-const twitchSelector = wrapper.querySelector('.twitch-selector');
+const favoritesDropdown = wrapper.querySelector('.favorites-dropdown');
+const historyDropdown = wrapper.querySelector('.history-dropdown');
+const leftSelectors = wrapper.querySelector('.left-selectors');
+const rightSelectors = wrapper.querySelector('.right-selectors');
 wrapper.classList.remove('loaded');
 inputContainer.style.display = '';
 iframe.style.display = 'none';
@@ -1036,13 +1714,17 @@ iframe.src = '';
 info.textContent = '';
 dropdown.selectedIndex = 0;
 twitchDropdown.selectedIndex = 0;
-selector.style.display = 'block';
-twitchSelector.style.display = 'block';
+favoritesDropdown.selectedIndex = 0;
+historyDropdown.selectedIndex = 0;
+leftSelectors.style.display = 'flex';
+rightSelectors.style.display = 'flex';
 });
+
 if (isTheaterMode) {
 updateTheaterModeLayout();
 }
 }
+
 function showError(message) {
 const errorDiv = document.createElement('div');
 errorDiv.className = 'error-message';
@@ -1052,18 +1734,19 @@ setTimeout(() => {
 errorDiv.remove();
 }, 3000);
 }
+
 document.querySelectorAll('.refresh-btn').forEach(btn => {
-    btn.addEventListener('click', function () {
-        const wrapper = btn.closest('.stream-wrapper');
-        const iframe = wrapper.querySelector('.stream-iframe');
-        if (iframe && iframe.src) {
-            const currentSrc = iframe.src;
-            iframe.src = '';
-            setTimeout(() => {
-                iframe.src = currentSrc;
-            }, 100);
-        }
-    });
+btn.addEventListener('click', function () {
+const wrapper = btn.closest('.stream-wrapper');
+const iframe = wrapper.querySelector('.stream-iframe');
+if (iframe && iframe.src) {
+const currentSrc = iframe.src;
+iframe.src = '';
+setTimeout(() => {
+iframe.src = currentSrc;
+}, 100);
+}
+});
 });
 </script>
 </body>
