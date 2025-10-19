@@ -9,578 +9,700 @@
 <link rel="icon" href="https://github.githubassets.com/images/icons/emoji/unicode/1f4fa.png" type="image/png">
 <style>
 :root {
---active-color: #00FF9D;
---bg-color: #0a0a0a;
---card-color: #1a1a1a;
---text-color: #e0e0e0;
---border-color: #333;
---button-bg: #333;
+  --active-color: #00FF9D;
+  --bg-color: #0a0a0a;
+  --card-color: #1a1a1a;
+  --text-color: #e0e0e0;
+  --border-color: #333;
+  --button-bg: #333;
 }
 * {
-box-sizing: border-box;
-margin: 0;
-padding: 0;
-scrollbar-width: none;
--webkit-user-select: none;
--moz-user-select: none;
--ms-user-select: none;
-user-select: none;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  scrollbar-width: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 *::-webkit-scrollbar {
-display: none;
+  display: none;
 }
 body {
-background-color: var(--bg-color);
-color: var(--text-color);
-font-family: 'Roboto', sans-serif;
-padding: 20px 20px;
-min-height: 100vh;
-display: flex;
-flex-direction: column;
-overflow-x: hidden;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: 'Roboto', sans-serif;
+  padding: 20px 20px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
 }
 .announcement-banner {
-position: fixed;
-top: 0;
-left: 0;
-right: 0;
-background-color: #ff4444;
-color: white;
-padding: 12px 50px 12px 20px;
-text-align: center;
-z-index: 10000;
-font-weight: 500;
-box-shadow: 0 2px 10px rgba(255, 68, 68, 0.3);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #ff4444;
+  color: white;
+  padding: 12px 50px 12px 20px;
+  text-align: center;
+  z-index: 10000;
+  font-weight: 500;
+  box-shadow: 0 2px 10px rgba(255, 68, 68, 0.3);
 }
 .close-announcement {
-position: absolute;
-right: 15px;
-top: 50%;
-transform: translateY(-50%);
-background: none;
-border: none;
-color: white;
-font-size: 18px;
-cursor: pointer;
-width: 24px;
-height: 24px;
-display: flex;
-align-items: center;
-justify-content: center;
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .close-announcement:hover {
-background-color: rgba(255, 255, 255, 0.2);
-border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
 }
 .header {
-display: flex;
-justify-content: space-between;
-align-items: center;
-margin-bottom: 10px;
-position: relative;
-width: 95%;
-max-width: 1800px;
-margin-left: auto;
-margin-right: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  position: relative;
+  width: 95%;
+  max-width: 1800px;
+  margin-left: auto;
+  margin-right: auto;
 }
 h1 {
-margin: 0;
-color: var(--active-color);
-font-weight: 600;
-font-size: 2.5rem;
-font-family: 'Montserrat', sans-serif;
-text-align: center;
-letter-spacing: 1px;
-position: absolute;
-left: 50%;
-transform: translateX(-50%);
+  margin: 0;
+  color: var(--active-color);
+  font-weight: 600;
+  font-size: 2.5rem;
+  font-family: 'Montserrat', sans-serif;
+  text-align: center;
+  letter-spacing: 1px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
 .github-btn {
-background-color: var(--button-bg);
-color: white;
-padding: 8px 15px;
-border-radius: 6px;
-text-decoration: none;
-display: flex;
-align-items: center;
-gap: 8px;
-font-weight: 500;
-transition: all 0.2s;
+  background-color: var(--button-bg);
+  color: white;
+  padding: 8px 15px;
+  border-radius: 6px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+  transition: all 0.2s;
 }
 .github-btn:hover {
-background-color: #555;
+  background-color: #555;
 }
 .global-controls {
-display: flex;
-gap: 10px;
-align-items: center;
-margin-left: auto;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-left: auto;
 }
 .global-btn {
-padding: 8px 15px;
-background-color: var(--button-bg);
-color: var(--text-color);
-border: 1px solid var(--border-color);
-border-radius: 6px;
-cursor: pointer;
-font-weight: 500;
-transition: all 0.2s;
-font-size: 14px;
+  padding: 8px 15px;
+  background-color: var(--button-bg);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s;
+  font-size: 14px;
 }
 .global-btn:hover {
-background-color: rgba(0, 255, 157, 0.2);
+  background-color: rgba(0, 255, 157, 0.2);
 }
 .separator {
-color: var(--border-color);
-font-weight: bold;
-padding: 0 5px;
+  color: var(--border-color);
+  font-weight: bold;
+  padding: 0 5px;
 }
 .container {
-display: grid;
-grid-template-columns: repeat(2, 1fr);
-grid-template-rows: auto;
-gap: 15px;
-max-width: 1800px;
-margin: 0 auto;
-width: 95%;
-flex-grow: 1;
-margin-bottom: 10px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: auto;
+  gap: 15px;
+  max-width: 1800px;
+  margin: 0 auto;
+  width: 95%;
+  flex-grow: 1;
+  margin-bottom: 10px;
 }
-.container.tone-streams {
-grid-template-columns: repeat(2, 1fr);
+.container.two-streams {
+  grid-template-columns: repeat(2, 1fr);
 }
 .container.three-streams {
-grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 1fr);
 }
 .container.four-streams {
-grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, 1fr);
 }
 .stream-wrapper {
-position: relative;
-background-color: var(--card-color);
-border-radius: 12px;
-overflow: hidden;
-transition: all 0.2s ease;
-box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-display: flex;
-flex-direction: column;
-min-height: 300px;
+  position: relative;
+  background-color: var(--card-color);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  display: flex;
+  flex-direction: column;
+  min-height: 300px;
 }
 .stream-wrapper.loaded {
-min-height: auto;
+  min-height: auto;
 }
 .stream-wrapper.active {
-border: 2px solid var(--active-color);
-box-shadow: 0 0 30px rgba(0, 255, 157, 0.3);
+  border: 2px solid var(--active-color);
+  box-shadow: 0 0 30px rgba(0, 255, 157, 0.3);
 }
 .stream-wrapper.hidden {
-display: none;
+  display: none;
 }
 .left-selectors {
-position: absolute;
-top: 10px;
-left: 10px;
-z-index: 20;
-display: flex;
-flex-direction: column;
-gap: 5px;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 .right-selectors {
-position: absolute;
-top: 10px;
-right: 10px;
-z-index: 20;
-display: flex;
-flex-direction: column;
-gap: 5px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 .left-selectors select,
 .right-selectors select {
-padding: 8px 12px;
-background-color: var(--button-bg);
-color: var(--text-color);
-border: 1px solid var(--border-color);
-border-radius: 6px;
-font-size: 14px;
-cursor: pointer;
-transition: all 0.2s;
-width: auto;
+  padding: 8px 12px;
+  background-color: var(--button-bg);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+  width: auto;
+  min-width: 0;
 }
 .left-selectors select:focus,
 .right-selectors select:focus {
-outline: none;
-border-color: var(--active-color);
+  outline: none;
+  border-color: var(--active-color);
 }
 .left-selectors select:hover,
 .right-selectors select:hover {
-background-color: #333;
+  background-color: #333;
 }
-.twitch-dropdown {
-width: 180px;
+.history-dropdown {
+  position: relative;
+  margin-top: 5px;
 }
-.twitch-option {
-display: flex;
-justify-content: space-between;
-align-items: center;
-width: 100%;
-padding: 4px 0;
+.history-dropdown select {
+  padding: 8px 12px;
+  background-color: var(--button-bg);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+  width: 100%;
 }
-.viewer-count {
-display: flex;
-align-items: center;
-gap: 4px;
-font-size: 11px;
-color: #ff4444;
+.history-dropdown select:focus {
+  outline: none;
+  border-color: var(--active-color);
+}
+.history-dropdown select:hover {
+  background-color: #333;
+}
+.twitch-btn {
+  padding: 8px 12px;
+  background-color: var(--button-bg);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+  width: 70px;
+  height: 36px;
+}
+.twitch-btn:hover {
+  background-color: #333;
+  color: var(--text-color);
+}
+.twitch-modal {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--card-color);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 10px 50px rgba(0,0,0,0.5);
+  z-index: 10000;
+  max-width: 350px;
+  width: 90%;
+  border: 2px solid #9146FF;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+.twitch-modal h2 {
+  color: #9146FF;
+  margin-bottom: 15px;
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.3rem;
+}
+.twitch-stream {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid var(--border-color);
+  gap: 12px;
+}
+.twitch-stream:last-child {
+  border-bottom: none;
+}
+.twitch-pfp {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, #9146FF, #6441A5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+  overflow: hidden;
+}
+.twitch-pfp img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.twitch-info {
+  flex: 1;
+}
+.twitch-name {
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+.twitch-viewers {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #ff4444;
 }
 .red-eye {
-color: #ff4444;
-font-size: 10px;
+  color: #ff4444;
+  font-size: 10px;
+}
+.load-twitch-btn {
+  padding: 6px 12px;
+  background-color: var(--active-color);
+  color: #111;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 11px;
+  transition: all 0.2s;
+}
+.load-twitch-btn:hover {
+  opacity: 0.9;
+}
+.stream-red {
+  color: #ff6b6b;
+}
+.stream-yellow {
+  color: #ffd93d;
+}
+.stream-green {
+  color: #6bff6b;
 }
 .stream-input {
-position: absolute;
-top: 50%;
-left: 50%;
-transform: translate(-50%, -50%);
-width: 80%;
-max-width: 400px;
-z-index: 10;
-background-color: rgba(30, 30, 30, 0.95);
-padding: 25px;
-border-radius: 10px;
-text-align: center;
-border: 1px solid var(--border-color);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  max-width: 400px;
+  z-index: 10;
+  background-color: rgba(30, 30, 30, 0.95);
+  padding: 25px;
+  border-radius: 10px;
+  text-align: center;
+  border: 1px solid var(--border-color);
 }
 .stream-input input {
-width: 100%;
-padding: 12px 15px;
-margin-bottom: 15px;
-background-color: var(--button-bg);
-border: 1px solid var(--border-color);
-color: var(--text-color);
-border-radius: 8px;
-font-size: 15px;
--webkit-user-select: text;
--moz-user-select: text;
--ms-user-select: text;
-user-select: text;
+  width: 100%;
+  padding: 12px 15px;
+  margin-bottom: 15px;
+  background-color: var(--button-bg);
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
+  border-radius: 8px;
+  font-size: 15px;
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
 }
 .stream-input button {
-padding: 12px 25px;
-background-color: var(--active-color);
-color: #111;
-border: none;
-border-radius: 8px;
-cursor: pointer;
-font-weight: 600;
-transition: all 0.2s;
-font-size: 15px;
-width: 100%;
+  padding: 12px 25px;
+  background-color: var(--active-color);
+  color: #111;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s;
+  font-size: 15px;
+  width: 100%;
 }
 .stream-input button:hover {
-opacity: 0.9;
+  opacity: 0.9;
 }
 .stream-iframe {
-width: 100%;
-height: 100%;
-display: none;
-border: none;
-flex-grow: 1;
-overflow: hidden;
+  width: 100%;
+  height: 100%;
+  display: none;
+  border: none;
+  flex-grow: 1;
+  overflow: hidden;
 }
 .stream-controls {
-display: none;
-padding: 8px 12px;
-background-color: rgba(0,0,0,0.5);
-align-items: center;
-justify-content: space-between;
+  display: none;
+  padding: 8px 12px;
+  background-color: rgba(0,0,0,0.5);
+  align-items: center;
+  justify-content: space-between;
 }
 .stream-info {
-font-size: 14px;
-white-space: nowrap;
-overflow: hidden;
-text-overflow: ellipsis;
-padding-right: 10px;
-flex: 1;
-font-family: 'Oswald', sans-serif;
-letter-spacing: 0.5px;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 10px;
+  flex: 1;
+  font-family: 'Oswald', sans-serif;
+  letter-spacing: 0.5px;
 }
 .stream-buttons {
-display: flex;
-gap: 8px;
-align-items: center;
+  display: flex;
+  gap: 8px;
+  align-items: center;
 }
 .favorite-btn {
-background: none;
-border: none;
-color: var(--text-color);
-cursor: pointer;
-font-size: 16px;
-transition: all 0.2s;
-padding: 4px;
+  background: none;
+  border: none;
+  color: var(--text-color);
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.2s;
+  padding: 4px;
 }
 .favorite-btn:hover {
-color: #ff6b9d;
+  color: #ff6b9d;
 }
 .favorite-btn.favorited {
-color: #ff6b9d;
+  color: #ff6b9d;
 }
 .control-btn {
-padding: 6px 12px;
-background-color: var(--button-bg);
-color: var(--text-color);
-border: 1px solid var(--border-color);
-border-radius: 6px;
-cursor: pointer;
-font-weight: 500;
-transition: all 0.2s;
-font-size: 12px;
+  padding: 6px 12px;
+  background-color: var(--button-bg);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s;
+  font-size: 12px;
 }
 .control-btn:hover {
-background-color: rgba(0, 255, 157, 0.2);
+  background-color: rgba(0, 255, 157, 0.2);
 }
 .control-btn.active {
-background-color: var(--active-color);
-color: #111;
-border-color: transparent;
+  background-color: var(--active-color);
+  color: #111;
+  border-color: transparent;
 }
 .theater-mode-btn {
-position: fixed;
-top: 10px;
-right: 10px;
-z-index: 1000;
-padding: 8px 15px;
-background-color: var(--button-bg);
-color: var(--text-color);
-border: 1px solid var(--border-color);
-border-radius: 6px;
-cursor: pointer;
-font-weight: 500;
-transition: all 0.2s;
-font-size: 14px;
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 1000;
+  padding: 8px 15px;
+  background-color: var(--button-bg);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s;
+  font-size: 14px;
 }
 .theater-mode-btn:hover {
-background-color: rgba(0, 255, 157, 0.2);
+  background-color: rgba(0, 255, 157, 0.2);
 }
 .exit-theater-btn {
-position: fixed;
-top: 10px;
-right: 10px;
-z-index: 1000;
-padding: 8px 15px;
-background-color: rgba(255, 255, 255, 0.015);
-color: rgba(255, 255, 255, 0.5);
-border: 1px solid rgba(255, 255, 255, 0.05);
-border-radius: 6px;
-cursor: pointer;
-font-weight: 500;
-transition: all 0.2s;
-font-size: 14px;
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 1000;
+  padding: 8px 15px;
+  background-color: rgba(255, 255, 255, 0.015);
+  color: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s;
+  font-size: 14px;
 }
 .exit-theater-btn:hover {
-background-color: rgba(0, 255, 157, 0.08);
+  background-color: rgba(0, 255, 157, 0.08);
 }
 .shortcuts-modal {
-display: none;
-position: fixed;
-top: 50%;
-left: 50%;
-transform: translate(-50%, -50%);
-background-color: var(--card-color);
-padding: 25px;
-border-radius: 12px;
-box-shadow: 0 10px 50px rgba(0,0,0,0.5);
-z-index: 10000;
-max-width: 400px;
-width: 90%;
-border: 2px solid var(--active-color);
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--card-color);
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 10px 50px rgba(0,0,0,0.5);
+  z-index: 10000;
+  max-width: 400px;
+  width: 90%;
+  border: 2px solid var(--active-color);
 }
 .shortcuts-modal h2 {
-color: var(--active-color);
-margin-bottom: 15px;
-text-align: center;
-font-family: 'Montserrat', sans-serif;
-font-size: 1.5rem;
+  color: var(--active-color);
+  margin-bottom: 15px;
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.5rem;
 }
 .shortcut-category {
-margin-bottom: 15px;
+  margin-bottom: 15px;
 }
 .shortcut-category h3 {
-color: var(--active-color);
-font-size: 14px;
-margin-bottom: 8px;
-font-family: 'Montserrat', sans-serif;
-border-bottom: 1px solid var(--border-color);
-padding-bottom: 5px;
+  color: var(--active-color);
+  font-size: 14px;
+  margin-bottom: 8px;
+  font-family: 'Montserrat', sans-serif;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 5px;
 }
 .shortcut-item {
-display: flex;
-justify-content: space-between;
-align-items: center;
-padding: 6px 0;
-font-size: 13px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 0;
+  font-size: 13px;
 }
 .shortcut-key {
-background-color: var(--button-bg);
-padding: 3px 6px;
-border-radius: 4px;
-font-family: monospace;
-font-size: 11px;
-border: 1px solid var(--border-color);
+  background-color: var(--button-bg);
+  padding: 3px 6px;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 11px;
+  border: 1px solid var(--border-color);
 }
 .close-shortcuts {
-position: absolute;
-top: 10px;
-right: 12px;
-background: none;
-border: none;
-color: var(--text-color);
-font-size: 18px;
-cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  background: none;
+  border: none;
+  color: var(--text-color);
+  font-size: 18px;
+  cursor: pointer;
+}
+.close-twitch {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  background: none;
+  border: none;
+  color: var(--text-color);
+  font-size: 18px;
+  cursor: pointer;
 }
 .overlay {
-display: none;
-position: fixed;
-top: 0;
-left: 0;
-right: 0;
-bottom: 0;
-background-color: rgba(0,0,0,0.7);
-z-index: 9999;
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.7);
+  z-index: 9999;
 }
 @media (max-width: 1200px) {
-.header {
-flex-direction: column;
-gap: 15px;
-}
-.global-controls {
-margin-left: 0;
-}
-h1 {
-position: static;
-transform: none;
-}
+  .header {
+    flex-direction: column;
+    gap: 15px;
+  }
+  .global-controls {
+    margin-left: 0;
+  }
+  h1 {
+    position: static;
+    transform: none;
+  }
 }
 @media (max-width: 768px) {
-.container {
-grid-template-columns: 1fr;
-}
-.container.two-streams,
-.container.three-streams,
-.container.four-streams {
-grid-template-columns: 1fr;
-}
-.announcement-banner {
-padding: 10px 40px 10px 15px;
-font-size: 14px;
-}
-.left-selectors,
-.right-selectors {
-flex-direction: row;
-flex-wrap: wrap;
-}
-.left-selectors select,
-.right-selectors select {
-min-width: 120px;
-}
+  .container {
+    grid-template-columns: 1fr;
+  }
+  .container.two-streams,
+  .container.three-streams,
+  .container.four-streams {
+    grid-template-columns: 1fr;
+  }
+  .announcement-banner {
+    padding: 10px 40px 10px 15px;
+    font-size: 14px;
+  }
+  .left-selectors,
+  .right-selectors {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .left-selectors select,
+  .right-selectors select {
+    min-width: 120px;
+  }
 }
 body.theater-mode {
-padding: 0;
-overflow: hidden;
-height: 100vh;
+  padding: 0;
+  overflow: hidden;
+  height: 100vh;
 }
 body.theater-mode .header,
 body.theater-mode .stream-input,
 body.theater-mode .left-selectors,
-body.theater-mode .right-selectors {
-display: none;
+body.theater-mode .right-selectors,
+body.theater-mode .history-dropdown {
+  display: none;
 }
 body.theater-mode .announcement-banner {
-display: none !important;
+  display: none !important;
 }
 body.theater-mode .container {
-height: 100vh;
-width: 100%;
-max-width: 100%;
-margin: 0;
-gap: 0 !important;
-padding: 0;
+  height: 100vh;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  gap: 0 !important;
+  padding: 0;
 }
 body.theater-mode .stream-wrapper {
-border-radius: 0;
-height: 100%;
-gap: 0 !important;
+  border-radius: 0;
+  height: 100%;
+  gap: 0 !important;
 }
 body.theater-mode .stream-iframe {
-display: block !important;
+  display: block !important;
 }
 body.theater-mode .stream-wrapper:not(.loaded) {
-display: none;
+  display: none;
 }
 body.theater-mode.two-streams .container {
-grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, 1fr);
 }
 body.theater-mode.three-streams .container {
-grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 1fr);
 }
 body.theater-mode.four-streams .container {
-display: grid;
-grid-template-columns: repeat(2, 1fr);
-grid-template-rows: repeat(2, 1fr);
-width: 100vw;
-height: 100vh;
-margin: 0;
-padding: 0;
-gap: 0;
-overflow: hidden;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  gap: 0;
+  overflow: hidden;
 }
 body.theater-mode.four-streams .stream-wrapper { 
-overflow: hidden;
-margin: 0;
-padding: 0;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
 }
 body.theater-mode.four-streams .stream-iframe {
-width: 100%;
-height: 100%;
-display: block;
-transform: none;
+  width: 100%;
+  height: 100%;
+  display: block;
+  transform: none;
 }
 @media (max-width: 768px) {
-body.theater-mode .container {
-grid-template-columns: 1fr !important;
-grid-template-rows: 1fr;
-}
-body.theater-mode .stream-wrapper {
-height: 100vh;
-}
-body.theater-mode.two-streams .stream-wrapper:nth-child(1) {
-height: 50vh;
-}
-body.theater-mode.two-streams .stream-wrapper:nth-child(2) {
-height: 50vh;
-}
+  body.theater-mode .container {
+    grid-template-columns: 1fr !important;
+    grid-template-rows: 1fr;
+  }
+  body.theater-mode .stream-wrapper {
+    height: 100vh;
+  }
+  body.theater-mode.two-streams .stream-wrapper:nth-child(1) {
+    height: 50vh;
+  }
+  body.theater-mode.two-streams .stream-wrapper:nth-child(2) {
+    height: 50vh;
+  }
 }
 .error-message {
-position: fixed;
-top: 20px;
-left: 50%;
-transform: translateX(-50%);
-background-color: rgba(255, 0, 0, 0.8);
-color: white;
-padding: 10px 20px;
-border-radius: 5px;
-font-weight: 500;
-z-index: 1000;
-animation: fadeInOut 3s forwards;
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(255, 0, 0, 0.8);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-weight: 500;
+  z-index: 1000;
+  animation: fadeInOut 3s forwards;
 }
 @keyframes fadeInOut {
-0% { opacity: 0; }
-10% { opacity: 1; }
-90% { opacity: 1; }
-100% { opacity: 0; display: none; }
+  0% { opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { opacity: 0; display: none; }
 }
 body.theater-mode .stream-controls,
 body.theater-mode .stream-info {
-display: none !important;
+  display: none !important;
 }
 </style>
 </head>
@@ -641,6 +763,121 @@ display: none !important;
 </div>
 </div>
 
+<div class="twitch-modal" id="twitchModal">
+<button class="close-twitch" id="closeTwitch">×</button>
+<h2>Twitch Streams</h2>
+<div class="twitch-stream">
+<div class="twitch-pfp"><img src="https://yt3.googleusercontent.com/3E8Enk5t9C95O7l-A-gi1lArZFWAVzOMVJ1aS7IfnxUsdUH8uPsZpZy1bw_4nvMc0K6o2yRP4A=s900-c-k-c0x00ffffff-no-rj" alt="Jynxzi"></div>
+<div class="twitch-info">
+<div class="twitch-name">Jynxzi</div>
+<div class="twitch-viewers">
+<i class="fas fa-eye red-eye"></i>
+000k
+</div>
+</div>
+<button class="load-twitch-btn" data-stream="jynxi">Load</button>
+</div>
+<div class="twitch-stream">
+<div class="twitch-pfp">S1</div>
+<div class="twitch-info">
+<div class="twitch-name">Streamer 1</div>
+<div class="twitch-viewers">
+<i class="fas fa-eye red-eye"></i>
+000k
+</div>
+</div>
+<button class="load-twitch-btn" data-stream="stream1">Load</button>
+</div>
+<div class="twitch-stream">
+<div class="twitch-pfp">S2</div>
+<div class="twitch-info">
+<div class="twitch-name">Streamer 2</div>
+<div class="twitch-viewers">
+<i class="fas fa-eye red-eye"></i>
+000k
+</div>
+</div>
+<button class="load-twitch-btn" data-stream="stream2">Load</button>
+</div>
+<div class="twitch-stream">
+<div class="twitch-pfp">S3</div>
+<div class="twitch-info">
+<div class="twitch-name">Streamer 3</div>
+<div class="twitch-viewers">
+<i class="fas fa-eye red-eye"></i>
+000k
+</div>
+</div>
+<button class="load-twitch-btn" data-stream="stream3">Load</button>
+</div>
+<div class="twitch-stream">
+<div class="twitch-pfp">S4</div>
+<div class="twitch-info">
+<div class="twitch-name">Streamer 4</div>
+<div class="twitch-viewers">
+<i class="fas fa-eye red-eye"></i>
+000k
+</div>
+</div>
+<button class="load-twitch-btn" data-stream="stream4">Load</button>
+</div>
+<div class="twitch-stream">
+<div class="twitch-pfp">S5</div>
+<div class="twitch-info">
+<div class="twitch-name">Streamer 5</div>
+<div class="twitch-viewers">
+<i class="fas fa-eye red-eye"></i>
+000k
+</div>
+</div>
+<button class="load-twitch-btn" data-stream="stream5">Load</button>
+</div>
+<div class="twitch-stream">
+<div class="twitch-pfp">S6</div>
+<div class="twitch-info">
+<div class="twitch-name">Streamer 6</div>
+<div class="twitch-viewers">
+<i class="fas fa-eye red-eye"></i>
+000k
+</div>
+</div>
+<button class="load-twitch-btn" data-stream="stream6">Load</button>
+</div>
+<div class="twitch-stream">
+<div class="twitch-pfp">S7</div>
+<div class="twitch-info">
+<div class="twitch-name">Streamer 7</div>
+<div class="twitch-viewers">
+<i class="fas fa-eye red-eye"></i>
+000k
+</div>
+</div>
+<button class="load-twitch-btn" data-stream="stream7">Load</button>
+</div>
+<div class="twitch-stream">
+<div class="twitch-pfp">S8</div>
+<div class="twitch-info">
+<div class="twitch-name">Streamer 8</div>
+<div class="twitch-viewers">
+<i class="fas fa-eye red-eye"></i>
+000k
+</div>
+</div>
+<button class="load-twitch-btn" data-stream="stream8">Load</button>
+</div>
+<div class="twitch-stream">
+<div class="twitch-pfp">S9</div>
+<div class="twitch-info">
+<div class="twitch-name">Streamer 9</div>
+<div class="twitch-viewers">
+<i class="fas fa-eye red-eye"></i>
+000k
+</div>
+</div>
+<button class="load-twitch-btn" data-stream="stream9">Load</button>
+</div>
+</div>
+
 <div class="header">
 <a href="https://github.com/VenomousRhyme41/Multi-Stream-Viewer" class="github-btn" target="_blank">
 <i class="fab fa-github"></i> GitHub
@@ -659,88 +896,34 @@ display: none !important;
 <select class="favorites-dropdown">
 <option value="" selected disabled>Favorites</option>
 </select>
-<select class="history-dropdown">
+<div class="history-dropdown">
+<select class="history-dropdown-select">
 <option value="" selected disabled>History</option>
 </select>
+</div>
 </div>
 <div class="right-selectors">
 <select class="stream-dropdown">
 <option value="" selected disabled>24/7 Channels</option>
-<option value="espn">ESPN</option>
-<option value="mlb-network">MLB Network</option>
-<option value="nfl-network">NFL Network</option>
-<option value="nba-tv">NBA TV</option>
-<option value="nhl-network">NHL Network</option>
-<option value="tennis-channel">Tennis Channel</option>
-<option value="sky-sports-golf">Golf Channel</option>
-<option value="sky-sports-darts">Darts Channel</option>
-<option value="fox-nrl-tv">Rugby Channel</option>
-<option value="ufc-events">UFC Events</option>
-<option value="dazn-f1">Formula 1 (DAZN)</option>
-<option value="sky-f1">F1 (Sky Sports)</option>
-<option value="motogp">MotoGP</option>
-<option value="poker">Poker</option>
-<option value="southpark">South Park</option>
-<option value="simpsons">The Simpsons</option>
-<option value="familyguy">Family Guy</option>
+<option value="espn" class="stream-green">ESPN</option>
+<option value="mlb-network" class="stream-green">MLB Network</option>
+<option value="nfl-network" class="stream-green">NFL Network</option>
+<option value="nba-tv" class="stream-green">NBA TV</option>
+<option value="nhl-network" class="stream-green">NHL Network</option>
+<option value="tennis-channel" class="stream-green">Tennis</option>
+<option value="sky-sports-golf" class="stream-green">Golf</option>
+<option value="sky-sports-darts" class="stream-green">Darts</option>
+<option value="dazn-f1" class="stream-green">Formula 1</option>
+<option value="sky-f1" class="stream-green">F1</option>
+<option value="poker" class="stream-yellow">Poker</option>
+<option value="fox-nrl-tv" class="stream-red">Rugby</option>
+<option value="ufc-events" class="stream-red">UFC</option>
+<option value="motogp" class="stream-red">MotoGP</option>
+<option value="southpark" class="stream-red">South Park</option>
+<option value="simpsons" class="stream-red">The Simpsons</option>
+<option value="familyguy" class="stream-red">Family Guy</option>
 </select>
-<select class="twitch-dropdown">
-<option value="" selected disabled>Twitch</option>
-<option value="jynxi">
-<div class="twitch-option">
-<span>Jynxi</span>
-<span class="viewer-count">
-<i class="fas fa-eye red-eye"></i>
-000k
-</span>
-</div>
-</option>
-<option value="stream1">
-<div class="twitch-option">
-<span>Stream 1</span>
-<span class="viewer-count">
-<i class="fas fa-eye red-eye"></i>
-000k
-</span>
-</div>
-</option>
-<option value="stream2">
-<div class="twitch-option">
-<span>Stream 2</span>
-<span class="viewer-count">
-<i class="fas fa-eye red-eye"></i>
-000k
-</span>
-</div>
-</option>
-<option value="stream3">
-<div class="twitch-option">
-<span>Stream 3</span>
-<span class="viewer-count">
-<i class="fas fa-eye red-eye"></i>
-000k
-</span>
-</div>
-</option>
-<option value="stream4">
-<div class="twitch-option">
-<span>Stream 4</span>
-<span class="viewer-count">
-<i class="fas fa-eye red-eye"></i>
-000k
-</span>
-</div>
-</option>
-<option value="stream5">
-<div class="twitch-option">
-<span>Stream 5</span>
-<span class="viewer-count">
-<i class="fas fa-eye red-eye"></i>
-000k
-</span>
-</div>
-</option>
-</select>
+<button class="twitch-btn" onclick="showTwitchModal()">Twitch</button>
 </div>
 <div class="stream-input">
 <input type="text" placeholder="Paste stream URL or embed code" class="src-input">
@@ -761,88 +944,34 @@ display: none !important;
 <select class="favorites-dropdown">
 <option value="" selected disabled>Favorites</option>
 </select>
-<select class="history-dropdown">
+<div class="history-dropdown">
+<select class="history-dropdown-select">
 <option value="" selected disabled>History</option>
 </select>
+</div>
 </div>
 <div class="right-selectors">
 <select class="stream-dropdown">
 <option value="" selected disabled>24/7 Channels</option>
-<option value="espn">ESPN</option>
-<option value="mlb-network">MLB Network</option>
-<option value="nfl-network">NFL Network</option>
-<option value="nba-tv">NBA TV</option>
-<option value="nhl-network">NHL Network</option>
-<option value="tennis-channel">Tennis Channel</option>
-<option value="sky-sports-golf">Golf Channel</option>
-<option value="sky-sports-darts">Darts Channel</option>
-<option value="fox-nrl-tv">Rugby Channel</option>
-<option value="ufc-events">UFC Events</option>
-<option value="dazn-f1">Formula 1 (DAZN)</option>
-<option value="sky-f1">F1 (Sky Sports)</option>
-<option value="motogp">MotoGP</option>
-<option value="poker">Poker</option>
-<option value="southpark">South Park</option>
-<option value="simpsons">The Simpsons</option>
-<option value="familyguy">Family Guy</option>
+<option value="espn" class="stream-green">ESPN</option>
+<option value="mlb-network" class="stream-green">MLB Network</option>
+<option value="nfl-network" class="stream-green">NFL Network</option>
+<option value="nba-tv" class="stream-green">NBA TV</option>
+<option value="nhl-network" class="stream-green">NHL Network</option>
+<option value="tennis-channel" class="stream-green">Tennis</option>
+<option value="sky-sports-golf" class="stream-green">Golf</option>
+<option value="sky-sports-darts" class="stream-green">Darts</option>
+<option value="dazn-f1" class="stream-green">Formula 1</option>
+<option value="sky-f1" class="stream-green">F1</option>
+<option value="poker" class="stream-yellow">Poker</option>
+<option value="fox-nrl-tv" class="stream-red">Rugby</option>
+<option value="ufc-events" class="stream-red">UFC</option>
+<option value="motogp" class="stream-red">MotoGP</option>
+<option value="southpark" class="stream-red">South Park</option>
+<option value="simpsons" class="stream-red">The Simpsons</option>
+<option value="familyguy" class="stream-red">Family Guy</option>
 </select>
-<select class="twitch-dropdown">
-<option value="" selected disabled>Twitch</option>
-<option value="jynxi">
-<div class="twitch-option">
-<span>Jynxi</span>
-<span class="viewer-count">
-<i class="fas fa-eye red-eye"></i>
-000k
-</span>
-</div>
-</option>
-<option value="stream1">
-<div class="twitch-option">
-<span>Stream 1</span>
-<span class="viewer-count">
-<i class="fas fa-eye red-eye"></i>
-000k
-</span>
-</div>
-</option>
-<option value="stream2">
-<div class="twitch-option">
-<span>Stream 2</span>
-<span class="viewer-count">
-<i class="fas fa-eye red-eye"></i>
-000k
-</span>
-</div>
-</option>
-<option value="stream3">
-<div class="twitch-option">
-<span>Stream 3</span>
-<span class="viewer-count">
-<i class="fas fa-eye red-eye"></i>
-000k
-</span>
-</div>
-</option>
-<option value="stream4">
-<div class="twitch-option">
-<span>Stream 4</span>
-<span class="viewer-count">
-<i class="fas fa-eye red-eye"></i>
-000k
-</span>
-</div>
-</option>
-<option value="stream5">
-<div class="twitch-option">
-<span>Stream 5</span>
-<span class="viewer-count">
-<i class="fas fa-eye red-eye"></i>
-000k
-</span>
-</div>
-</option>
-</select>
+<button class="twitch-btn" onclick="showTwitchModal()">Twitch</button>
 </div>
 <div class="stream-input">
 <input type="text" placeholder="Paste stream URL or embed code" class="src-input">
@@ -863,88 +992,34 @@ display: none !important;
 <select class="favorites-dropdown">
 <option value="" selected disabled>Favorites</option>
 </select>
-<select class="history-dropdown">
+<div class="history-dropdown">
+<select class="history-dropdown-select">
 <option value="" selected disabled>History</option>
 </select>
+</div>
 </div>
 <div class="right-selectors">
 <select class="stream-dropdown">
 <option value="" selected disabled>24/7 Channels</option>
-<option value="espn">ESPN</option>
-<option value="mlb-network">MLB Network</option>
-<option value="nfl-network">NFL Network</option>
-<option value="nba-tv">NBA TV</option>
-<option value="nhl-network">NHL Network</option>
-<option value="tennis-channel">Tennis Channel</option>
-<option value="sky-sports-golf">Golf Channel</option>
-<option value="sky-sports-darts">Darts Channel</option>
-<option value="fox-nrl-tv">Rugby Channel</option>
-<option value="ufc-events">UFC Events</option>
-<option value="dazn-f1">Formula 1 (DAZN)</option>
-<option value="sky-f1">F1 (Sky Sports)</option>
-<option value="motogp">MotoGP</option>
-<option value="poker">Poker</option>
-<option value="southpark">South Park</option>
-<option value="simpsons">The Simpsons</option>
-<option value="familyguy">Family Guy</option>
+<option value="espn" class="stream-green">ESPN</option>
+<option value="mlb-network" class="stream-green">MLB Network</option>
+<option value="nfl-network" class="stream-green">NFL Network</option>
+<option value="nba-tv" class="stream-green">NBA TV</option>
+<option value="nhl-network" class="stream-green">NHL Network</option>
+<option value="tennis-channel" class="stream-green">Tennis</option>
+<option value="sky-sports-golf" class="stream-green">Golf</option>
+<option value="sky-sports-darts" class="stream-green">Darts</option>
+<option value="dazn-f1" class="stream-green">Formula 1</option>
+<option value="sky-f1" class="stream-green">F1</option>
+<option value="poker" class="stream-yellow">Poker</option>
+<option value="fox-nrl-tv" class="stream-red">Rugby</option>
+<option value="ufc-events" class="stream-red">UFC</option>
+<option value="motogp" class="stream-red">MotoGP</option>
+<option value="southpark" class="stream-red">South Park</option>
+<option value="simpsons" class="stream-red">The Simpsons</option>
+<option value="familyguy" class="stream-red">Family Guy</option>
 </select>
-<select class="twitch-dropdown">
-<option value="" selected disabled>Twitch</option>
-<option value="jynxi">
-<div class="twitch-option">
-<span>Jynxi</span>
-<span class="viewer-count">
-<i class="fas fa-eye red-eye"></i>
-000k
-</span>
-</div>
-</option>
-<option value="stream1">
-<div class="twitch-option">
-<span>Stream 1</span>
-<span class="viewer-count">
-<i class="fas fa-eye red-eye"></i>
-000k
-</span>
-</div>
-</option>
-<option value="stream2">
-<div class="twitch-option">
-<span>Stream 2</span>
-<span class="viewer-count">
-<i class="fas fa-eye red-eye"></i>
-000k
-</span>
-</div>
-</option>
-<option value="stream3">
-<div class="twitch-option">
-<span>Stream 3</span>
-<span class="viewer-count">
-<i class="fas fa-eye red-eye"></i>
-000k
-</span>
-</div>
-</option>
-<option value="stream4">
-<div class="twitch-option">
-<span>Stream 4</span>
-<span class="viewer-count">
-<i class="fas fa-eye red-eye"></i>
-000k
-</span>
-</div>
-</option>
-<option value="stream5">
-<div class="twitch-option">
-<span>Stream 5</span>
-<span class="viewer-count">
-<i class="fas fa-eye red-eye"></i>
-000k
-</span>
-</div>
-</option>
-</select>
+<button class="twitch-btn" onclick="showTwitchModal()">Twitch</button>
 </div>
 <div class="stream-input">
 <input type="text" placeholder="Paste stream URL or embed code" class="src-input">
@@ -965,88 +1040,34 @@ display: none !important;
 <select class="favorites-dropdown">
 <option value="" selected disabled>Favorites</option>
 </select>
-<select class="history-dropdown">
+<div class="history-dropdown">
+<select class="history-dropdown-select">
 <option value="" selected disabled>History</option>
 </select>
+</div>
 </div>
 <div class="right-selectors">
 <select class="stream-dropdown">
 <option value="" selected disabled>24/7 Channels</option>
-<option value="espn">ESPN</option>
-<option value="mlb-network">MLB Network</option>
-<option value="nfl-network">NFL Network</option>
-<option value="nba-tv">NBA TV</option>
-<option value="nhl-network">NHL Network</option>
-<option value="tennis-channel">Tennis Channel</option>
-<option value="sky-sports-golf">Golf Channel</option>
-<option value="sky-sports-darts">Darts Channel</option>
-<option value="fox-nrl-tv">Rugby Channel</option>
-<option value="ufc-events">UFC Events</option>
-<option value="dazn-f1">Formula 1 (DAZN)</option>
-<option value="sky-f1">F1 (Sky Sports)</option>
-<option value="motogp">MotoGP</option>
-<option value="poker">Poker</option>
-<option value="southpark">South Park</option>
-<option value="simpsons">The Simpsons</option>
-<option value="familyguy">Family Guy</option>
+<option value="espn" class="stream-green">ESPN</option>
+<option value="mlb-network" class="stream-green">MLB Network</option>
+<option value="nfl-network" class="stream-green">NFL Network</option>
+<option value="nba-tv" class="stream-green">NBA TV</option>
+<option value="nhl-network" class="stream-green">NHL Network</option>
+<option value="tennis-channel" class="stream-green">Tennis</option>
+<option value="sky-sports-golf" class="stream-green">Golf</option>
+<option value="sky-sports-darts" class="stream-green">Darts</option>
+<option value="dazn-f1" class="stream-green">Formula 1</option>
+<option value="sky-f1" class="stream-green">F1</option>
+<option value="poker" class="stream-yellow">Poker</option>
+<option value="fox-nrl-tv" class="stream-red">Rugby</option>
+<option value="ufc-events" class="stream-red">UFC</option>
+<option value="motogp" class="stream-red">MotoGP</option>
+<option value="southpark" class="stream-red">South Park</option>
+<option value="simpsons" class="stream-red">The Simpsons</option>
+<option value="familyguy" class="stream-red">Family Guy</option>
 </select>
-<select class="twitch-dropdown">
-<option value="" selected disabled>Twitch</option>
-<option value="jynxi">
-<div class="twitch-option">
-<span>Jynxi</span>
-<span class="viewer-count">
-<i class="fas fa-eye red-eye"></i>
-000k
-</span>
-</div>
-</option>
-<option value="stream1">
-<div class="twitch-option">
-<span>Stream 1</span>
-<span class="viewer-count">
-<i class="fas fa-eye red-eye"></i>
-000k
-</span>
-</div>
-</option>
-<option value="stream2">
-<div class="twitch-option">
-<span>Stream 2</span>
-<span class="viewer-count">
-<i class="fas fa-eye red-eye"></i>
-000k
-</span>
-</div>
-</option>
-<option value="stream3">
-<div class="twitch-option">
-<span>Stream 3</span>
-<span class="viewer-count">
-<i class="fas fa-eye red-eye"></i>
-000k
-</span>
-</div>
-</option>
-<option value="stream4">
-<div class="twitch-option">
-<span>Stream 4</span>
-<span class="viewer-count">
-<i class="fas fa-eye red-eye"></i>
-000k
-</span>
-</div>
-</option>
-<option value="stream5">
-<div class="twitch-option">
-<span>Stream 5</span>
-<span class="viewer-count">
-<i class="fas fa-eye red-eye"></i>
-000k
-</span>
-</div>
-</option>
-</select>
+<button class="twitch-btn" onclick="showTwitchModal()">Twitch</button>
 </div>
 <div class="stream-input">
 <input type="text" placeholder="Paste stream URL or embed code" class="src-input">
@@ -1064,6 +1085,7 @@ display: none !important;
 </div>
 </div>
 <button id="exitTheaterBtn" class="exit-theater-btn" style="display: none;">Exit Theater</button>
+
 <script>
 const domain = window.location.hostname;
 let isTheaterMode = false;
@@ -1075,16 +1097,18 @@ const resetAllBtn = document.getElementById('resetAllBtn');
 const exitTheaterBtn = document.getElementById('exitTheaterBtn');
 const resetBtns = document.querySelectorAll('.reset-btn');
 const streamDropdowns = document.querySelectorAll('.stream-dropdown');
-const twitchDropdowns = document.querySelectorAll('.twitch-dropdown');
 const favoritesDropdowns = document.querySelectorAll('.favorites-dropdown');
-const historyDropdowns = document.querySelectorAll('.history-dropdown');
+const historyDropdowns = document.querySelectorAll('.history-dropdown-select');
 const favoriteBtns = document.querySelectorAll('.favorite-btn');
 const announcementBanner = document.getElementById('announcementBanner');
 const closeAnnouncement = document.getElementById('closeAnnouncement');
 const announcementText = document.getElementById('announcementText');
 const shortcutsModal = document.getElementById('shortcutsModal');
 const closeShortcuts = document.getElementById('closeShortcuts');
+const twitchModal = document.getElementById('twitchModal');
+const closeTwitch = document.getElementById('closeTwitch');
 const overlay = document.getElementById('overlay');
+const loadTwitchBtns = document.querySelectorAll('.load-twitch-btn');
 
 const channelMap = {
 'espn': {
@@ -1109,31 +1133,31 @@ name: 'NHL Network'
 },
 'tennis-channel': {
 url: 'https://embedstreams.top/embed/alpha/tennis-channel/1',
-name: 'Tennis Channel'
+name: 'Tennis'
 },
 'sky-sports-golf': {
 url: 'https://embedstreams.top/embed/alpha/sky-sports-golf/1',
-name: 'Golf Channel'
+name: 'Golf'
 },
 'sky-sports-darts': {
 url: 'https://embedstreams.top/embed/alpha/sky-sports-darts/1',
-name: 'Darts Channel'
+name: 'Darts'
 },
 'fox-nrl-tv': {
 url: 'https://embedstreams.top/embed/alpha/fox-nrl-tv/1',
-name: 'Rugby Channel'
+name: 'Rugby'
 },
 'ufc-events': {
 url: 'https://embedstreams.top/embed/alpha/ufc-events-ufc-mma-ufc-ppv/1',
-name: 'UFC Events'
+name: 'UFC'
 },
 'dazn-f1': {
 url: 'https://embedstreams.top/embed/alpha/dazn-formula-1-dazn-f1/1',
-name: 'Formula 1 (DAZN)'
+name: 'Formula 1'
 },
 'sky-f1': {
 url: 'https://embedstreams.top/embed/alpha/sky-sports-f1-sky-f1/1',
-name: 'F1 (Sky Sports)'
+name: 'F1'
 },
 'motogp': {
 url: 'https://embedstreams.top/embed/alpha/motogp-qualifying-motogp-main-race/1',
@@ -1157,27 +1181,43 @@ name: 'Family Guy'
 },
 'jynxi': {
 url: 'https://player.twitch.tv/?channel=jynxzi&parent=venomousrhyme41.github.io',
-name: 'Jynxi'
+name: 'Jynxzi'
 },
 'stream1': {
-url: 'https://player.twitch.tv/?channel=&parent=venomousrhyme41.github.io',
-name: 'Stream 1'
+url: 'https://player.twitch.tv/?channel=stream1&parent=venomousrhyme41.github.io',
+name: 'Streamer 1'
 },
 'stream2': {
-url: 'https://player.twitch.tv/?channel=&parent=venomousrhyme41.github.io',
-name: 'Stream 2'
+url: 'https://player.twitch.tv/?channel=stream2&parent=venomousrhyme41.github.io',
+name: 'Streamer 2'
 },
 'stream3': {
-url: 'https://player.twitch.tv/?channel=&parent=venomousrhyme41.github.io',
-name: 'Stream 3'
+url: 'https://player.twitch.tv/?channel=stream3&parent=venomousrhyme41.github.io',
+name: 'Streamer 3'
 },
 'stream4': {
-url: 'https://player.twitch.tv/?channel=&parent=venomousrhyme41.github.io',
-name: 'Stream 4'
+url: 'https://player.twitch.tv/?channel=stream4&parent=venomousrhyme41.github.io',
+name: 'Streamer 4'
 },
 'stream5': {
-url: 'https://player.twitch.tv/?channel=&parent=venomousrhyme41.github.io',
-name: 'Stream 5'
+url: 'https://player.twitch.tv/?channel=stream5&parent=venomousrhyme41.github.io',
+name: 'Streamer 5'
+},
+'stream6': {
+url: 'https://player.twitch.tv/?channel=stream6&parent=venomousrhyme41.github.io',
+name: 'Streamer 6'
+},
+'stream7': {
+url: 'https://player.twitch.tv/?channel=stream7&parent=venomousrhyme41.github.io',
+name: 'Streamer 7'
+},
+'stream8': {
+url: 'https://player.twitch.tv/?channel=stream8&parent=venomousrhyme41.github.io',
+name: 'Streamer 8'
+},
+'stream9': {
+url: 'https://player.twitch.tv/?channel=stream9&parent=venomousrhyme41.github.io',
+name: 'Streamer 9'
 }
 };
 
@@ -1273,6 +1313,36 @@ favoriteBtn.classList.remove('favorited');
 favoriteBtn.innerHTML = '♡';
 }
 });
+}
+
+function showTwitchModal() {
+twitchModal.style.display = 'block';
+overlay.style.display = 'block';
+}
+
+function hideTwitchModal() {
+twitchModal.style.display = 'none';
+overlay.style.display = 'none';
+}
+
+function loadTwitchStream(streamKey) {
+const channel = channelMap[streamKey];
+if (channel) {
+const wrapper = document.querySelector('.stream-wrapper:not(.loaded)') || document.querySelector('.stream-wrapper');
+const iframe = wrapper.querySelector('.stream-iframe');
+iframe.src = channel.url;
+iframe.style.display = 'block';
+wrapper.querySelector('.stream-input').style.display = 'none';
+wrapper.querySelector('.stream-controls').style.display = 'flex';
+wrapper.classList.add('loaded');
+wrapper.querySelector('.stream-info').textContent = channel.name;
+wrapper.querySelector('.left-selectors').style.display = 'none';
+wrapper.querySelector('.right-selectors').style.display = 'none';
+wrapper.querySelector('.history-dropdown').style.display = 'none';
+addToHistory(channel.url, channel.name);
+updateFavoriteButtons();
+hideTwitchModal();
+}
 }
 
 function setupKeyboardShortcuts() {
@@ -1373,7 +1443,18 @@ announcementClosed = true;
 });
 
 closeShortcuts.addEventListener('click', hideShortcuts);
-overlay.addEventListener('click', hideShortcuts);
+closeTwitch.addEventListener('click', hideTwitchModal);
+overlay.addEventListener('click', function() {
+hideShortcuts();
+hideTwitchModal();
+});
+
+loadTwitchBtns.forEach(btn => {
+btn.addEventListener('click', function() {
+const streamKey = this.getAttribute('data-stream');
+loadTwitchStream(streamKey);
+});
+});
 
 streamLayoutBtn.addEventListener('click', toggleStreamLayout);
 theaterModeBtn.addEventListener('click', toggleTheaterMode);
@@ -1395,12 +1476,6 @@ resetStream(this);
 streamDropdowns.forEach(dropdown => {
 dropdown.addEventListener('change', function() {
 handleDropdownChange(this);
-});
-});
-
-twitchDropdowns.forEach(dropdown => {
-dropdown.addEventListener('change', function() {
-handleTwitchDropdownChange(this);
 });
 });
 
@@ -1443,6 +1518,7 @@ wrapper.classList.add('loaded');
 wrapper.querySelector('.stream-info').textContent = favorite.title || favorite.src;
 wrapper.querySelector('.left-selectors').style.display = 'none';
 wrapper.querySelector('.right-selectors').style.display = 'none';
+wrapper.querySelector('.history-dropdown').style.display = 'none';
 dropdown.selectedIndex = 0;
 updateFavoriteButtons();
 }
@@ -1465,6 +1541,7 @@ wrapper.classList.add('loaded');
 wrapper.querySelector('.stream-info').textContent = historyItem.title || historyItem.src;
 wrapper.querySelector('.left-selectors').style.display = 'none';
 wrapper.querySelector('.right-selectors').style.display = 'none';
+wrapper.querySelector('.history-dropdown').style.display = 'none';
 dropdown.selectedIndex = 0;
 updateFavoriteButtons();
 }
@@ -1492,6 +1569,7 @@ const controls = wrapper.querySelector('.stream-controls');
 const info = wrapper.querySelector('.stream-info');
 const leftSelectors = wrapper.querySelector('.left-selectors');
 const rightSelectors = wrapper.querySelector('.right-selectors');
+const historyDropdown = wrapper.querySelector('.history-dropdown');
 let src = input.value.trim();
 let title = '';
 
@@ -1547,6 +1625,7 @@ controls.style.display = 'flex';
 wrapper.classList.add('loaded');
 leftSelectors.style.display = 'none';
 rightSelectors.style.display = 'none';
+historyDropdown.style.display = 'none';
 
 if (title) {
 info.textContent = title;
@@ -1576,25 +1655,7 @@ wrapper.classList.add('loaded');
 wrapper.querySelector('.stream-info').textContent = channel.name;
 wrapper.querySelector('.left-selectors').style.display = 'none';
 wrapper.querySelector('.right-selectors').style.display = 'none';
-dropdown.selectedIndex = 0;
-addToHistory(channel.url, channel.name);
-updateFavoriteButtons();
-}
-}
-
-function handleTwitchDropdownChange(dropdown) {
-const wrapper = dropdown.closest('.stream-wrapper');
-const channel = channelMap[dropdown.value];
-if (channel) {
-const iframe = wrapper.querySelector('.stream-iframe');
-iframe.src = channel.url;
-iframe.style.display = 'block';
-wrapper.querySelector('.stream-input').style.display = 'none';
-wrapper.querySelector('.stream-controls').style.display = 'flex';
-wrapper.classList.add('loaded');
-wrapper.querySelector('.stream-info').textContent = channel.name;
-wrapper.querySelector('.left-selectors').style.display = 'none';
-wrapper.querySelector('.right-selectors').style.display = 'none';
+wrapper.querySelector('.history-dropdown').style.display = 'none';
 dropdown.selectedIndex = 0;
 addToHistory(channel.url, channel.name);
 updateFavoriteButtons();
@@ -1611,6 +1672,9 @@ selector.style.display = 'none';
 document.querySelectorAll('.right-selectors').forEach(selector => {
 selector.style.display = 'none';
 });
+document.querySelectorAll('.history-dropdown').forEach(selector => {
+selector.style.display = 'none';
+});
 
 if (isTheaterMode) {
 updateTheaterModeLayout();
@@ -1620,6 +1684,9 @@ selector.style.display = 'flex';
 });
 document.querySelectorAll('.stream-wrapper:not(.loaded) .right-selectors').forEach(selector => {
 selector.style.display = 'flex';
+});
+document.querySelectorAll('.stream-wrapper:not(.loaded) .history-dropdown').forEach(selector => {
+selector.style.display = 'block';
 });
 updateStreamLayout();
 }
@@ -1671,11 +1738,11 @@ const iframe = wrapper.querySelector('.stream-iframe');
 const controls = wrapper.querySelector('.stream-controls');
 const info = wrapper.querySelector('.stream-info');
 const dropdown = wrapper.querySelector('.stream-dropdown');
-const twitchDropdown = wrapper.querySelector('.twitch-dropdown');
 const favoritesDropdown = wrapper.querySelector('.favorites-dropdown');
-const historyDropdown = wrapper.querySelector('.history-dropdown');
+const historyDropdown = wrapper.querySelector('.history-dropdown-select');
 const leftSelectors = wrapper.querySelector('.left-selectors');
 const rightSelectors = wrapper.querySelector('.right-selectors');
+const historyContainer = wrapper.querySelector('.history-dropdown');
 wrapper.classList.remove('loaded');
 inputContainer.style.display = '';
 iframe.style.display = 'none';
@@ -1683,11 +1750,11 @@ controls.style.display = 'none';
 iframe.src = '';
 info.textContent = '';
 dropdown.selectedIndex = 0;
-twitchDropdown.selectedIndex = 0;
 favoritesDropdown.selectedIndex = 0;
 historyDropdown.selectedIndex = 0;
 leftSelectors.style.display = 'flex';
 rightSelectors.style.display = 'flex';
+historyContainer.style.display = 'block';
 
 if (isTheaterMode) {
 updateTheaterModeLayout();
@@ -1701,11 +1768,11 @@ const iframe = wrapper.querySelector('.stream-iframe');
 const controls = wrapper.querySelector('.stream-controls');
 const info = wrapper.querySelector('.stream-info');
 const dropdown = wrapper.querySelector('.stream-dropdown');
-const twitchDropdown = wrapper.querySelector('.twitch-dropdown');
 const favoritesDropdown = wrapper.querySelector('.favorites-dropdown');
-const historyDropdown = wrapper.querySelector('.history-dropdown');
+const historyDropdown = wrapper.querySelector('.history-dropdown-select');
 const leftSelectors = wrapper.querySelector('.left-selectors');
 const rightSelectors = wrapper.querySelector('.right-selectors');
+const historyContainer = wrapper.querySelector('.history-dropdown');
 wrapper.classList.remove('loaded');
 inputContainer.style.display = '';
 iframe.style.display = 'none';
@@ -1713,11 +1780,11 @@ controls.style.display = 'none';
 iframe.src = '';
 info.textContent = '';
 dropdown.selectedIndex = 0;
-twitchDropdown.selectedIndex = 0;
 favoritesDropdown.selectedIndex = 0;
 historyDropdown.selectedIndex = 0;
 leftSelectors.style.display = 'flex';
 rightSelectors.style.display = 'flex';
+historyContainer.style.display = 'block';
 });
 
 if (isTheaterMode) {
