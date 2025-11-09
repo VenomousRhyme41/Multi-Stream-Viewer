@@ -568,6 +568,21 @@ h1 {
   background-color: rgba(0,0,0,0.7);
   z-index: 9999;
 }
+#visit-counter {
+  position: fixed;
+  bottom: 12px;
+  right: 12px;
+  background: rgba(0,0,0,0.7);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-family: system-ui, sans-serif;
+  font-size: 14px;
+  z-index: 9999;
+}
+body.theater-mode #visit-counter {
+  display: none;
+}
 @media (max-width: 1200px) {
   .header {
     flex-direction: column;
@@ -725,6 +740,10 @@ body.theater-mode .stream-info {
 <div class="shortcut-item">
 <span>Cycle Layout (2/3/4)</span>
 <span class="shortcut-key">L</span>
+</div>
+<div class="shortcut-item">
+<span>Toggle Visitor Counter</span>
+<span class="shortcut-key">V</span>
 </div>
 </div>
 <div class="shortcut-category">
@@ -1086,7 +1105,35 @@ body.theater-mode .stream-info {
 </div>
 <button id="exitTheaterBtn" class="exit-theater-btn" style="display: none;">Exit Theater</button>
 
+<div id="visit-counter"></div>
+
 <script>
+let isCounterVisible = true;
+
+const namespace = 'venomousrhyme41.github.io';
+const key = 'multistream-viewer';
+const url = `https://api.countapi.xyz/hit/${encodeURIComponent(namespace)}/${encodeURIComponent(key)}`;
+
+fetch(url)
+  .then(res => res.json())
+  .then(data => {
+    const el = document.getElementById('visit-counter');
+    if (el && data && typeof data.value !== 'undefined') {
+      el.textContent = data.value;
+    }
+  })
+  .catch(err => {
+    const el = document.getElementById('visit-counter');
+    if (el) el.textContent = '?';
+    console.error('CountAPI error', err);
+  });
+
+function toggleCounter() {
+  isCounterVisible = !isCounterVisible;
+  const counter = document.getElementById('visit-counter');
+  counter.style.display = isCounterVisible ? 'block' : 'none';
+}
+
 const domain = window.location.hostname;
 let isTheaterMode = false;
 let streamLayout = 4;
@@ -1367,6 +1414,9 @@ toggleStreamLayout();
 break;
 case 'r':
 resetAll();
+break;
+case 'v':
+toggleCounter();
 break;
 case '?':
 showShortcuts();
