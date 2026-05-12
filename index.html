@@ -14,7 +14,10 @@
   --card-color: #1a1a1a;
   --text-color: #e0e0e0;
   --border-color: #333;
-  --button-bg: #333;
+  --button-bg: #252525;
+  --button-hover: #2e2e2e;
+  --danger-light: rgba(255, 80, 80, 0.18);
+  --danger-border: rgba(255, 80, 80, 0.5);
 }
 * {
   box-sizing: border-box;
@@ -26,31 +29,31 @@
   -ms-user-select: none;
   user-select: none;
 }
-*::-webkit-scrollbar {
-  display: none;
+*::-webkit-scrollbar { display: none; }
+html, body {
+  height: 100%;
+  overflow: hidden;
 }
 body {
   background-color: var(--bg-color);
   color: var(--text-color);
   font-family: 'Roboto', sans-serif;
-  padding: 20px 20px;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  overflow-x: hidden;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
 }
 .announcement-banner {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: 0; left: 0; right: 0;
   background-color: #ff4444;
   color: white;
   padding: 12px 50px 12px 20px;
   text-align: center;
   z-index: 10000;
   font-weight: 500;
-  box-shadow: 0 2px 10px rgba(255, 68, 68, 0.3);
+  box-shadow: 0 2px 10px rgba(255,68,68,0.3);
 }
 .close-announcement {
   position: absolute;
@@ -68,118 +71,118 @@ body {
   align-items: center;
   justify-content: center;
 }
-.close-announcement:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-  border-radius: 50%;
-}
+.close-announcement:hover { background-color: rgba(255,255,255,0.2); border-radius: 50%; }
 .header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px;
+  padding: 10px 2.5%;
   position: relative;
-  width: 95%;
-  max-width: 1800px;
-  margin-left: auto;
-  margin-right: auto;
+  width: 100%;
+  flex-shrink: 0;
+  height: 54px;
+}
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: absolute;
+  left: 2.5%;
+}
+.header-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: absolute;
+  right: 2.5%;
 }
 h1 {
   margin: 0;
   color: var(--active-color);
   font-weight: 600;
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-family: 'Montserrat', sans-serif;
-  text-align: center;
   letter-spacing: 1px;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+  white-space: nowrap;
 }
-.github-btn {
+.header-btn {
   background-color: var(--button-bg);
-  color: white;
-  padding: 8px 15px;
-  border-radius: 6px;
+  color: var(--text-color);
+  padding: 7px 13px;
+  border-radius: 7px;
   text-decoration: none;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 7px;
   font-weight: 500;
-  transition: all 0.2s;
+  font-size: 13px;
+  border: 1px solid var(--border-color);
+  cursor: pointer;
+  transition: background 0.18s, border-color 0.18s;
+  white-space: nowrap;
+  font-family: 'Roboto', sans-serif;
 }
-.github-btn:hover {
-  background-color: #555;
-}
-.global-controls {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  margin-left: auto;
-}
+.header-btn:hover { background-color: var(--button-hover); border-color: #444; }
+.header-btn i { font-size: 14px; }
 .global-btn {
-  padding: 8px 15px;
+  padding: 7px 13px;
   background-color: var(--button-bg);
   color: var(--text-color);
   border: 1px solid var(--border-color);
-  border-radius: 6px;
+  border-radius: 7px;
   cursor: pointer;
   font-weight: 500;
-  transition: all 0.2s;
-  font-size: 14px;
+  transition: background 0.18s, border-color 0.18s, color 0.18s;
+  font-size: 13px;
+  font-family: 'Roboto', sans-serif;
+  white-space: nowrap;
 }
-.global-btn:hover {
-  background-color: rgba(0, 255, 157, 0.2);
+.global-btn:hover { background-color: var(--button-hover); border-color: #444; }
+.global-btn.danger-warn {
+  background-color: var(--danger-light);
+  border-color: var(--danger-border);
+  color: #ff9090;
 }
-.separator {
-  color: var(--border-color);
-  font-weight: bold;
-  padding: 0 5px;
+.separator { color: var(--border-color); font-weight: bold; padding: 0 3px; }
+.page-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 0 2.5% 10px 2.5%;
+  min-height: 0;
 }
 .container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: auto;
-  gap: 15px;
-  max-width: 1800px;
-  margin: 0 auto;
-  width: 95%;
-  flex-grow: 1;
-  margin-bottom: 10px;
+  gap: 12px;
+  flex: 1;
+  min-height: 0;
+  width: 100%;
 }
-.container.two-streams {
-  grid-template-columns: repeat(2, 1fr);
-}
-.container.three-streams {
-  grid-template-columns: repeat(3, 1fr);
-}
-.container.four-streams {
-  grid-template-columns: repeat(2, 1fr);
-}
+.container.two-streams { grid-template-columns: repeat(2, 1fr); }
+.container.three-streams { grid-template-columns: repeat(3, 1fr); }
+.container.four-streams { grid-template-columns: repeat(2, 1fr); }
 .stream-wrapper {
   position: relative;
   background-color: var(--card-color);
-  border-radius: 12px;
+  border-radius: 10px;
   overflow: hidden;
   transition: all 0.2s ease;
   box-shadow: 0 4px 20px rgba(0,0,0,0.3);
   display: flex;
   flex-direction: column;
-  min-height: 300px;
+  min-height: 0;
 }
-.stream-wrapper.loaded {
-  min-height: auto;
-}
-.stream-wrapper.active {
-  border: 2px solid var(--active-color);
-  box-shadow: 0 0 30px rgba(0, 255, 157, 0.3);
-}
-.stream-wrapper.hidden {
-  display: none;
-}
+.stream-wrapper.active { border: 2px solid var(--active-color); box-shadow: 0 0 30px rgba(0,255,157,0.3); }
+.stream-wrapper.hidden { display: none; }
 .left-selectors {
   position: absolute;
-  top: 10px;
-  left: 10px;
+  top: 10px; left: 10px;
   z-index: 20;
   display: flex;
   flex-direction: column;
@@ -187,209 +190,102 @@ h1 {
 }
 .right-selectors {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 10px; right: 10px;
   z-index: 20;
   display: flex;
   flex-direction: column;
   gap: 5px;
 }
-.left-selectors select,
-.right-selectors select {
-  padding: 8px 12px;
+.styled-select {
+  padding: 6px 22px 6px 9px;
   background-color: var(--button-bg);
   color: var(--text-color);
   border: 1px solid var(--border-color);
-  border-radius: 6px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: all 0.2s;
-  width: auto;
-  min-width: 0;
-}
-.left-selectors select:focus,
-.right-selectors select:focus {
-  outline: none;
-  border-color: var(--active-color);
-}
-.left-selectors select:hover,
-.right-selectors select:hover {
-  background-color: #333;
-}
-.history-dropdown {
-  position: relative;
-  margin-top: 5px;
-}
-.history-dropdown select {
-  padding: 8px 12px;
-  background-color: var(--button-bg);
-  color: var(--text-color);
-  border: 1px solid var(--border-color);
-  border-radius: 6px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: all 0.2s;
-  width: 100%;
-}
-.history-dropdown select:focus {
-  outline: none;
-  border-color: var(--active-color);
-}
-.history-dropdown select:hover {
-  background-color: #333;
-}
-.twitch-btn {
-  padding: 8px 12px;
-  background-color: var(--button-bg);
-  color: var(--text-color);
-  border: 1px solid var(--border-color);
-  border-radius: 6px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: all 0.2s;
-  width: 70px;
-  height: 36px;
-}
-.twitch-btn:hover {
-  background-color: #333;
-  color: var(--text-color);
-}
-.twitch-modal {
-  display: none;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: var(--card-color);
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 10px 50px rgba(0,0,0,0.5);
-  z-index: 10000;
-  max-width: 350px;
-  width: 90%;
-  border: 2px solid #9146FF;
-  max-height: 80vh;
-  overflow-y: auto;
-}
-.twitch-modal h2 {
-  color: #9146FF;
-  margin-bottom: 15px;
-  text-align: center;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 1.3rem;
-}
-.twitch-stream {
-  display: flex;
-  align-items: center;
-  padding: 10px;
-  border-bottom: 1px solid var(--border-color);
-  gap: 12px;
-}
-.twitch-stream:last-child {
-  border-bottom: none;
-}
-.twitch-pfp {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: linear-gradient(45deg, #9146FF, #6441A5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-weight: bold;
-  font-size: 14px;
-  overflow: hidden;
-}
-.twitch-pfp img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.twitch-info {
-  flex: 1;
-}
-.twitch-name {
-  font-weight: 500;
-  margin-bottom: 4px;
-}
-.twitch-viewers {
-  display: flex;
-  align-items: center;
-  gap: 6px;
+  border-radius: 7px;
   font-size: 12px;
-  color: #ff4444;
-}
-.red-eye {
-  color: #ff4444;
-  font-size: 10px;
-}
-.load-twitch-btn {
-  padding: 6px 12px;
-  background-color: var(--active-color);
-  color: #111;
-  border: none;
-  border-radius: 6px;
   cursor: pointer;
-  font-weight: 500;
-  font-size: 11px;
-  transition: all 0.2s;
+  transition: background 0.18s, border-color 0.18s;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='9' height='5' viewBox='0 0 9 5'%3E%3Cpath fill='%23888' d='M0 0l4.5 5L9 0z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 7px center;
+  font-family: 'Roboto', sans-serif;
+  width: 105px;
+  max-width: 105px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
-.load-twitch-btn:hover {
-  opacity: 0.9;
-}
-.stream-red {
-  color: #ff6b6b;
-}
-.stream-yellow {
-  color: #ffd93d;
-}
-.stream-green {
-  color: #6bff6b;
+.styled-select:focus { outline: none; border-color: var(--active-color); }
+.styled-select:hover { background-color: var(--button-hover); border-color: #444; }
+.stream-dropdown {
+  width: auto;
+  max-width: none;
+  min-width: 0;
 }
 .stream-input {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 80%;
-  max-width: 400px;
+  width: 68%;
+  max-width: 340px;
   z-index: 10;
-  background-color: rgba(30, 30, 30, 0.95);
-  padding: 25px;
+  background-color: rgba(18, 18, 18, 0.98);
+  padding: 16px 18px 15px;
   border-radius: 10px;
-  text-align: center;
-  border: 1px solid var(--border-color);
+  border: 1px solid #272727;
+  box-shadow: 0 6px 28px rgba(0,0,0,0.55);
+}
+.stream-input-label {
+  display: block;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #555;
+  margin-bottom: 9px;
+  font-family: 'Roboto', sans-serif;
+}
+.stream-input-row {
+  display: flex;
+  gap: 7px;
+  align-items: center;
 }
 .stream-input input {
-  width: 100%;
-  padding: 12px 15px;
-  margin-bottom: 15px;
-  background-color: var(--button-bg);
-  border: 1px solid var(--border-color);
+  flex: 1;
+  min-width: 0;
+  padding: 8px 11px;
+  background-color: #111;
+  border: 1px solid #272727;
   color: var(--text-color);
-  border-radius: 8px;
-  font-size: 15px;
+  border-radius: 6px;
+  font-size: 12px;
   -webkit-user-select: text;
   -moz-user-select: text;
   -ms-user-select: text;
   user-select: text;
+  font-family: 'Roboto', sans-serif;
+  transition: border-color 0.18s;
 }
+.stream-input input::placeholder { color: #484848; }
+.stream-input input:focus { outline: none; border-color: var(--active-color); }
 .stream-input button {
-  padding: 12px 25px;
+  padding: 8px 13px;
   background-color: var(--active-color);
-  color: #111;
+  color: #0a0a0a;
   border: none;
-  border-radius: 8px;
+  border-radius: 6px;
   cursor: pointer;
-  font-weight: 600;
-  transition: all 0.2s;
-  font-size: 15px;
-  width: 100%;
+  font-weight: 700;
+  transition: opacity 0.18s;
+  font-size: 12px;
+  white-space: nowrap;
+  font-family: 'Roboto', sans-serif;
+  flex-shrink: 0;
 }
-.stream-input button:hover {
-  opacity: 0.9;
-}
+.stream-input button:hover { opacity: 0.87; }
 .stream-iframe {
   width: 100%;
   height: 100%;
@@ -397,16 +293,18 @@ h1 {
   border: none;
   flex-grow: 1;
   overflow: hidden;
+  min-height: 0;
 }
 .stream-controls {
   display: none;
-  padding: 8px 12px;
-  background-color: rgba(0,0,0,0.5);
+  padding: 7px 10px;
+  background-color: rgba(0,0,0,0.55);
   align-items: center;
   justify-content: space-between;
+  flex-shrink: 0;
 }
 .stream-info {
-  font-size: 14px;
+  font-size: 13px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -415,310 +313,101 @@ h1 {
   font-family: 'Oswald', sans-serif;
   letter-spacing: 0.5px;
 }
-.stream-buttons {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-}
+.stream-buttons { display: flex; gap: 7px; align-items: center; }
 .favorite-btn {
   background: none;
   border: none;
   color: var(--text-color);
   cursor: pointer;
   font-size: 16px;
-  transition: all 0.2s;
+  transition: color 0.18s;
   padding: 4px;
 }
-.favorite-btn:hover {
-  color: #ff6b9d;
-}
-.favorite-btn.favorited {
-  color: #ff6b9d;
-}
+.favorite-btn:hover { color: #ff6b9d; }
+.favorite-btn.favorited { color: #ff6b9d; }
 .control-btn {
-  padding: 6px 12px;
+  padding: 5px 11px;
   background-color: var(--button-bg);
   color: var(--text-color);
   border: 1px solid var(--border-color);
   border-radius: 6px;
   cursor: pointer;
   font-weight: 500;
-  transition: all 0.2s;
+  transition: background 0.18s;
   font-size: 12px;
+  font-family: 'Roboto', sans-serif;
 }
-.control-btn:hover {
-  background-color: rgba(0, 255, 157, 0.2);
-}
-.control-btn.active {
-  background-color: var(--active-color);
-  color: #111;
-  border-color: transparent;
-}
-.theater-mode-btn {
-  position: fixed;
-  top: 10px;
-  right: 10px;
-  z-index: 1000;
-  padding: 8px 15px;
-  background-color: var(--button-bg);
-  color: var(--text-color);
-  border: 1px solid var(--border-color);
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: 500;
-  transition: all 0.2s;
-  font-size: 14px;
-}
-.theater-mode-btn:hover {
-  background-color: rgba(0, 255, 157, 0.2);
-}
+.control-btn:hover { background-color: rgba(0,255,157,0.15); border-color: rgba(0,255,157,0.3); }
+.control-btn.active { background-color: var(--active-color); color: #111; border-color: transparent; }
 .exit-theater-btn {
   position: fixed;
-  top: 10px;
-  right: 10px;
+  top: 10px; right: 10px;
   z-index: 1000;
-  padding: 8px 15px;
-  background-color: rgba(255, 255, 255, 0.015);
-  color: rgba(255, 255, 255, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 6px;
+  padding: 7px 13px;
+  background-color: rgba(255,255,255,0.015);
+  color: rgba(255,255,255,0.5);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 7px;
   cursor: pointer;
   font-weight: 500;
-  transition: all 0.2s;
-  font-size: 14px;
-}
-.exit-theater-btn:hover {
-  background-color: rgba(0, 255, 157, 0.08);
-}
-.shortcuts-modal {
-  display: none;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: var(--card-color);
-  padding: 25px;
-  border-radius: 12px;
-  box-shadow: 0 10px 50px rgba(0,0,0,0.5);
-  z-index: 10000;
-  max-width: 400px;
-  width: 90%;
-  border: 2px solid var(--active-color);
-}
-.shortcuts-modal h2 {
-  color: var(--active-color);
-  margin-bottom: 15px;
-  text-align: center;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 1.5rem;
-}
-.shortcut-category {
-  margin-bottom: 15px;
-}
-.shortcut-category h3 {
-  color: var(--active-color);
-  font-size: 14px;
-  margin-bottom: 8px;
-  font-family: 'Montserrat', sans-serif;
-  border-bottom: 1px solid var(--border-color);
-  padding-bottom: 5px;
-}
-.shortcut-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 6px 0;
+  transition: background 0.18s;
   font-size: 13px;
+  font-family: 'Roboto', sans-serif;
 }
-.shortcut-key {
-  background-color: var(--button-bg);
-  padding: 3px 6px;
-  border-radius: 4px;
-  font-family: monospace;
-  font-size: 11px;
-  border: 1px solid var(--border-color);
-}
-.close-shortcuts {
-  position: absolute;
-  top: 10px;
-  right: 12px;
-  background: none;
-  border: none;
-  color: var(--text-color);
-  font-size: 18px;
-  cursor: pointer;
-}
-.close-twitch {
-  position: absolute;
-  top: 10px;
-  right: 12px;
-  background: none;
-  border: none;
-  color: var(--text-color);
-  font-size: 18px;
-  cursor: pointer;
-}
+.exit-theater-btn:hover { background-color: rgba(0,255,157,0.08); }
 .overlay {
   display: none;
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  top: 0; left: 0; right: 0; bottom: 0;
   background-color: rgba(0,0,0,0.7);
   z-index: 9999;
 }
-#visit-counter {
-  position: fixed;
-  bottom: 12px;
-  right: 12px;
-  background: rgba(0,0,0,0.7);
-  color: white;
-  padding: 8px 12px;
-  border-radius: 8px;
-  font-family: system-ui, sans-serif;
-  font-size: 14px;
-  z-index: 9999;
-}
-body.theater-mode #visit-counter {
-  display: none;
-}
-@media (max-width: 1200px) {
-  .header {
-    flex-direction: column;
-    gap: 15px;
-  }
-  .global-controls {
-    margin-left: 0;
-  }
-  h1 {
-    position: static;
-    transform: none;
-  }
-}
-@media (max-width: 768px) {
-  .container {
-    grid-template-columns: 1fr;
-  }
-  .container.two-streams,
-  .container.three-streams,
-  .container.four-streams {
-    grid-template-columns: 1fr;
-  }
-  .announcement-banner {
-    padding: 10px 40px 10px 15px;
-    font-size: 14px;
-  }
-  .left-selectors,
-  .right-selectors {
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
-  .left-selectors select,
-  .right-selectors select {
-    min-width: 120px;
-  }
-}
-body.theater-mode {
-  padding: 0;
-  overflow: hidden;
-  height: 100vh;
-}
+body.theater-mode { padding: 0; overflow: hidden; }
 body.theater-mode .header,
 body.theater-mode .stream-input,
 body.theater-mode .left-selectors,
 body.theater-mode .right-selectors,
-body.theater-mode .history-dropdown {
-  display: none;
-}
-body.theater-mode .announcement-banner {
-  display: none !important;
-}
+body.theater-mode .history-dropdown { display: none !important; }
+body.theater-mode .announcement-banner { display: none !important; }
+body.theater-mode .page-wrap { padding: 0; height: 100vh; }
 body.theater-mode .container {
   height: 100vh;
-  width: 100%;
-  max-width: 100%;
-  margin: 0;
+  width: 100vw;
   gap: 0 !important;
-  padding: 0;
-}
-body.theater-mode .stream-wrapper {
   border-radius: 0;
-  height: 100%;
-  gap: 0 !important;
+  grid-template-rows: repeat(2, 1fr);
 }
-body.theater-mode .stream-iframe {
-  display: block !important;
-}
-body.theater-mode .stream-wrapper:not(.loaded) {
-  display: none;
-}
-body.theater-mode.two-streams .container {
-  grid-template-columns: repeat(2, 1fr);
-}
-body.theater-mode.three-streams .container {
-  grid-template-columns: repeat(3, 1fr);
-}
+body.theater-mode .stream-wrapper { border-radius: 0; height: 100%; }
+body.theater-mode .stream-iframe { display: block !important; }
+body.theater-mode .stream-wrapper:not(.loaded) { display: none; }
+body.theater-mode.two-streams .container { grid-template-columns: repeat(2, 1fr); grid-template-rows: 1fr; }
+body.theater-mode.three-streams .container { grid-template-columns: repeat(3, 1fr); grid-template-rows: 1fr; }
 body.theater-mode.four-streams .container {
-  display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(2, 1fr);
   width: 100vw;
   height: 100vh;
-  margin: 0;
-  padding: 0;
-  gap: 0;
-  overflow: hidden;
 }
-body.theater-mode.four-streams .stream-wrapper { 
-  overflow: hidden;
-  margin: 0;
-  padding: 0;
-}
-body.theater-mode.four-streams .stream-iframe {
-  width: 100%;
-  height: 100%;
-  display: block;
-  transform: none;
-}
-@media (max-width: 768px) {
-  body.theater-mode .container {
-    grid-template-columns: 1fr !important;
-    grid-template-rows: 1fr;
-  }
-  body.theater-mode .stream-wrapper {
-    height: 100vh;
-  }
-  body.theater-mode.two-streams .stream-wrapper:nth-child(1) {
-    height: 50vh;
-  }
-  body.theater-mode.two-streams .stream-wrapper:nth-child(2) {
-    height: 50vh;
-  }
-}
+body.theater-mode .stream-controls { display: none !important; }
 .error-message {
   position: fixed;
   top: 20px;
   left: 50%;
   transform: translateX(-50%);
-  background-color: rgba(255, 0, 0, 0.8);
+  background-color: rgba(255,0,0,0.8);
   color: white;
   padding: 10px 20px;
   border-radius: 5px;
   font-weight: 500;
-  z-index: 1000;
+  z-index: 11000;
   animation: fadeInOut 3s forwards;
 }
 @keyframes fadeInOut {
-  0% { opacity: 0; }
-  10% { opacity: 1; }
-  90% { opacity: 1; }
-  100% { opacity: 0; display: none; }
+  0% { opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { opacity: 0; }
 }
-body.theater-mode .stream-controls,
-body.theater-mode .stream-info {
-  display: none !important;
-}
+option.opt-green { color: #6bff6b; }
+option.opt-yellow { color: #ffd93d; }
+option.opt-red { color: #ff6b6b; }
 </style>
 </head>
 <body>
@@ -728,225 +417,70 @@ body.theater-mode .stream-info {
 </div>
 
 <div class="overlay" id="overlay"></div>
-<div class="shortcuts-modal" id="shortcutsModal">
-<button class="close-shortcuts" id="closeShortcuts">×</button>
-<h2>Keyboard Shortcuts</h2>
-<div class="shortcut-category">
-<h3>Layout & Display</h3>
-<div class="shortcut-item">
-<span>Toggle Theater Mode</span>
-<span class="shortcut-key">T</span>
-</div>
-<div class="shortcut-item">
-<span>Cycle Layout (2/3/4)</span>
-<span class="shortcut-key">L</span>
-</div>
-<div class="shortcut-item">
-<span>Toggle Visitor Counter</span>
-<span class="shortcut-key">V</span>
-</div>
-</div>
-<div class="shortcut-category">
-<h3>Stream Management</h3>
-<div class="shortcut-item">
-<span>Reset All Streams</span>
-<span class="shortcut-key">R</span>
-</div>
-<div class="shortcut-item">
-<span>Refresh All Streams</span>
-<span class="shortcut-key">F5</span>
-</div>
-<div class="shortcut-item">
-<span>Toggle Favorite</span>
-<span class="shortcut-key">F</span>
-</div>
-</div>
-<div class="shortcut-category">
-<h3>Interface</h3>
-<div class="shortcut-item">
-<span>Show/Hide Shortcuts</span>
-<span class="shortcut-key">Shift + ?</span>
-</div>
-<div class="shortcut-item">
-<span>Close Announcement</span>
-<span class="shortcut-key">X</span>
-</div>
-<div class="shortcut-item">
-<span>Reopen Announcement</span>
-<span class="shortcut-key">A</span>
-</div>
-<div class="shortcut-item">
-<span>Clear History</span>
-<span class="shortcut-key">H</span>
-</div>
-</div>
-</div>
-
-<div class="twitch-modal" id="twitchModal">
-<button class="close-twitch" id="closeTwitch">×</button>
-<h2>Twitch Streams</h2>
-<div class="twitch-stream">
-<div class="twitch-pfp"><img src="https://yt3.googleusercontent.com/3E8Enk5t9C95O7l-A-gi1lArZFWAVzOMVJ1aS7IfnxUsdUH8uPsZpZy1bw_4nvMc0K6o2yRP4A=s900-c-k-c0x00ffffff-no-rj" alt="Jynxzi"></div>
-<div class="twitch-info">
-<div class="twitch-name">Jynxzi</div>
-<div class="twitch-viewers">
-<i class="fas fa-eye red-eye"></i>
-000k
-</div>
-</div>
-<button class="load-twitch-btn" data-stream="jynxi">Load</button>
-</div>
-<div class="twitch-stream">
-<div class="twitch-pfp">S1</div>
-<div class="twitch-info">
-<div class="twitch-name">Streamer 1</div>
-<div class="twitch-viewers">
-<i class="fas fa-eye red-eye"></i>
-000k
-</div>
-</div>
-<button class="load-twitch-btn" data-stream="stream1">Load</button>
-</div>
-<div class="twitch-stream">
-<div class="twitch-pfp">S2</div>
-<div class="twitch-info">
-<div class="twitch-name">Streamer 2</div>
-<div class="twitch-viewers">
-<i class="fas fa-eye red-eye"></i>
-000k
-</div>
-</div>
-<button class="load-twitch-btn" data-stream="stream2">Load</button>
-</div>
-<div class="twitch-stream">
-<div class="twitch-pfp">S3</div>
-<div class="twitch-info">
-<div class="twitch-name">Streamer 3</div>
-<div class="twitch-viewers">
-<i class="fas fa-eye red-eye"></i>
-000k
-</div>
-</div>
-<button class="load-twitch-btn" data-stream="stream3">Load</button>
-</div>
-<div class="twitch-stream">
-<div class="twitch-pfp">S4</div>
-<div class="twitch-info">
-<div class="twitch-name">Streamer 4</div>
-<div class="twitch-viewers">
-<i class="fas fa-eye red-eye"></i>
-000k
-</div>
-</div>
-<button class="load-twitch-btn" data-stream="stream4">Load</button>
-</div>
-<div class="twitch-stream">
-<div class="twitch-pfp">S5</div>
-<div class="twitch-info">
-<div class="twitch-name">Streamer 5</div>
-<div class="twitch-viewers">
-<i class="fas fa-eye red-eye"></i>
-000k
-</div>
-</div>
-<button class="load-twitch-btn" data-stream="stream5">Load</button>
-</div>
-<div class="twitch-stream">
-<div class="twitch-pfp">S6</div>
-<div class="twitch-info">
-<div class="twitch-name">Streamer 6</div>
-<div class="twitch-viewers">
-<i class="fas fa-eye red-eye"></i>
-000k
-</div>
-</div>
-<button class="load-twitch-btn" data-stream="stream6">Load</button>
-</div>
-<div class="twitch-stream">
-<div class="twitch-pfp">S7</div>
-<div class="twitch-info">
-<div class="twitch-name">Streamer 7</div>
-<div class="twitch-viewers">
-<i class="fas fa-eye red-eye"></i>
-000k
-</div>
-</div>
-<button class="load-twitch-btn" data-stream="stream7">Load</button>
-</div>
-<div class="twitch-stream">
-<div class="twitch-pfp">S8</div>
-<div class="twitch-info">
-<div class="twitch-name">Streamer 8</div>
-<div class="twitch-viewers">
-<i class="fas fa-eye red-eye"></i>
-000k
-</div>
-</div>
-<button class="load-twitch-btn" data-stream="stream8">Load</button>
-</div>
-<div class="twitch-stream">
-<div class="twitch-pfp">S9</div>
-<div class="twitch-info">
-<div class="twitch-name">Streamer 9</div>
-<div class="twitch-viewers">
-<i class="fas fa-eye red-eye"></i>
-000k
-</div>
-</div>
-<button class="load-twitch-btn" data-stream="stream9">Load</button>
-</div>
-</div>
 
 <div class="header">
-<a href="https://github.com/VenomousRhyme41/Multi-Stream-Viewer" class="github-btn" target="_blank">
-<i class="fab fa-github"></i> GitHub
-</a>
-<h1>Multi-Stream Viewer</h1>
-<div class="global-controls">
-<button class="global-btn" id="streamLayoutBtn">4 Streams</button>
-<button class="global-btn" id="theaterModeBtn">Theater Mode</button>
-<span class="separator">|</span>
-<button class="global-btn" id="resetAllBtn">Reset All Streams</button>
+  <div class="header-left">
+    <a href="https://github.com/VenomousRhyme41/Multi-Stream-Viewer" class="header-btn" target="_blank">
+      <i class="fab fa-github"></i> GitHub
+    </a>
+    <a href="https://example.com" class="header-btn" target="_blank">
+      <i class="fas fa-stream"></i> Streams
+    </a>
+  </div>
+  <div class="header-center">
+    <h1>Multi-Stream Viewer</h1>
+  </div>
+  <div class="header-right">
+    <button class="global-btn" id="streamLayoutBtn">4 Streams</button>
+    <button class="global-btn" id="theaterModeBtn">Theater Mode</button>
+    <span class="separator">|</span>
+    <button class="global-btn" id="refreshAllBtn"><i class="fas fa-sync-alt" style="margin-right:5px;font-size:11px;"></i>Refresh All</button>
+    <button class="global-btn" id="resetAllBtn">Reset All Streams</button>
+  </div>
 </div>
-</div>
+
+<div class="page-wrap">
 <div class="container" id="streamContainer">
+
 <div class="stream-wrapper">
 <div class="left-selectors">
-<select class="favorites-dropdown">
+<select class="styled-select favorites-dropdown">
 <option value="" selected disabled>Favorites</option>
 </select>
 <div class="history-dropdown">
-<select class="history-dropdown-select">
+<select class="styled-select history-dropdown-select">
 <option value="" selected disabled>History</option>
 </select>
 </div>
 </div>
 <div class="right-selectors">
-<select class="stream-dropdown">
+<select class="styled-select stream-dropdown">
 <option value="" selected disabled>24/7 Channels</option>
-<option value="espn" class="stream-green">ESPN</option>
-<option value="mlb-network" class="stream-green">MLB Network</option>
-<option value="nfl-network" class="stream-green">NFL Network</option>
-<option value="nba-tv" class="stream-green">NBA TV</option>
-<option value="nhl-network" class="stream-green">NHL Network</option>
-<option value="tennis-channel" class="stream-green">Tennis</option>
-<option value="sky-sports-golf" class="stream-green">Golf</option>
-<option value="sky-sports-darts" class="stream-green">Darts</option>
-<option value="dazn-f1" class="stream-green">Formula 1</option>
-<option value="sky-f1" class="stream-green">F1</option>
-<option value="poker" class="stream-yellow">Poker</option>
-<option value="fox-nrl-tv" class="stream-red">Rugby</option>
-<option value="ufc-events" class="stream-red">UFC</option>
-<option value="motogp" class="stream-red">MotoGP</option>
-<option value="southpark" class="stream-red">South Park</option>
-<option value="simpsons" class="stream-red">The Simpsons</option>
-<option value="familyguy" class="stream-red">Family Guy</option>
+<option value="espn" class="opt-green">ESPN</option>
+<option value="mlb-network" class="opt-green">MLB Network</option>
+<option value="nfl-network" class="opt-green">NFL Network</option>
+<option value="nba-tv" class="opt-green">NBA TV</option>
+<option value="nhl-network" class="opt-green">NHL Network</option>
+<option value="tennis-channel" class="opt-green">Tennis</option>
+<option value="sky-sports-golf" class="opt-green">Golf</option>
+<option value="sky-sports-darts" class="opt-green">Darts</option>
+<option value="dazn-f1" class="opt-green">Formula 1</option>
+<option value="sky-f1" class="opt-green">F1</option>
+<option value="poker" class="opt-yellow">Poker</option>
+<option value="fox-nrl-tv" class="opt-red">Rugby</option>
+<option value="ufc-events" class="opt-red">UFC</option>
+<option value="motogp" class="opt-red">MotoGP</option>
+<option value="southpark" class="opt-red">South Park</option>
+<option value="simpsons" class="opt-red">The Simpsons</option>
+<option value="familyguy" class="opt-red">Family Guy</option>
 </select>
-<button class="twitch-btn" onclick="showTwitchModal()">Twitch</button>
 </div>
 <div class="stream-input">
-<input type="text" placeholder="Paste stream URL or embed code" class="src-input">
-<button class="load-stream-btn">Load Stream</button>
+<span class="stream-input-label">Load a Stream</span>
+<div class="stream-input-row">
+<input type="text" placeholder="URL or embed code" class="src-input">
+<button class="load-stream-btn">Load</button>
+</div>
 </div>
 <iframe class="stream-iframe" allowfullscreen></iframe>
 <div class="stream-controls">
@@ -958,43 +492,46 @@ body.theater-mode .stream-info {
 </div>
 </div>
 </div>
+
 <div class="stream-wrapper">
 <div class="left-selectors">
-<select class="favorites-dropdown">
+<select class="styled-select favorites-dropdown">
 <option value="" selected disabled>Favorites</option>
 </select>
 <div class="history-dropdown">
-<select class="history-dropdown-select">
+<select class="styled-select history-dropdown-select">
 <option value="" selected disabled>History</option>
 </select>
 </div>
 </div>
 <div class="right-selectors">
-<select class="stream-dropdown">
+<select class="styled-select stream-dropdown">
 <option value="" selected disabled>24/7 Channels</option>
-<option value="espn" class="stream-green">ESPN</option>
-<option value="mlb-network" class="stream-green">MLB Network</option>
-<option value="nfl-network" class="stream-green">NFL Network</option>
-<option value="nba-tv" class="stream-green">NBA TV</option>
-<option value="nhl-network" class="stream-green">NHL Network</option>
-<option value="tennis-channel" class="stream-green">Tennis</option>
-<option value="sky-sports-golf" class="stream-green">Golf</option>
-<option value="sky-sports-darts" class="stream-green">Darts</option>
-<option value="dazn-f1" class="stream-green">Formula 1</option>
-<option value="sky-f1" class="stream-green">F1</option>
-<option value="poker" class="stream-yellow">Poker</option>
-<option value="fox-nrl-tv" class="stream-red">Rugby</option>
-<option value="ufc-events" class="stream-red">UFC</option>
-<option value="motogp" class="stream-red">MotoGP</option>
-<option value="southpark" class="stream-red">South Park</option>
-<option value="simpsons" class="stream-red">The Simpsons</option>
-<option value="familyguy" class="stream-red">Family Guy</option>
+<option value="espn" class="opt-green">ESPN</option>
+<option value="mlb-network" class="opt-green">MLB Network</option>
+<option value="nfl-network" class="opt-green">NFL Network</option>
+<option value="nba-tv" class="opt-green">NBA TV</option>
+<option value="nhl-network" class="opt-green">NHL Network</option>
+<option value="tennis-channel" class="opt-green">Tennis</option>
+<option value="sky-sports-golf" class="opt-green">Golf</option>
+<option value="sky-sports-darts" class="opt-green">Darts</option>
+<option value="dazn-f1" class="opt-green">Formula 1</option>
+<option value="sky-f1" class="opt-green">F1</option>
+<option value="poker" class="opt-yellow">Poker</option>
+<option value="fox-nrl-tv" class="opt-red">Rugby</option>
+<option value="ufc-events" class="opt-red">UFC</option>
+<option value="motogp" class="opt-red">MotoGP</option>
+<option value="southpark" class="opt-red">South Park</option>
+<option value="simpsons" class="opt-red">The Simpsons</option>
+<option value="familyguy" class="opt-red">Family Guy</option>
 </select>
-<button class="twitch-btn" onclick="showTwitchModal()">Twitch</button>
 </div>
 <div class="stream-input">
-<input type="text" placeholder="Paste stream URL or embed code" class="src-input">
-<button class="load-stream-btn">Load Stream</button>
+<span class="stream-input-label">Load a Stream</span>
+<div class="stream-input-row">
+<input type="text" placeholder="URL or embed code" class="src-input">
+<button class="load-stream-btn">Load</button>
+</div>
 </div>
 <iframe class="stream-iframe" allowfullscreen></iframe>
 <div class="stream-controls">
@@ -1006,43 +543,46 @@ body.theater-mode .stream-info {
 </div>
 </div>
 </div>
+
 <div class="stream-wrapper">
 <div class="left-selectors">
-<select class="favorites-dropdown">
+<select class="styled-select favorites-dropdown">
 <option value="" selected disabled>Favorites</option>
 </select>
 <div class="history-dropdown">
-<select class="history-dropdown-select">
+<select class="styled-select history-dropdown-select">
 <option value="" selected disabled>History</option>
 </select>
 </div>
 </div>
 <div class="right-selectors">
-<select class="stream-dropdown">
+<select class="styled-select stream-dropdown">
 <option value="" selected disabled>24/7 Channels</option>
-<option value="espn" class="stream-green">ESPN</option>
-<option value="mlb-network" class="stream-green">MLB Network</option>
-<option value="nfl-network" class="stream-green">NFL Network</option>
-<option value="nba-tv" class="stream-green">NBA TV</option>
-<option value="nhl-network" class="stream-green">NHL Network</option>
-<option value="tennis-channel" class="stream-green">Tennis</option>
-<option value="sky-sports-golf" class="stream-green">Golf</option>
-<option value="sky-sports-darts" class="stream-green">Darts</option>
-<option value="dazn-f1" class="stream-green">Formula 1</option>
-<option value="sky-f1" class="stream-green">F1</option>
-<option value="poker" class="stream-yellow">Poker</option>
-<option value="fox-nrl-tv" class="stream-red">Rugby</option>
-<option value="ufc-events" class="stream-red">UFC</option>
-<option value="motogp" class="stream-red">MotoGP</option>
-<option value="southpark" class="stream-red">South Park</option>
-<option value="simpsons" class="stream-red">The Simpsons</option>
-<option value="familyguy" class="stream-red">Family Guy</option>
+<option value="espn" class="opt-green">ESPN</option>
+<option value="mlb-network" class="opt-green">MLB Network</option>
+<option value="nfl-network" class="opt-green">NFL Network</option>
+<option value="nba-tv" class="opt-green">NBA TV</option>
+<option value="nhl-network" class="opt-green">NHL Network</option>
+<option value="tennis-channel" class="opt-green">Tennis</option>
+<option value="sky-sports-golf" class="opt-green">Golf</option>
+<option value="sky-sports-darts" class="opt-green">Darts</option>
+<option value="dazn-f1" class="opt-green">Formula 1</option>
+<option value="sky-f1" class="opt-green">F1</option>
+<option value="poker" class="opt-yellow">Poker</option>
+<option value="fox-nrl-tv" class="opt-red">Rugby</option>
+<option value="ufc-events" class="opt-red">UFC</option>
+<option value="motogp" class="opt-red">MotoGP</option>
+<option value="southpark" class="opt-red">South Park</option>
+<option value="simpsons" class="opt-red">The Simpsons</option>
+<option value="familyguy" class="opt-red">Family Guy</option>
 </select>
-<button class="twitch-btn" onclick="showTwitchModal()">Twitch</button>
 </div>
 <div class="stream-input">
-<input type="text" placeholder="Paste stream URL or embed code" class="src-input">
-<button class="load-stream-btn">Load Stream</button>
+<span class="stream-input-label">Load a Stream</span>
+<div class="stream-input-row">
+<input type="text" placeholder="URL or embed code" class="src-input">
+<button class="load-stream-btn">Load</button>
+</div>
 </div>
 <iframe class="stream-iframe" allowfullscreen></iframe>
 <div class="stream-controls">
@@ -1054,43 +594,46 @@ body.theater-mode .stream-info {
 </div>
 </div>
 </div>
+
 <div class="stream-wrapper">
 <div class="left-selectors">
-<select class="favorites-dropdown">
+<select class="styled-select favorites-dropdown">
 <option value="" selected disabled>Favorites</option>
 </select>
 <div class="history-dropdown">
-<select class="history-dropdown-select">
+<select class="styled-select history-dropdown-select">
 <option value="" selected disabled>History</option>
 </select>
 </div>
 </div>
 <div class="right-selectors">
-<select class="stream-dropdown">
+<select class="styled-select stream-dropdown">
 <option value="" selected disabled>24/7 Channels</option>
-<option value="espn" class="stream-green">ESPN</option>
-<option value="mlb-network" class="stream-green">MLB Network</option>
-<option value="nfl-network" class="stream-green">NFL Network</option>
-<option value="nba-tv" class="stream-green">NBA TV</option>
-<option value="nhl-network" class="stream-green">NHL Network</option>
-<option value="tennis-channel" class="stream-green">Tennis</option>
-<option value="sky-sports-golf" class="stream-green">Golf</option>
-<option value="sky-sports-darts" class="stream-green">Darts</option>
-<option value="dazn-f1" class="stream-green">Formula 1</option>
-<option value="sky-f1" class="stream-green">F1</option>
-<option value="poker" class="stream-yellow">Poker</option>
-<option value="fox-nrl-tv" class="stream-red">Rugby</option>
-<option value="ufc-events" class="stream-red">UFC</option>
-<option value="motogp" class="stream-red">MotoGP</option>
-<option value="southpark" class="stream-red">South Park</option>
-<option value="simpsons" class="stream-red">The Simpsons</option>
-<option value="familyguy" class="stream-red">Family Guy</option>
+<option value="espn" class="opt-green">ESPN</option>
+<option value="mlb-network" class="opt-green">MLB Network</option>
+<option value="nfl-network" class="opt-green">NFL Network</option>
+<option value="nba-tv" class="opt-green">NBA TV</option>
+<option value="nhl-network" class="opt-green">NHL Network</option>
+<option value="tennis-channel" class="opt-green">Tennis</option>
+<option value="sky-sports-golf" class="opt-green">Golf</option>
+<option value="sky-sports-darts" class="opt-green">Darts</option>
+<option value="dazn-f1" class="opt-green">Formula 1</option>
+<option value="sky-f1" class="opt-green">F1</option>
+<option value="poker" class="opt-yellow">Poker</option>
+<option value="fox-nrl-tv" class="opt-red">Rugby</option>
+<option value="ufc-events" class="opt-red">UFC</option>
+<option value="motogp" class="opt-red">MotoGP</option>
+<option value="southpark" class="opt-red">South Park</option>
+<option value="simpsons" class="opt-red">The Simpsons</option>
+<option value="familyguy" class="opt-red">Family Guy</option>
 </select>
-<button class="twitch-btn" onclick="showTwitchModal()">Twitch</button>
 </div>
 <div class="stream-input">
-<input type="text" placeholder="Paste stream URL or embed code" class="src-input">
-<button class="load-stream-btn">Load Stream</button>
+<span class="stream-input-label">Load a Stream</span>
+<div class="stream-input-row">
+<input type="text" placeholder="URL or embed code" class="src-input">
+<button class="load-stream-btn">Load</button>
+</div>
 </div>
 <iframe class="stream-iframe" allowfullscreen></iframe>
 <div class="stream-controls">
@@ -1102,45 +645,26 @@ body.theater-mode .stream-info {
 </div>
 </div>
 </div>
+
 </div>
+</div>
+
 <button id="exitTheaterBtn" class="exit-theater-btn" style="display: none;">Exit Theater</button>
 
-<div id="visit-counter"></div>
-
 <script>
-let isCounterVisible = true;
-
-const namespace = 'venomousrhyme41.github.io';
-const key = 'multistream-viewer';
-const url = `https://api.countapi.xyz/hit/${encodeURIComponent(namespace)}/${encodeURIComponent(key)}`;
-
-fetch(url)
-  .then(res => res.json())
-  .then(data => {
-    const el = document.getElementById('visit-counter');
-    if (el && data && typeof data.value !== 'undefined') {
-      el.textContent = data.value;
-    }
-  })
-  .catch(err => {
-    const el = document.getElementById('visit-counter');
-    if (el) el.textContent = '?';
-    console.error('CountAPI error', err);
-  });
-
-function toggleCounter() {
-  isCounterVisible = !isCounterVisible;
-  const counter = document.getElementById('visit-counter');
-  counter.style.display = isCounterVisible ? 'block' : 'none';
-}
-
 const domain = window.location.hostname;
 let isTheaterMode = false;
 let streamLayout = 4;
 let announcementClosed = false;
+let resetAllWarned = false;
+let resetAllTimer = null;
+let refreshAllWarned = false;
+let refreshAllTimer = null;
+
 const streamLayoutBtn = document.getElementById('streamLayoutBtn');
 const theaterModeBtn = document.getElementById('theaterModeBtn');
 const resetAllBtn = document.getElementById('resetAllBtn');
+const refreshAllBtn = document.getElementById('refreshAllBtn');
 const exitTheaterBtn = document.getElementById('exitTheaterBtn');
 const resetBtns = document.querySelectorAll('.reset-btn');
 const streamDropdowns = document.querySelectorAll('.stream-dropdown');
@@ -1150,720 +674,345 @@ const favoriteBtns = document.querySelectorAll('.favorite-btn');
 const announcementBanner = document.getElementById('announcementBanner');
 const closeAnnouncement = document.getElementById('closeAnnouncement');
 const announcementText = document.getElementById('announcementText');
-const shortcutsModal = document.getElementById('shortcutsModal');
-const closeShortcuts = document.getElementById('closeShortcuts');
-const twitchModal = document.getElementById('twitchModal');
-const closeTwitch = document.getElementById('closeTwitch');
 const overlay = document.getElementById('overlay');
-const loadTwitchBtns = document.querySelectorAll('.load-twitch-btn');
 
 const channelMap = {
-'espn': {
-url: 'https://embedstreams.top/embed/alpha/espn/1',
-name: 'ESPN'
-},
-'mlb-network': {
-url: 'https://embedstreams.top/embed/alpha/mlb-network/1',
-name: 'MLB Network'
-},
-'nfl-network': {
-url: 'https://embedstreams.top/embed/alpha/nfl-network/1',
-name: 'NFL Network'
-},
-'nba-tv': {
-url: 'https://embedstreams.top/embed/alpha/nba-tv/1',
-name: 'NBA TV'
-},
-'nhl-network': {
-url: 'https://embedstreams.top/embed/alpha/nhl-network/1',
-name: 'NHL Network'
-},
-'tennis-channel': {
-url: 'https://embedstreams.top/embed/alpha/tennis-channel/1',
-name: 'Tennis'
-},
-'sky-sports-golf': {
-url: 'https://embedstreams.top/embed/alpha/sky-sports-golf/1',
-name: 'Golf'
-},
-'sky-sports-darts': {
-url: 'https://embedstreams.top/embed/alpha/sky-sports-darts/1',
-name: 'Darts'
-},
-'fox-nrl-tv': {
-url: 'https://embedstreams.top/embed/alpha/fox-nrl-tv/1',
-name: 'Rugby'
-},
-'ufc-events': {
-url: 'https://embedstreams.top/embed/alpha/ufc-events-ufc-mma-ufc-ppv/1',
-name: 'UFC'
-},
-'dazn-f1': {
-url: 'https://embedstreams.top/embed/alpha/dazn-formula-1-dazn-f1/1',
-name: 'Formula 1'
-},
-'sky-f1': {
-url: 'https://embedstreams.top/embed/alpha/sky-sports-f1-sky-f1/1',
-name: 'F1'
-},
-'motogp': {
-url: 'https://embedstreams.top/embed/alpha/motogp-qualifying-motogp-main-race/1',
-name: 'MotoGP'
-},
-'poker': {
-url: 'https://player.twitch.tv/?channel=pokerstars247&parent=venomousrhyme41.github.io',
-name: 'Poker'
-},
-'southpark': {
-url: 'https://vecloud.eu/stream/3b146825-9e54-4e17-b96e-c172ced342ad',
-name: 'South Park'
-},
-'simpsons': {
-url: 'https://vecloud.eu/stream/8b48e26f-e89d-47ab-abf5-04b4119273d0',
-name: 'The Simpsons'
-},
-'familyguy': {
-url: 'https://vecloud.eu/stream/d2b4b104-853f-4e4e-9edd-425a1275e90a',
-name: 'Family Guy'
-},
-'jynxi': {
-url: 'https://player.twitch.tv/?channel=jynxzi&parent=venomousrhyme41.github.io',
-name: 'Jynxzi'
-},
-'stream1': {
-url: 'https://player.twitch.tv/?channel=stream1&parent=venomousrhyme41.github.io',
-name: 'Streamer 1'
-},
-'stream2': {
-url: 'https://player.twitch.tv/?channel=stream2&parent=venomousrhyme41.github.io',
-name: 'Streamer 2'
-},
-'stream3': {
-url: 'https://player.twitch.tv/?channel=stream3&parent=venomousrhyme41.github.io',
-name: 'Streamer 3'
-},
-'stream4': {
-url: 'https://player.twitch.tv/?channel=stream4&parent=venomousrhyme41.github.io',
-name: 'Streamer 4'
-},
-'stream5': {
-url: 'https://player.twitch.tv/?channel=stream5&parent=venomousrhyme41.github.io',
-name: 'Streamer 5'
-},
-'stream6': {
-url: 'https://player.twitch.tv/?channel=stream6&parent=venomousrhyme41.github.io',
-name: 'Streamer 6'
-},
-'stream7': {
-url: 'https://player.twitch.tv/?channel=stream7&parent=venomousrhyme41.github.io',
-name: 'Streamer 7'
-},
-'stream8': {
-url: 'https://player.twitch.tv/?channel=stream8&parent=venomousrhyme41.github.io',
-name: 'Streamer 8'
-},
-'stream9': {
-url: 'https://player.twitch.tv/?channel=stream9&parent=venomousrhyme41.github.io',
-name: 'Streamer 9'
-}
+'espn': { url: 'https://embedstreams.top/embed/alpha/espn/1', name: 'ESPN' },
+'mlb-network': { url: 'https://embedstreams.top/embed/alpha/mlb-network/1', name: 'MLB Network' },
+'nfl-network': { url: 'https://embedstreams.top/embed/alpha/nfl-network/1', name: 'NFL Network' },
+'nba-tv': { url: 'https://embedstreams.top/embed/alpha/nba-tv/1', name: 'NBA TV' },
+'nhl-network': { url: 'https://embedstreams.top/embed/alpha/nhl-network/1', name: 'NHL Network' },
+'tennis-channel': { url: 'https://embedstreams.top/embed/alpha/tennis-channel/1', name: 'Tennis' },
+'sky-sports-golf': { url: 'https://embedstreams.top/embed/alpha/sky-sports-golf/1', name: 'Golf' },
+'sky-sports-darts': { url: 'https://embedstreams.top/embed/alpha/sky-sports-darts/1', name: 'Darts' },
+'fox-nrl-tv': { url: 'https://embedstreams.top/embed/alpha/fox-nrl-tv/1', name: 'Rugby' },
+'ufc-events': { url: 'https://embedstreams.top/embed/alpha/ufc-events-ufc-mma-ufc-ppv/1', name: 'UFC' },
+'dazn-f1': { url: 'https://embedstreams.top/embed/alpha/dazn-formula-1-dazn-f1/1', name: 'Formula 1' },
+'sky-f1': { url: 'https://embedstreams.top/embed/alpha/sky-sports-f1-sky-f1/1', name: 'F1' },
+'motogp': { url: 'https://embedstreams.top/embed/alpha/motogp-qualifying-motogp-main-race/1', name: 'MotoGP' },
+'poker': { url: 'https://player.twitch.tv/?channel=pokerstars247&parent=venomousrhyme41.github.io', name: 'Poker' },
+'southpark': { url: 'https://vecloud.eu/stream/3b146825-9e54-4e17-b96e-c172ced342ad', name: 'South Park' },
+'simpsons': { url: 'https://vecloud.eu/stream/8b48e26f-e89d-47ab-abf5-04b4119273d0', name: 'The Simpsons' },
+'familyguy': { url: 'https://vecloud.eu/stream/d2b4b104-853f-4e4e-9edd-425a1275e90a', name: 'Family Guy' }
 };
 
-function getFavorites() {
-return JSON.parse(localStorage.getItem('streamFavorites') || '[]');
-}
-
-function saveFavorites(favorites) {
-localStorage.setItem('streamFavorites', JSON.stringify(favorites));
-}
-
-function getHistory() {
-return JSON.parse(localStorage.getItem('streamHistory') || '[]');
-}
-
-function saveHistory(history) {
-localStorage.setItem('streamHistory', JSON.stringify(history.slice(0, 5)));
-}
-
-function clearHistory() {
-localStorage.setItem('streamHistory', '[]');
-updateHistoryDropdowns();
-}
+function getFavorites() { return JSON.parse(localStorage.getItem('streamFavorites') || '[]'); }
+function saveFavorites(f) { localStorage.setItem('streamFavorites', JSON.stringify(f)); }
+function getHistory() { return JSON.parse(localStorage.getItem('streamHistory') || '[]'); }
+function saveHistory(h) { localStorage.setItem('streamHistory', JSON.stringify(h.slice(0, 5))); }
+function clearHistory() { localStorage.setItem('streamHistory', '[]'); updateHistoryDropdowns(); }
 
 function addToHistory(src, title) {
-const history = getHistory();
-const existingIndex = history.findIndex(item => item.src === src);
-if (existingIndex > -1) {
-history.splice(existingIndex, 1);
-}
-history.unshift({ src, title, timestamp: Date.now() });
-saveHistory(history);
-updateHistoryDropdowns();
+  const history = getHistory();
+  const idx = history.findIndex(i => i.src === src);
+  if (idx > -1) history.splice(idx, 1);
+  history.unshift({ src, title, timestamp: Date.now() });
+  saveHistory(history);
+  updateHistoryDropdowns();
 }
 
 function toggleFavorite(src, title) {
-const favorites = getFavorites();
-const existingIndex = favorites.findIndex(item => item.src === src);
-if (existingIndex > -1) {
-favorites.splice(existingIndex, 1);
-} else {
-favorites.unshift({ src, title, timestamp: Date.now() });
-}
-saveFavorites(favorites);
-updateFavoritesDropdowns();
-updateFavoriteButtons();
+  const favorites = getFavorites();
+  const idx = favorites.findIndex(i => i.src === src);
+  if (idx > -1) favorites.splice(idx, 1);
+  else favorites.unshift({ src, title, timestamp: Date.now() });
+  saveFavorites(favorites);
+  updateFavoritesDropdowns();
+  updateFavoriteButtons();
 }
 
-function isFavorited(src) {
-const favorites = getFavorites();
-return favorites.some(item => item.src === src);
-}
+function isFavorited(src) { return getFavorites().some(i => i.src === src); }
 
 function updateFavoritesDropdowns() {
-const favorites = getFavorites();
-favoritesDropdowns.forEach(dropdown => {
-while (dropdown.children.length > 1) {
-dropdown.removeChild(dropdown.lastChild);
-}
-favorites.forEach(fav => {
-const option = document.createElement('option');
-option.value = fav.src;
-option.textContent = fav.title || fav.src;
-dropdown.appendChild(option);
-});
-});
+  const favorites = getFavorites();
+  favoritesDropdowns.forEach(dropdown => {
+    while (dropdown.children.length > 1) dropdown.removeChild(dropdown.lastChild);
+    favorites.forEach(fav => {
+      const opt = document.createElement('option');
+      opt.value = fav.src;
+      opt.textContent = fav.title || fav.src;
+      dropdown.appendChild(opt);
+    });
+  });
 }
 
 function updateHistoryDropdowns() {
-const history = getHistory();
-historyDropdowns.forEach(dropdown => {
-while (dropdown.children.length > 1) {
-dropdown.removeChild(dropdown.lastChild);
-}
-history.forEach(item => {
-const option = document.createElement('option');
-option.value = item.src;
-option.textContent = item.title || item.src;
-dropdown.appendChild(option);
-});
-});
+  const history = getHistory();
+  historyDropdowns.forEach(dropdown => {
+    while (dropdown.children.length > 1) dropdown.removeChild(dropdown.lastChild);
+    history.forEach(item => {
+      const opt = document.createElement('option');
+      opt.value = item.src;
+      opt.textContent = item.title || item.src;
+      dropdown.appendChild(opt);
+    });
+  });
 }
 
 function updateFavoriteButtons() {
-document.querySelectorAll('.stream-wrapper.loaded').forEach(wrapper => {
-const iframe = wrapper.querySelector('.stream-iframe');
-const favoriteBtn = wrapper.querySelector('.favorite-btn');
-if (iframe.src && isFavorited(iframe.src)) {
-favoriteBtn.classList.add('favorited');
-favoriteBtn.innerHTML = '♥';
-} else {
-favoriteBtn.classList.remove('favorited');
-favoriteBtn.innerHTML = '♡';
-}
-});
-}
-
-function showTwitchModal() {
-twitchModal.style.display = 'block';
-overlay.style.display = 'block';
-}
-
-function hideTwitchModal() {
-twitchModal.style.display = 'none';
-overlay.style.display = 'none';
-}
-
-function loadTwitchStream(streamKey) {
-const channel = channelMap[streamKey];
-if (channel) {
-const wrapper = document.querySelector('.stream-wrapper:not(.loaded)') || document.querySelector('.stream-wrapper');
-const iframe = wrapper.querySelector('.stream-iframe');
-iframe.src = channel.url;
-iframe.style.display = 'block';
-wrapper.querySelector('.stream-input').style.display = 'none';
-wrapper.querySelector('.stream-controls').style.display = 'flex';
-wrapper.classList.add('loaded');
-wrapper.querySelector('.stream-info').textContent = channel.name;
-wrapper.querySelector('.left-selectors').style.display = 'none';
-wrapper.querySelector('.right-selectors').style.display = 'none';
-wrapper.querySelector('.history-dropdown').style.display = 'none';
-addToHistory(channel.url, channel.name);
-updateFavoriteButtons();
-hideTwitchModal();
-}
+  document.querySelectorAll('.stream-wrapper.loaded').forEach(wrapper => {
+    const iframe = wrapper.querySelector('.stream-iframe');
+    const btn = wrapper.querySelector('.favorite-btn');
+    if (iframe.src && isFavorited(iframe.src)) { btn.classList.add('favorited'); btn.innerHTML = '♥'; }
+    else { btn.classList.remove('favorited'); btn.innerHTML = '♡'; }
+  });
 }
 
 function setupKeyboardShortcuts() {
-document.addEventListener('keydown', function(e) {
-if (e.target.tagName === 'INPUT') return;
-    
-if (e.shiftKey && e.key === '?') {
-if (shortcutsModal.style.display === 'block') {
-hideShortcuts();
-} else {
-showShortcuts();
-}
-return;
-}
-    
-switch(e.key.toLowerCase()) {
-case 't':
-toggleTheaterMode();
-break;
-case 'l':
-toggleStreamLayout();
-break;
-case 'r':
-resetAll();
-break;
-case 'v':
-toggleCounter();
-break;
-case '?':
-showShortcuts();
-break;
-case 'f':
-const activeWrapper = document.querySelector('.stream-wrapper.active, .stream-wrapper.loaded');
-if (activeWrapper) {
-const iframe = activeWrapper.querySelector('.stream-iframe');
-const info = activeWrapper.querySelector('.stream-info');
-if (iframe.src) {
-toggleFavorite(iframe.src, info.textContent);
-}
-}
-break;
-case 'x':
-if (announcementBanner.style.display !== 'none') {
-closeAnnouncement.click();
-}
-break;
-case 'a':
-if (announcementClosed) {
-announcementBanner.style.display = 'block';
-announcementClosed = false;
-}
-break;
-case 'h':
-clearHistory();
-showError("History cleared");
-break;
-case 'f5':
-if (e.ctrlKey || e.metaKey) return;
-e.preventDefault();
-document.querySelectorAll('.refresh-btn').forEach(btn => btn.click());
-break;
-}
-});
-}
-
-function showShortcuts() {
-shortcutsModal.style.display = 'block';
-overlay.style.display = 'block';
-}
-
-function hideShortcuts() {
-shortcutsModal.style.display = 'none';
-overlay.style.display = 'none';
+  document.addEventListener('keydown', function(e) {
+    if (e.target.tagName === 'INPUT') return;
+    switch(e.key.toLowerCase()) {
+      case 't': toggleTheaterMode(); break;
+      case 'l': toggleStreamLayout(); break;
+      case 'r': resetAll(); break;
+      case 'f':
+        const aw = document.querySelector('.stream-wrapper.active, .stream-wrapper.loaded');
+        if (aw) { const iframe = aw.querySelector('.stream-iframe'); const info = aw.querySelector('.stream-info'); if (iframe.src) toggleFavorite(iframe.src, info.textContent); }
+        break;
+      case 'x': if (announcementBanner.style.display !== 'none') closeAnnouncement.click(); break;
+      case 'a': if (announcementClosed) { announcementBanner.style.display = 'block'; announcementClosed = false; } break;
+      case 'h': clearHistory(); showError("History cleared"); break;
+    }
+  });
 }
 
 async function fetchAnnouncement() {
-try {
-const response = await fetch('https://raw.githubusercontent.com/VenomousRhyme41/multi-stream-announcement-text-/refs/heads/main/text.txt');
-if (response.ok) {
-const text = await response.text();
-const trimmedText = text.trim();
-if (trimmedText && trimmedText.length > 0) {
-announcementText.textContent = trimmedText;
-if (!announcementClosed) {
-announcementBanner.style.display = 'block';
-}
-} else {
-announcementBanner.style.display = 'none';
-}
-} else {
-announcementBanner.style.display = 'none';
-}
-} catch (error) {
-announcementBanner.style.display = 'none';
-}
+  try {
+    const response = await fetch('https://raw.githubusercontent.com/VenomousRhyme41/multi-stream-announcement-text-/refs/heads/main/text.txt');
+    if (response.ok) {
+      const text = (await response.text()).trim();
+      if (text.length > 0) { announcementText.textContent = text; if (!announcementClosed) announcementBanner.style.display = 'block'; }
+      else announcementBanner.style.display = 'none';
+    } else announcementBanner.style.display = 'none';
+  } catch { announcementBanner.style.display = 'none'; }
 }
 
-closeAnnouncement.addEventListener('click', function() {
-announcementBanner.style.display = 'none';
-announcementClosed = true;
-});
-
-closeShortcuts.addEventListener('click', hideShortcuts);
-closeTwitch.addEventListener('click', hideTwitchModal);
-overlay.addEventListener('click', function() {
-hideShortcuts();
-hideTwitchModal();
-});
-
-loadTwitchBtns.forEach(btn => {
-btn.addEventListener('click', function() {
-const streamKey = this.getAttribute('data-stream');
-loadTwitchStream(streamKey);
-});
-});
-
+closeAnnouncement.addEventListener('click', function() { announcementBanner.style.display = 'none'; announcementClosed = true; });
+overlay.addEventListener('click', function() { overlay.style.display = 'none'; });
 streamLayoutBtn.addEventListener('click', toggleStreamLayout);
 theaterModeBtn.addEventListener('click', toggleTheaterMode);
 exitTheaterBtn.addEventListener('click', toggleTheaterMode);
-resetAllBtn.addEventListener('click', resetAll);
 
-document.querySelectorAll('.load-stream-btn').forEach(btn => {
-btn.addEventListener('click', function() {
-loadStream(this);
-});
-});
-
-resetBtns.forEach(btn => {
-btn.addEventListener('click', function() {
-resetStream(this);
-});
+resetAllBtn.addEventListener('click', function() {
+  if (!resetAllWarned) {
+    resetAllWarned = true;
+    resetAllBtn.classList.add('danger-warn');
+    resetAllTimer = setTimeout(() => { resetAllWarned = false; resetAllBtn.classList.remove('danger-warn'); }, 3000);
+  } else {
+    clearTimeout(resetAllTimer); resetAllWarned = false; resetAllBtn.classList.remove('danger-warn'); resetAll();
+  }
 });
 
-streamDropdowns.forEach(dropdown => {
-dropdown.addEventListener('change', function() {
-handleDropdownChange(this);
-});
-});
-
-favoritesDropdowns.forEach(dropdown => {
-dropdown.addEventListener('change', function() {
-handleFavoritesChange(this);
-});
-});
-
-historyDropdowns.forEach(dropdown => {
-dropdown.addEventListener('change', function() {
-handleHistoryChange(this);
-});
+refreshAllBtn.addEventListener('click', function() {
+  if (!refreshAllWarned) {
+    refreshAllWarned = true;
+    refreshAllBtn.classList.add('danger-warn');
+    refreshAllTimer = setTimeout(() => { refreshAllWarned = false; refreshAllBtn.classList.remove('danger-warn'); }, 3000);
+  } else {
+    clearTimeout(refreshAllTimer); refreshAllWarned = false; refreshAllBtn.classList.remove('danger-warn');
+    document.querySelectorAll('.refresh-btn').forEach(btn => btn.click());
+  }
 });
 
+document.querySelectorAll('.load-stream-btn').forEach(btn => { btn.addEventListener('click', function() { loadStream(this); }); });
+
+document.querySelectorAll('.src-input').forEach(input => {
+  input.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') { const btn = this.closest('.stream-input').querySelector('.load-stream-btn'); if (btn) btn.click(); }
+  });
+});
+
+resetBtns.forEach(btn => { btn.addEventListener('click', function() { resetStream(this); }); });
+streamDropdowns.forEach(d => { d.addEventListener('change', function() { handleDropdownChange(this); }); });
+favoritesDropdowns.forEach(d => { d.addEventListener('change', function() { handleFavoritesChange(this); }); });
+historyDropdowns.forEach(d => { d.addEventListener('change', function() { handleHistoryChange(this); }); });
 favoriteBtns.forEach(btn => {
-btn.addEventListener('click', function() {
-const wrapper = this.closest('.stream-wrapper');
-const iframe = wrapper.querySelector('.stream-iframe');
-const info = wrapper.querySelector('.stream-info');
-if (iframe.src) {
-toggleFavorite(iframe.src, info.textContent);
-}
-});
+  btn.addEventListener('click', function() {
+    const wrapper = this.closest('.stream-wrapper');
+    const iframe = wrapper.querySelector('.stream-iframe');
+    const info = wrapper.querySelector('.stream-info');
+    if (iframe.src) toggleFavorite(iframe.src, info.textContent);
+  });
 });
 
 function handleFavoritesChange(dropdown) {
-const wrapper = dropdown.closest('.stream-wrapper');
-const src = dropdown.value;
-if (src) {
-const favorites = getFavorites();
-const favorite = favorites.find(fav => fav.src === src);
-if (favorite) {
-const iframe = wrapper.querySelector('.stream-iframe');
-iframe.src = favorite.src;
-iframe.style.display = 'block';
-wrapper.querySelector('.stream-input').style.display = 'none';
-wrapper.querySelector('.stream-controls').style.display = 'flex';
-wrapper.classList.add('loaded');
-wrapper.querySelector('.stream-info').textContent = favorite.title || favorite.src;
-wrapper.querySelector('.left-selectors').style.display = 'none';
-wrapper.querySelector('.right-selectors').style.display = 'none';
-wrapper.querySelector('.history-dropdown').style.display = 'none';
-dropdown.selectedIndex = 0;
-updateFavoriteButtons();
-}
-}
+  const wrapper = dropdown.closest('.stream-wrapper');
+  const src = dropdown.value;
+  if (src) { const fav = getFavorites().find(f => f.src === src); if (fav) { loadIntoWrapper(wrapper, fav.src, fav.title || fav.src); dropdown.selectedIndex = 0; } }
 }
 
 function handleHistoryChange(dropdown) {
-const wrapper = dropdown.closest('.stream-wrapper');
-const src = dropdown.value;
-if (src) {
-const history = getHistory();
-const historyItem = history.find(item => item.src === src);
-if (historyItem) {
-const iframe = wrapper.querySelector('.stream-iframe');
-iframe.src = historyItem.src;
-iframe.style.display = 'block';
-wrapper.querySelector('.stream-input').style.display = 'none';
-wrapper.querySelector('.stream-controls').style.display = 'flex';
-wrapper.classList.add('loaded');
-wrapper.querySelector('.stream-info').textContent = historyItem.title || historyItem.src;
-wrapper.querySelector('.left-selectors').style.display = 'none';
-wrapper.querySelector('.right-selectors').style.display = 'none';
-wrapper.querySelector('.history-dropdown').style.display = 'none';
-dropdown.selectedIndex = 0;
-updateFavoriteButtons();
+  const wrapper = dropdown.closest('.stream-wrapper');
+  const src = dropdown.value;
+  if (src) { const item = getHistory().find(i => i.src === src); if (item) { loadIntoWrapper(wrapper, item.src, item.title || item.src); dropdown.selectedIndex = 0; } }
 }
-}
+
+function loadIntoWrapper(wrapper, src, title) {
+  const iframe = wrapper.querySelector('.stream-iframe');
+  iframe.src = src; iframe.style.display = 'block';
+  wrapper.querySelector('.stream-input').style.display = 'none';
+  wrapper.querySelector('.stream-controls').style.display = 'flex';
+  wrapper.classList.add('loaded');
+  wrapper.querySelector('.stream-info').textContent = title;
+  wrapper.querySelector('.left-selectors').style.display = 'none';
+  wrapper.querySelector('.right-selectors').style.display = 'none';
+  wrapper.querySelector('.history-dropdown').style.display = 'none';
+  updateFavoriteButtons();
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-document.querySelectorAll('.stream-controls').forEach(controls => {
-controls.style.display = 'none';
-});
-exitTheaterBtn.style.display = 'none';
-updateStreamLayout();
-fetchAnnouncement();
-updateFavoritesDropdowns();
-updateHistoryDropdowns();
-setupKeyboardShortcuts();
+  document.querySelectorAll('.stream-controls').forEach(c => { c.style.display = 'none'; });
+  exitTheaterBtn.style.display = 'none';
+  updateStreamLayout();
+  fetchAnnouncement();
+  updateFavoritesDropdowns();
+  updateHistoryDropdowns();
+  setupKeyboardShortcuts();
 });
 
 function loadStream(button) {
-const wrapper = button.closest('.stream-wrapper');
-const input = wrapper.querySelector('.src-input');
-const iframe = wrapper.querySelector('.stream-iframe');
-const inputContainer = wrapper.querySelector('.stream-input');
-const controls = wrapper.querySelector('.stream-controls');
-const info = wrapper.querySelector('.stream-info');
-const leftSelectors = wrapper.querySelector('.left-selectors');
-const rightSelectors = wrapper.querySelector('.right-selectors');
-const historyDropdown = wrapper.querySelector('.history-dropdown');
-let src = input.value.trim();
-let title = '';
+  const wrapper = button.closest('.stream-wrapper');
+  const input = wrapper.querySelector('.src-input');
+  const iframe = wrapper.querySelector('.stream-iframe');
+  const inputContainer = wrapper.querySelector('.stream-input');
+  const controls = wrapper.querySelector('.stream-controls');
+  const info = wrapper.querySelector('.stream-info');
+  const leftSelectors = wrapper.querySelector('.left-selectors');
+  const rightSelectors = wrapper.querySelector('.right-selectors');
+  const historyDropdown = wrapper.querySelector('.history-dropdown');
+  let src = input.value.trim();
+  let title = '';
 
-if (src.includes('<iframe')) {
-const parser = new DOMParser();
-const doc = parser.parseFromString(src, 'text/html');
-const iframeElement = doc.querySelector('iframe');
-if (iframeElement) {
-src = iframeElement.getAttribute('src');
-title = iframeElement.getAttribute('title') || '';
-}
-}
+  if (src.includes('<iframe')) {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(src, 'text/html');
+    const el = doc.querySelector('iframe');
+    if (el) { src = el.getAttribute('src'); title = el.getAttribute('title') || ''; }
+  }
 
-if (!src) {
-showError("Please enter a valid URL or embed code");
-return;
-}
+  if (!src) { showError("Please enter a valid URL or embed code"); return; }
 
-if (src.includes('youtube.com')) {
-if (src.includes('watch?v=')) {
-const videoId = src.split('v=')[1].split('&')[0];
-src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
-fetch(`https://noembed.com/embed?url=https://youtube.com/watch?v=${videoId}`)
-.then(response => response.json())
-.then(data => {
-title = data.title || 'YouTube Stream';
-});
-} else if (src.includes('youtu.be/')) {
-const videoId = src.split('youtu.be/')[1].split('?')[0];
-src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
-fetch(`https://noembed.com/embed?url=https://youtube.com/watch?v=${videoId}`)
-.then(response => response.json())
-.then(data => {
-title = data.title || 'YouTube Stream';
-});
-} else if (src.includes('embed/')) {
-const videoId = src.split('embed/')[1].split('?')[0];
-fetch(`https://noembed.com/embed?url=https://youtube.com/watch?v=${videoId}`)
-.then(response => response.json())
-.then(data => {
-title = data.title || 'YouTube Stream';
-});
-}
-} else if (!src.startsWith('http') && !src.startsWith('//')) {
-showError("Invalid URL format");
-return;
-}
+  if (src.includes('youtube.com')) {
+    if (src.includes('watch?v=')) {
+      const vid = src.split('v=')[1].split('&')[0];
+      src = `https://www.youtube.com/embed/${vid}?autoplay=1`;
+      fetch(`https://noembed.com/embed?url=https://youtube.com/watch?v=${vid}`).then(r => r.json()).then(d => { if (d.title) info.textContent = d.title; });
+    } else if (src.includes('youtu.be/')) {
+      const vid = src.split('youtu.be/')[1].split('?')[0];
+      src = `https://www.youtube.com/embed/${vid}?autoplay=1`;
+      fetch(`https://noembed.com/embed?url=https://youtube.com/watch?v=${vid}`).then(r => r.json()).then(d => { if (d.title) info.textContent = d.title; });
+    }
+  } else if (!src.startsWith('http') && !src.startsWith('//')) {
+    showError("Invalid URL format"); return;
+  }
 
-iframe.src = src;
-iframe.style.display = 'block';
-inputContainer.style.display = 'none';
-controls.style.display = 'flex';
-wrapper.classList.add('loaded');
-leftSelectors.style.display = 'none';
-rightSelectors.style.display = 'none';
-historyDropdown.style.display = 'none';
+  iframe.src = src; iframe.style.display = 'block';
+  inputContainer.style.display = 'none';
+  controls.style.display = 'flex';
+  wrapper.classList.add('loaded');
+  leftSelectors.style.display = 'none';
+  rightSelectors.style.display = 'none';
+  historyDropdown.style.display = 'none';
 
-if (title) {
-info.textContent = title;
-} else {
-info.textContent = src.replace(/https?:\/\/(www\.)?/, '').split('/')[0];
-}
+  if (title) info.textContent = title;
+  else info.textContent = src.replace(/https?:\/\/(www\.)?/, '').split('/')[0];
 
-input.value = '';
-addToHistory(src, title);
-updateFavoriteButtons();
-
-if (isTheaterMode) {
-updateTheaterModeLayout();
-}
+  input.value = '';
+  addToHistory(src, title);
+  updateFavoriteButtons();
+  if (isTheaterMode) updateTheaterModeLayout();
 }
 
 function handleDropdownChange(dropdown) {
-const wrapper = dropdown.closest('.stream-wrapper');
-const channel = channelMap[dropdown.value];
-if (channel) {
-const iframe = wrapper.querySelector('.stream-iframe');
-iframe.src = channel.url;
-iframe.style.display = 'block';
-wrapper.querySelector('.stream-input').style.display = 'none';
-wrapper.querySelector('.stream-controls').style.display = 'flex';
-wrapper.classList.add('loaded');
-wrapper.querySelector('.stream-info').textContent = channel.name;
-wrapper.querySelector('.left-selectors').style.display = 'none';
-wrapper.querySelector('.right-selectors').style.display = 'none';
-wrapper.querySelector('.history-dropdown').style.display = 'none';
-dropdown.selectedIndex = 0;
-addToHistory(channel.url, channel.name);
-updateFavoriteButtons();
-}
+  const wrapper = dropdown.closest('.stream-wrapper');
+  const channel = channelMap[dropdown.value];
+  if (channel) { loadIntoWrapper(wrapper, channel.url, channel.name); dropdown.selectedIndex = 0; addToHistory(channel.url, channel.name); }
 }
 
 function toggleTheaterMode() {
-isTheaterMode = !isTheaterMode;
-document.body.classList.toggle('theater-mode', isTheaterMode);
-exitTheaterBtn.style.display = isTheaterMode ? 'block' : 'none';
-document.querySelectorAll('.left-selectors').forEach(selector => {
-selector.style.display = 'none';
-});
-document.querySelectorAll('.right-selectors').forEach(selector => {
-selector.style.display = 'none';
-});
-document.querySelectorAll('.history-dropdown').forEach(selector => {
-selector.style.display = 'none';
-});
-
-if (isTheaterMode) {
-updateTheaterModeLayout();
-} else {
-document.querySelectorAll('.stream-wrapper:not(.loaded) .left-selectors').forEach(selector => {
-selector.style.display = 'flex';
-});
-document.querySelectorAll('.stream-wrapper:not(.loaded) .right-selectors').forEach(selector => {
-selector.style.display = 'flex';
-});
-document.querySelectorAll('.stream-wrapper:not(.loaded) .history-dropdown').forEach(selector => {
-selector.style.display = 'block';
-});
-updateStreamLayout();
-}
+  isTheaterMode = !isTheaterMode;
+  document.body.classList.toggle('theater-mode', isTheaterMode);
+  exitTheaterBtn.style.display = isTheaterMode ? 'block' : 'none';
+  if (isTheaterMode) {
+    updateTheaterModeLayout();
+  } else {
+    document.querySelectorAll('.stream-wrapper:not(.loaded) .left-selectors').forEach(s => s.style.display = 'flex');
+    document.querySelectorAll('.stream-wrapper:not(.loaded) .right-selectors').forEach(s => s.style.display = 'flex');
+    document.querySelectorAll('.stream-wrapper:not(.loaded) .history-dropdown').forEach(s => s.style.display = 'block');
+    updateStreamLayout();
+  }
 }
 
 function updateTheaterModeLayout() {
-const loadedCount = document.querySelectorAll('.stream-wrapper.loaded').length;
-document.body.classList.remove('two-streams', 'three-streams', 'four-streams');
-if (loadedCount <= 2) {
-document.body.classList.add('two-streams');
-} else if (loadedCount === 3) {
-document.body.classList.add('three-streams');
-} else {
-document.body.classList.add('four-streams');
-}
+  const n = document.querySelectorAll('.stream-wrapper.loaded').length;
+  document.body.classList.remove('two-streams', 'three-streams', 'four-streams');
+  if (n <= 2) document.body.classList.add('two-streams');
+  else if (n === 3) document.body.classList.add('three-streams');
+  else document.body.classList.add('four-streams');
 }
 
 function toggleStreamLayout() {
-streamLayout = streamLayout === 4 ? 2 : (streamLayout === 2 ? 3 : 4);
-updateStreamLayout();
-streamLayoutBtn.textContent = `${streamLayout} Streams`;
+  streamLayout = streamLayout === 4 ? 2 : (streamLayout === 2 ? 3 : 4);
+  updateStreamLayout();
+  streamLayoutBtn.textContent = `${streamLayout} Streams`;
 }
 
 function updateStreamLayout() {
-const container = document.getElementById('streamContainer');
-const streamWrappers = document.querySelectorAll('.stream-wrapper');
-container.classList.remove('two-streams', 'three-streams', 'four-streams');
-if (streamLayout === 2) {
-container.classList.add('two-streams');
-streamWrappers.forEach((wrapper, index) => {
-wrapper.classList.toggle('hidden', index >= 2);
-});
-} else if (streamLayout === 3) {
-container.classList.add('three-streams');
-streamWrappers.forEach((wrapper, index) => {
-wrapper.classList.toggle('hidden', index >= 3);
-});
-} else {
-streamWrappers.forEach(wrapper => {
-wrapper.classList.remove('hidden');
-});
-}
+  const container = document.getElementById('streamContainer');
+  const wrappers = document.querySelectorAll('.stream-wrapper');
+  container.classList.remove('two-streams', 'three-streams', 'four-streams');
+  if (streamLayout === 2) { container.classList.add('two-streams'); wrappers.forEach((w, i) => w.classList.toggle('hidden', i >= 2)); }
+  else if (streamLayout === 3) { container.classList.add('three-streams'); wrappers.forEach((w, i) => w.classList.toggle('hidden', i >= 3)); }
+  else { wrappers.forEach(w => w.classList.remove('hidden')); }
 }
 
 function resetStream(button) {
-const wrapper = button.closest('.stream-wrapper');
-const inputContainer = wrapper.querySelector('.stream-input');
-const iframe = wrapper.querySelector('.stream-iframe');
-const controls = wrapper.querySelector('.stream-controls');
-const info = wrapper.querySelector('.stream-info');
-const dropdown = wrapper.querySelector('.stream-dropdown');
-const favoritesDropdown = wrapper.querySelector('.favorites-dropdown');
-const historyDropdown = wrapper.querySelector('.history-dropdown-select');
-const leftSelectors = wrapper.querySelector('.left-selectors');
-const rightSelectors = wrapper.querySelector('.right-selectors');
-const historyContainer = wrapper.querySelector('.history-dropdown');
-wrapper.classList.remove('loaded');
-inputContainer.style.display = '';
-iframe.style.display = 'none';
-controls.style.display = 'none';
-iframe.src = '';
-info.textContent = '';
-dropdown.selectedIndex = 0;
-favoritesDropdown.selectedIndex = 0;
-historyDropdown.selectedIndex = 0;
-leftSelectors.style.display = 'flex';
-rightSelectors.style.display = 'flex';
-historyContainer.style.display = 'block';
-
-if (isTheaterMode) {
-updateTheaterModeLayout();
-}
+  const wrapper = button.closest('.stream-wrapper');
+  wrapper.classList.remove('loaded');
+  wrapper.querySelector('.stream-input').style.display = '';
+  const iframe = wrapper.querySelector('.stream-iframe');
+  iframe.style.display = 'none'; iframe.src = '';
+  wrapper.querySelector('.stream-controls').style.display = 'none';
+  wrapper.querySelector('.stream-info').textContent = '';
+  wrapper.querySelector('.stream-dropdown').selectedIndex = 0;
+  wrapper.querySelector('.favorites-dropdown').selectedIndex = 0;
+  wrapper.querySelector('.history-dropdown-select').selectedIndex = 0;
+  wrapper.querySelector('.left-selectors').style.display = 'flex';
+  wrapper.querySelector('.right-selectors').style.display = 'flex';
+  wrapper.querySelector('.history-dropdown').style.display = 'block';
+  if (isTheaterMode) updateTheaterModeLayout();
 }
 
 function resetAll() {
-document.querySelectorAll('.stream-wrapper').forEach(wrapper => {
-const inputContainer = wrapper.querySelector('.stream-input');
-const iframe = wrapper.querySelector('.stream-iframe');
-const controls = wrapper.querySelector('.stream-controls');
-const info = wrapper.querySelector('.stream-info');
-const dropdown = wrapper.querySelector('.stream-dropdown');
-const favoritesDropdown = wrapper.querySelector('.favorites-dropdown');
-const historyDropdown = wrapper.querySelector('.history-dropdown-select');
-const leftSelectors = wrapper.querySelector('.left-selectors');
-const rightSelectors = wrapper.querySelector('.right-selectors');
-const historyContainer = wrapper.querySelector('.history-dropdown');
-wrapper.classList.remove('loaded');
-inputContainer.style.display = '';
-iframe.style.display = 'none';
-controls.style.display = 'none';
-iframe.src = '';
-info.textContent = '';
-dropdown.selectedIndex = 0;
-favoritesDropdown.selectedIndex = 0;
-historyDropdown.selectedIndex = 0;
-leftSelectors.style.display = 'flex';
-rightSelectors.style.display = 'flex';
-historyContainer.style.display = 'block';
-});
-
-if (isTheaterMode) {
-updateTheaterModeLayout();
-}
+  document.querySelectorAll('.stream-wrapper').forEach(wrapper => {
+    wrapper.classList.remove('loaded');
+    wrapper.querySelector('.stream-input').style.display = '';
+    const iframe = wrapper.querySelector('.stream-iframe');
+    iframe.style.display = 'none'; iframe.src = '';
+    wrapper.querySelector('.stream-controls').style.display = 'none';
+    wrapper.querySelector('.stream-info').textContent = '';
+    wrapper.querySelector('.stream-dropdown').selectedIndex = 0;
+    wrapper.querySelector('.favorites-dropdown').selectedIndex = 0;
+    wrapper.querySelector('.history-dropdown-select').selectedIndex = 0;
+    wrapper.querySelector('.left-selectors').style.display = 'flex';
+    wrapper.querySelector('.right-selectors').style.display = 'flex';
+    wrapper.querySelector('.history-dropdown').style.display = 'block';
+  });
+  if (isTheaterMode) updateTheaterModeLayout();
 }
 
 function showError(message) {
-const errorDiv = document.createElement('div');
-errorDiv.className = 'error-message';
-errorDiv.textContent = message;
-document.body.appendChild(errorDiv);
-setTimeout(() => {
-errorDiv.remove();
-}, 3000);
+  const el = document.createElement('div');
+  el.className = 'error-message'; el.textContent = message;
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 3000);
 }
 
 document.querySelectorAll('.refresh-btn').forEach(btn => {
-btn.addEventListener('click', function () {
-const wrapper = btn.closest('.stream-wrapper');
-const iframe = wrapper.querySelector('.stream-iframe');
-if (iframe && iframe.src) {
-const currentSrc = iframe.src;
-iframe.src = '';
-setTimeout(() => {
-iframe.src = currentSrc;
-}, 100);
-}
-});
+  btn.addEventListener('click', function() {
+    const iframe = btn.closest('.stream-wrapper').querySelector('.stream-iframe');
+    if (iframe && iframe.src) { const s = iframe.src; iframe.src = ''; setTimeout(() => { iframe.src = s; }, 100); }
+  });
 });
 </script>
 </body>
