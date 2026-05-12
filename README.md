@@ -9,7 +9,7 @@ Watch up to 4 streams at once from YouTube, Twitch, Kick, and more.
 
 ## 🌐 Try It Now
 
-**[Launch Multi-Stream Viewer →](https://venomousrhyme41.github.io/Multi-Stream-Viewer/)**
+**[Launch Multi-Stream Viewer →](https://multi-stream-viewer-kappa.vercel.app/)**
 
 <img width="1918" height="866" alt="image" src="https://github.com/user-attachments/assets/2526a227-dfbb-443a-9317-e5ddf73fc825" />
 
@@ -30,7 +30,7 @@ Hide everything except the streams for a distraction-free experience.
 
 ## Quick Start
 
-1. Go to the [live site](https://venomousrhyme41.github.io/Multi-Stream-Viewer/)
+1. Go to the [live site](https://multi-stream-viewer-kappa.vercel.app/)
 2. Paste stream URLs into the input boxes
 3. Click "Load Stream" for each one
 4. Hit theater mode if you want a cleaner view
