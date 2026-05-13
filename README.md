@@ -11,7 +11,7 @@ Watch up to 4 streams at once from YouTube, Twitch, Kick, and more.
 
 **[Launch Multi-Stream Viewer →](https://multi-stream-viewer-kappa.vercel.app/)**
 
-<img width="1918" height="866" alt="image" src="https://github.com/user-attachments/assets/2526a227-dfbb-443a-9317-e5ddf73fc825" />
+<img width="1917" height="857" alt="Screenshot 2026-05-13 124333" src="https://github.com/user-attachments/assets/a30d4b3a-c4f6-46cd-8c01-75f69bfdb1b0" />
 
 ---
 
