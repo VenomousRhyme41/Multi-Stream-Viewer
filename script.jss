@@ -25,6 +25,9 @@ const shortcutsModal = document.getElementById('shortcutsModal');
 const closeShortcuts = document.getElementById('closeShortcuts');
 const streamsDropdownWrap = document.getElementById('streamsDropdownWrap');
 const streamsDropdownBtn = document.getElementById('streamsDropdownBtn');
+const moviesLink = document.getElementById('moviesLink');
+const otherLink = document.getElementById('otherLink');
+const shortcutsHintBtn = document.getElementById('shortcutsHintBtn');
 
 const channelMap = {
 'espn': { url: 'https://embedstreams.top/embed/alpha/espn/1', name: 'ESPN' },
@@ -45,6 +48,30 @@ const channelMap = {
 'simpsons': { url: 'https://vecloud.eu/stream/8b48e26f-e89d-47ab-abf5-04b4119273d0', name: 'The Simpsons' },
 'familyguy': { url: 'https://vecloud.eu/stream/d2b4b104-853f-4e4e-9edd-425a1275e90a', name: 'Family Guy' }
 };
+
+function showCustomNotif(message) {
+  const el = document.createElement('div');
+  el.className = 'custom-notif';
+  el.textContent = message;
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 3000);
+}
+
+moviesLink.addEventListener('click', function(e) {
+  e.preventDefault();
+  streamsDropdownWrap.classList.remove('open');
+  showCustomNotif('Coming soon!');
+});
+
+otherLink.addEventListener('click', function(e) {
+  e.preventDefault();
+  streamsDropdownWrap.classList.remove('open');
+  showCustomNotif('Coming soon!');
+});
+
+shortcutsHintBtn.addEventListener('click', function() {
+  shortcutsModal.style.display === 'block' ? hideShortcuts() : showShortcuts();
+});
 
 streamsDropdownBtn.addEventListener('click', function(e) {
   e.stopPropagation();
@@ -139,7 +166,7 @@ function setupKeyboardShortcuts() {
         break;
       case 'x': if (announcementBanner.style.display !== 'none') closeAnnouncement.click(); break;
       case 'a': if (announcementClosed) { announcementBanner.style.display = 'block'; announcementClosed = false; } break;
-      case 'h': clearHistory(); showError("History cleared"); break;
+      case 'h': clearHistory(); showCustomNotif('History cleared'); break;
     }
   });
 }
@@ -277,7 +304,7 @@ function loadStream(button) {
     if (el) { src = el.getAttribute('src'); title = el.getAttribute('title') || ''; }
   }
 
-  if (!src) { showError("Please enter a valid URL or embed code"); return; }
+  if (!src) { showCustomNotif('Please enter a valid URL or embed code'); return; }
 
   if (src.includes('youtube.com')) {
     if (src.includes('watch?v=')) {
@@ -290,7 +317,7 @@ function loadStream(button) {
       fetch(`https://noembed.com/embed?url=https://youtube.com/watch?v=${vid}`).then(r => r.json()).then(d => { if (d.title) info.textContent = d.title; });
     }
   } else if (!src.startsWith('http') && !src.startsWith('//')) {
-    showError("Invalid URL format"); return;
+    showCustomNotif('Invalid URL format'); return;
   }
 
   iframe.src = src; iframe.style.display = 'block';
@@ -311,9 +338,11 @@ function loadStream(button) {
 }
 
 function handleDropdownChange(dropdown) {
-  const wrapper = dropdown.closest('.stream-wrapper');
   const channel = channelMap[dropdown.value];
-  if (channel) { loadIntoWrapper(wrapper, channel.url, channel.name); dropdown.selectedIndex = 0; addToHistory(channel.url, channel.name); }
+  if (channel) {
+    showCustomNotif('Broken, fixing soon');
+    dropdown.selectedIndex = 0;
+  }
 }
 
 function toggleTheaterMode() {
@@ -387,13 +416,6 @@ function resetAll() {
     wrapper.querySelector('.history-dropdown').style.display = 'block';
   });
   if (isTheaterMode) updateTheaterModeLayout();
-}
-
-function showError(message) {
-  const el = document.createElement('div');
-  el.className = 'error-message'; el.textContent = message;
-  document.body.appendChild(el);
-  setTimeout(() => el.remove(), 3000);
 }
 
 document.querySelectorAll('.refresh-btn').forEach(btn => {
