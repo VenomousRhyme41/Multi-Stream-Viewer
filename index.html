@@ -46,7 +46,7 @@ body {
   top: 0; left: 0; right: 0;
   background-color: #ff4444;
   color: white;
-  padding: 12px 50px 12px 20px;
+  padding: 12px 60px 12px 20px;
   text-align: center;
   z-index: 10000;
   font-weight: 500;
@@ -56,14 +56,27 @@ body {
 .announcement-banner.fading { opacity: 0; pointer-events: none; }
 .close-announcement {
   position: absolute;
-  right: 15px; top: 50%;
+  right: 12px; top: 50%;
   transform: translateY(-50%);
-  background: none; border: none;
-  color: white; font-size: 18px; cursor: pointer;
-  width: 24px; height: 24px;
-  display: flex; align-items: center; justify-content: center;
+  background: rgba(255,255,255,0.2);
+  border: 2px solid rgba(255,255,255,0.6);
+  color: white;
+  font-size: 20px;
+  font-weight: 700;
+  cursor: pointer;
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  line-height: 1;
+  transition: background 0.15s, border-color 0.15s;
 }
-.close-announcement:hover { background-color: rgba(255,255,255,0.2); border-radius: 50%; }
+.close-announcement:hover {
+  background: rgba(255,255,255,0.35);
+  border-color: white;
+}
 .header {
   display: flex;
   align-items: center;
@@ -149,6 +162,7 @@ h1 {
   font-weight: 500;
   transition: background 0.15s;
   white-space: nowrap;
+  cursor: pointer;
 }
 .streams-menu a:hover { background-color: var(--button-hover); }
 .streams-menu a i { width: 16px; text-align: center; font-size: 13px; }
@@ -187,8 +201,18 @@ h1 {
   font-size: 11px;
   font-family: 'Roboto', sans-serif;
   z-index: 100;
-  pointer-events: none;
   letter-spacing: 0.03em;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: color 0.15s, background 0.15s;
+  pointer-events: auto;
+}
+.shortcuts-hint:hover {
+  color: #999;
+  background: rgba(0,0,0,0.8);
 }
 .shortcuts-hint kbd {
   background: rgba(255,255,255,0.08);
@@ -198,6 +222,26 @@ h1 {
   font-family: monospace;
   font-size: 11px;
   color: #999;
+}
+.copyright-hint {
+  position: fixed;
+  bottom: 12px;
+  right: 12px;
+  background: rgba(0,0,0,0.6);
+  color: #555;
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-family: 'Roboto', sans-serif;
+  z-index: 100;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  text-decoration: none;
+  transition: color 0.15s, background 0.15s;
+}
+.copyright-hint:hover {
+  color: #888;
+  background: rgba(0,0,0,0.8);
 }
 .shortcuts-modal {
   display: none;
@@ -320,14 +364,26 @@ h1 {
   background-repeat: no-repeat;
   background-position: right 7px center;
   font-family: 'Roboto', sans-serif;
-  width: 105px;
-  max-width: 105px;
+  width: 130px;
+  max-width: 130px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 .styled-select:focus { outline: none; border-color: var(--active-color); }
-.styled-select:hover { background-color: var(--button-hover); border-color: #444; }
+.styled-select:hover { background-color: var(--button-hover); border-color: #555; }
+.favorites-dropdown {
+  border-color: #3a2a3a;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='9' height='5' viewBox='0 0 9 5'%3E%3Cpath fill='%23ff6b9d' d='M0 0l4.5 5L9 0z'/%3E%3C/svg%3E");
+}
+.favorites-dropdown:hover { border-color: #ff6b9d; }
+.favorites-dropdown:focus { border-color: #ff6b9d; }
+.history-dropdown-select {
+  border-color: #2a2a3a;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='9' height='5' viewBox='0 0 9 5'%3E%3Cpath fill='%236b9dff' d='M0 0l4.5 5L9 0z'/%3E%3C/svg%3E");
+}
+.history-dropdown-select:hover { border-color: #6b9dff; }
+.history-dropdown-select:focus { border-color: #6b9dff; }
 .stream-dropdown { width: auto; max-width: none; min-width: 0; }
 .stream-input {
   position: absolute;
@@ -456,6 +512,7 @@ body.theater-mode .right-selectors,
 body.theater-mode .history-dropdown { display: none !important; }
 body.theater-mode .announcement-banner { display: none !important; }
 body.theater-mode .shortcuts-hint { display: none; }
+body.theater-mode .copyright-hint { display: none; }
 body.theater-mode .page-wrap { padding: 0; height: 100vh; }
 body.theater-mode .container {
   height: 100vh; width: 100vw;
@@ -482,6 +539,21 @@ body.theater-mode .stream-controls { display: none !important; }
   z-index: 11000;
   animation: fadeInOut 3s forwards;
 }
+.custom-notif {
+  position: fixed; top: 20px; left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(30,30,30,0.97);
+  color: var(--text-color);
+  padding: 12px 22px;
+  border-radius: 8px;
+  font-weight: 500;
+  z-index: 11000;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+  animation: fadeInOut 3s forwards;
+  font-size: 13px;
+  white-space: nowrap;
+}
 @keyframes fadeInOut {
   0% { opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { opacity: 0; }
 }
@@ -494,7 +566,7 @@ option.opt-red { color: #ff6b6b; }
 
 <div class="announcement-banner" id="announcementBanner" style="display: none;">
 <div id="announcementText"></div>
-<button class="close-announcement" id="closeAnnouncement">×</button>
+<button class="close-announcement" id="closeAnnouncement">&#x2715;</button>
 </div>
 
 <div class="overlay" id="overlay"></div>
@@ -531,11 +603,11 @@ option.opt-red { color: #ff6b6b; }
         <i class="fas fa-stream"></i> Streams
       </button>
       <div class="streams-menu" id="streamsMenu">
-        <a href="https://example.com/movies" target="_blank"><i class="fas fa-film"></i> Movies</a>
+        <a id="moviesLink"><i class="fas fa-film"></i> Movies</a>
         <div class="streams-menu-divider"></div>
-        <a href="https://example.com/sports" target="_blank"><i class="fas fa-trophy"></i> Sports</a>
+        <a href="https://strmd.link/" target="_blank"><i class="fas fa-trophy"></i> Sports</a>
         <div class="streams-menu-divider"></div>
-        <a href="https://example.com/other" target="_blank"><i class="fas fa-th-large"></i> Other</a>
+        <a id="otherLink"><i class="fas fa-th-large"></i> Other</a>
       </div>
     </div>
   </div>
@@ -568,17 +640,17 @@ option.opt-red { color: #ff6b6b; }
 <div class="right-selectors">
 <select class="styled-select stream-dropdown">
 <option value="" selected disabled>📺 24/7 Channels</option>
-<option value="espn" class="opt-green">ESPN</option>
-<option value="mlb-network" class="opt-green">MLB Network</option>
-<option value="nfl-network" class="opt-green">NFL Network</option>
-<option value="nba-tv" class="opt-green">NBA TV</option>
-<option value="nhl-network" class="opt-green">NHL Network</option>
-<option value="tennis-channel" class="opt-green">Tennis</option>
-<option value="sky-sports-golf" class="opt-green">Golf</option>
-<option value="sky-sports-darts" class="opt-green">Darts</option>
-<option value="dazn-f1" class="opt-green">Formula 1</option>
-<option value="sky-f1" class="opt-green">F1</option>
-<option value="poker" class="opt-yellow">Poker</option>
+<option value="espn" class="opt-red">ESPN</option>
+<option value="mlb-network" class="opt-red">MLB Network</option>
+<option value="nfl-network" class="opt-red">NFL Network</option>
+<option value="nba-tv" class="opt-red">NBA TV</option>
+<option value="nhl-network" class="opt-red">NHL Network</option>
+<option value="tennis-channel" class="opt-red">Tennis</option>
+<option value="sky-sports-golf" class="opt-red">Golf</option>
+<option value="sky-sports-darts" class="opt-red">Darts</option>
+<option value="dazn-f1" class="opt-red">Formula 1</option>
+<option value="sky-f1" class="opt-red">F1</option>
+<option value="poker" class="opt-red">Poker</option>
 <option value="fox-nrl-tv" class="opt-red">Rugby</option>
 <option value="ufc-events" class="opt-red">UFC</option>
 <option value="motogp" class="opt-red">MotoGP</option>
@@ -619,17 +691,17 @@ option.opt-red { color: #ff6b6b; }
 <div class="right-selectors">
 <select class="styled-select stream-dropdown">
 <option value="" selected disabled>📺 24/7 Channels</option>
-<option value="espn" class="opt-green">ESPN</option>
-<option value="mlb-network" class="opt-green">MLB Network</option>
-<option value="nfl-network" class="opt-green">NFL Network</option>
-<option value="nba-tv" class="opt-green">NBA TV</option>
-<option value="nhl-network" class="opt-green">NHL Network</option>
-<option value="tennis-channel" class="opt-green">Tennis</option>
-<option value="sky-sports-golf" class="opt-green">Golf</option>
-<option value="sky-sports-darts" class="opt-green">Darts</option>
-<option value="dazn-f1" class="opt-green">Formula 1</option>
-<option value="sky-f1" class="opt-green">F1</option>
-<option value="poker" class="opt-yellow">Poker</option>
+<option value="espn" class="opt-red">ESPN</option>
+<option value="mlb-network" class="opt-red">MLB Network</option>
+<option value="nfl-network" class="opt-red">NFL Network</option>
+<option value="nba-tv" class="opt-red">NBA TV</option>
+<option value="nhl-network" class="opt-red">NHL Network</option>
+<option value="tennis-channel" class="opt-red">Tennis</option>
+<option value="sky-sports-golf" class="opt-red">Golf</option>
+<option value="sky-sports-darts" class="opt-red">Darts</option>
+<option value="dazn-f1" class="opt-red">Formula 1</option>
+<option value="sky-f1" class="opt-red">F1</option>
+<option value="poker" class="opt-red">Poker</option>
 <option value="fox-nrl-tv" class="opt-red">Rugby</option>
 <option value="ufc-events" class="opt-red">UFC</option>
 <option value="motogp" class="opt-red">MotoGP</option>
@@ -670,17 +742,17 @@ option.opt-red { color: #ff6b6b; }
 <div class="right-selectors">
 <select class="styled-select stream-dropdown">
 <option value="" selected disabled>📺 24/7 Channels</option>
-<option value="espn" class="opt-green">ESPN</option>
-<option value="mlb-network" class="opt-green">MLB Network</option>
-<option value="nfl-network" class="opt-green">NFL Network</option>
-<option value="nba-tv" class="opt-green">NBA TV</option>
-<option value="nhl-network" class="opt-green">NHL Network</option>
-<option value="tennis-channel" class="opt-green">Tennis</option>
-<option value="sky-sports-golf" class="opt-green">Golf</option>
-<option value="sky-sports-darts" class="opt-green">Darts</option>
-<option value="dazn-f1" class="opt-green">Formula 1</option>
-<option value="sky-f1" class="opt-green">F1</option>
-<option value="poker" class="opt-yellow">Poker</option>
+<option value="espn" class="opt-red">ESPN</option>
+<option value="mlb-network" class="opt-red">MLB Network</option>
+<option value="nfl-network" class="opt-red">NFL Network</option>
+<option value="nba-tv" class="opt-red">NBA TV</option>
+<option value="nhl-network" class="opt-red">NHL Network</option>
+<option value="tennis-channel" class="opt-red">Tennis</option>
+<option value="sky-sports-golf" class="opt-red">Golf</option>
+<option value="sky-sports-darts" class="opt-red">Darts</option>
+<option value="dazn-f1" class="opt-red">Formula 1</option>
+<option value="sky-f1" class="opt-red">F1</option>
+<option value="poker" class="opt-red">Poker</option>
 <option value="fox-nrl-tv" class="opt-red">Rugby</option>
 <option value="ufc-events" class="opt-red">UFC</option>
 <option value="motogp" class="opt-red">MotoGP</option>
@@ -721,17 +793,17 @@ option.opt-red { color: #ff6b6b; }
 <div class="right-selectors">
 <select class="styled-select stream-dropdown">
 <option value="" selected disabled>📺 24/7 Channels</option>
-<option value="espn" class="opt-green">ESPN</option>
-<option value="mlb-network" class="opt-green">MLB Network</option>
-<option value="nfl-network" class="opt-green">NFL Network</option>
-<option value="nba-tv" class="opt-green">NBA TV</option>
-<option value="nhl-network" class="opt-green">NHL Network</option>
-<option value="tennis-channel" class="opt-green">Tennis</option>
-<option value="sky-sports-golf" class="opt-green">Golf</option>
-<option value="sky-sports-darts" class="opt-green">Darts</option>
-<option value="dazn-f1" class="opt-green">Formula 1</option>
-<option value="sky-f1" class="opt-green">F1</option>
-<option value="poker" class="opt-yellow">Poker</option>
+<option value="espn" class="opt-red">ESPN</option>
+<option value="mlb-network" class="opt-red">MLB Network</option>
+<option value="nfl-network" class="opt-red">NFL Network</option>
+<option value="nba-tv" class="opt-red">NBA TV</option>
+<option value="nhl-network" class="opt-red">NHL Network</option>
+<option value="tennis-channel" class="opt-red">Tennis</option>
+<option value="sky-sports-golf" class="opt-red">Golf</option>
+<option value="sky-sports-darts" class="opt-red">Darts</option>
+<option value="dazn-f1" class="opt-red">Formula 1</option>
+<option value="sky-f1" class="opt-red">F1</option>
+<option value="poker" class="opt-red">Poker</option>
 <option value="fox-nrl-tv" class="opt-red">Rugby</option>
 <option value="ufc-events" class="opt-red">UFC</option>
 <option value="motogp" class="opt-red">MotoGP</option>
@@ -763,7 +835,8 @@ option.opt-red { color: #ff6b6b; }
 
 <button id="exitTheaterBtn" class="exit-theater-btn" style="display: none;">Exit Theater</button>
 
-<div class="shortcuts-hint">Press <kbd>Shift + ?</kbd> for keyboard shortcuts</div>
+<span class="shortcuts-hint" id="shortcutsHintBtn"><kbd>Shift + ?</kbd> for shortcuts</span>
+<a href="/LICENSE" class="copyright-hint">© VenomousRhyme</a>
 
 <script src="script.js"></script>
 </body>
