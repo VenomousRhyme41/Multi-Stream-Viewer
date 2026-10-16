@@ -41,8 +41,7 @@ That's it. No setup, no downloads, no accounts needed.
 
 ## Coming Soon
 
-- Removing the blank spaces between streams in 4-stream mode
-- A clean twitch dropdown that shows the top 5 stream with the most view counts
+- more streams support (prob will never happen)
 
 *These updates might happen eventually, no promises though*
 
